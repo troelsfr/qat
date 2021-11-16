@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TransformationRulesPass/TransformationRulesPass.cpp | QIR Adaptor Tool Developer Documentation</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/assets/css/0.styles.7fad836b.css" as="style"><link rel="preload" href="/assets/js/app.e2451f08.js" as="script"><link rel="preload" href="/assets/js/2.f962d3f5.js" as="script"><link rel="preload" href="/assets/js/151.80a4fac8.js" as="script"><link rel="prefetch" href="/assets/js/10.21b52fb4.js"><link rel="prefetch" href="/assets/js/100.2a15072f.js"><link rel="prefetch" href="/assets/js/101.dd8d038d.js"><link rel="prefetch" href="/assets/js/102.703298f7.js"><link rel="prefetch" href="/assets/js/103.d22d31df.js"><link rel="prefetch" href="/assets/js/104.8a14eb8a.js"><link rel="prefetch" href="/assets/js/105.e4aaa8ac.js"><link rel="prefetch" href="/assets/js/106.4efa2a81.js"><link rel="prefetch" href="/assets/js/107.0db82b59.js"><link rel="prefetch" href="/assets/js/108.3d0caaf3.js"><link rel="prefetch" href="/assets/js/109.b4bea8c6.js"><link rel="prefetch" href="/assets/js/11.b9564042.js"><link rel="prefetch" href="/assets/js/110.41bd1513.js"><link rel="prefetch" href="/assets/js/111.98396cc0.js"><link rel="prefetch" href="/assets/js/112.771b52a2.js"><link rel="prefetch" href="/assets/js/113.4f2dc273.js"><link rel="prefetch" href="/assets/js/114.68182464.js"><link rel="prefetch" href="/assets/js/115.74db31ce.js"><link rel="prefetch" href="/assets/js/116.65694da4.js"><link rel="prefetch" href="/assets/js/117.79cf00fe.js"><link rel="prefetch" href="/assets/js/118.5174f2f0.js"><link rel="prefetch" href="/assets/js/119.9d9a0904.js"><link rel="prefetch" href="/assets/js/12.72e0a6a3.js"><link rel="prefetch" href="/assets/js/120.ad051ba4.js"><link rel="prefetch" href="/assets/js/121.7c710e93.js"><link rel="prefetch" href="/assets/js/122.f4f93a14.js"><link rel="prefetch" href="/assets/js/123.33d387ce.js"><link rel="prefetch" href="/assets/js/124.72c62fff.js"><link rel="prefetch" href="/assets/js/125.62908358.js"><link rel="prefetch" href="/assets/js/126.48ead500.js"><link rel="prefetch" href="/assets/js/127.4f5601a5.js"><link rel="prefetch" href="/assets/js/128.3fd5ad13.js"><link rel="prefetch" href="/assets/js/129.6b7f060e.js"><link rel="prefetch" href="/assets/js/13.4761b27f.js"><link rel="prefetch" href="/assets/js/130.88333d64.js"><link rel="prefetch" href="/assets/js/131.71c20e6e.js"><link rel="prefetch" href="/assets/js/132.355da14c.js"><link rel="prefetch" href="/assets/js/133.e297b9d9.js"><link rel="prefetch" href="/assets/js/134.8f3defae.js"><link rel="prefetch" href="/assets/js/135.1df6cee0.js"><link rel="prefetch" href="/assets/js/136.644147cf.js"><link rel="prefetch" href="/assets/js/137.4dfc11a8.js"><link rel="prefetch" href="/assets/js/138.83fb3c64.js"><link rel="prefetch" href="/assets/js/139.47a55a23.js"><link rel="prefetch" href="/assets/js/14.c966a810.js"><link rel="prefetch" href="/assets/js/140.26998966.js"><link rel="prefetch" href="/assets/js/141.644e5310.js"><link rel="prefetch" href="/assets/js/142.cd2abad1.js"><link rel="prefetch" href="/assets/js/143.cb3bbc4e.js"><link rel="prefetch" href="/assets/js/144.0d5cdf81.js"><link rel="prefetch" href="/assets/js/145.55cbfc98.js"><link rel="prefetch" href="/assets/js/146.742b7b7f.js"><link rel="prefetch" href="/assets/js/147.066d52b9.js"><link rel="prefetch" href="/assets/js/148.1edd49a1.js"><link rel="prefetch" href="/assets/js/149.7743b974.js"><link rel="prefetch" href="/assets/js/15.09a0fced.js"><link rel="prefetch" href="/assets/js/150.68bc7a55.js"><link rel="prefetch" href="/assets/js/152.f317736e.js"><link rel="prefetch" href="/assets/js/153.5c55db22.js"><link rel="prefetch" href="/assets/js/154.48ef77fc.js"><link rel="prefetch" href="/assets/js/155.45850186.js"><link rel="prefetch" href="/assets/js/156.914a7530.js"><link rel="prefetch" href="/assets/js/157.4b3c2135.js"><link rel="prefetch" href="/assets/js/158.8c49c7d6.js"><link rel="prefetch" href="/assets/js/159.a0bcfc8b.js"><link rel="prefetch" href="/assets/js/16.a07bc44e.js"><link rel="prefetch" href="/assets/js/160.ddeff1b5.js"><link rel="prefetch" href="/assets/js/161.149cc46a.js"><link rel="prefetch" href="/assets/js/162.38f96915.js"><link rel="prefetch" href="/assets/js/163.8683ebae.js"><link rel="prefetch" href="/assets/js/164.f7a667b3.js"><link rel="prefetch" href="/assets/js/165.ce929292.js"><link rel="prefetch" href="/assets/js/166.882d001b.js"><link rel="prefetch" href="/assets/js/167.fd654ca8.js"><link rel="prefetch" href="/assets/js/168.9cdfe92d.js"><link rel="prefetch" href="/assets/js/169.05d08513.js"><link rel="prefetch" href="/assets/js/17.28543ff8.js"><link rel="prefetch" href="/assets/js/170.6fc063a9.js"><link rel="prefetch" href="/assets/js/171.6db9c3b6.js"><link rel="prefetch" href="/assets/js/172.62a7a908.js"><link rel="prefetch" href="/assets/js/173.93dda5f8.js"><link rel="prefetch" href="/assets/js/174.43138094.js"><link rel="prefetch" href="/assets/js/175.cae3c718.js"><link rel="prefetch" href="/assets/js/176.3ceee466.js"><link rel="prefetch" href="/assets/js/177.4c8edc64.js"><link rel="prefetch" href="/assets/js/178.66a4ab32.js"><link rel="prefetch" href="/assets/js/179.408b7eba.js"><link rel="prefetch" href="/assets/js/18.a0831207.js"><link rel="prefetch" href="/assets/js/180.abb66898.js"><link rel="prefetch" href="/assets/js/181.bf57fd1e.js"><link rel="prefetch" href="/assets/js/182.90d38991.js"><link rel="prefetch" href="/assets/js/183.f77676d0.js"><link rel="prefetch" href="/assets/js/184.94261fbf.js"><link rel="prefetch" href="/assets/js/185.d3aa411b.js"><link rel="prefetch" href="/assets/js/186.b881d6b8.js"><link rel="prefetch" href="/assets/js/187.516e097d.js"><link rel="prefetch" href="/assets/js/188.a8a3ebdf.js"><link rel="prefetch" href="/assets/js/189.a92ea38b.js"><link rel="prefetch" href="/assets/js/19.d1cd2ca7.js"><link rel="prefetch" href="/assets/js/190.894addd3.js"><link rel="prefetch" href="/assets/js/191.8c50f3b5.js"><link rel="prefetch" href="/assets/js/192.4e6cb8e2.js"><link rel="prefetch" href="/assets/js/193.856ca012.js"><link rel="prefetch" href="/assets/js/194.a9fe3eff.js"><link rel="prefetch" href="/assets/js/195.299d6ddb.js"><link rel="prefetch" href="/assets/js/196.5e416d9f.js"><link rel="prefetch" href="/assets/js/197.3a39c2f7.js"><link rel="prefetch" href="/assets/js/198.a60561c1.js"><link rel="prefetch" href="/assets/js/199.4a6c2745.js"><link rel="prefetch" href="/assets/js/20.3750701d.js"><link rel="prefetch" href="/assets/js/200.a2119e3a.js"><link rel="prefetch" href="/assets/js/201.1acc9a10.js"><link rel="prefetch" href="/assets/js/202.887bab82.js"><link rel="prefetch" href="/assets/js/203.676d2878.js"><link rel="prefetch" href="/assets/js/204.4298b47d.js"><link rel="prefetch" href="/assets/js/205.be5014fb.js"><link rel="prefetch" href="/assets/js/206.c90b8362.js"><link rel="prefetch" href="/assets/js/207.89ac6dfa.js"><link rel="prefetch" href="/assets/js/208.cecd5551.js"><link rel="prefetch" href="/assets/js/209.62755d5a.js"><link rel="prefetch" href="/assets/js/21.f6b3c20d.js"><link rel="prefetch" href="/assets/js/22.7488975a.js"><link rel="prefetch" href="/assets/js/23.0e41172b.js"><link rel="prefetch" href="/assets/js/24.c49c5026.js"><link rel="prefetch" href="/assets/js/25.3dd9d60f.js"><link rel="prefetch" href="/assets/js/26.5c7c4fe5.js"><link rel="prefetch" href="/assets/js/27.f90739d5.js"><link rel="prefetch" href="/assets/js/28.3c09e2b8.js"><link rel="prefetch" href="/assets/js/29.36d49238.js"><link rel="prefetch" href="/assets/js/3.03284f30.js"><link rel="prefetch" href="/assets/js/30.e6ed33bd.js"><link rel="prefetch" href="/assets/js/31.a1d862b6.js"><link rel="prefetch" href="/assets/js/32.38309a49.js"><link rel="prefetch" href="/assets/js/33.00c935c2.js"><link rel="prefetch" href="/assets/js/34.2d00063c.js"><link rel="prefetch" href="/assets/js/35.7acd66b4.js"><link rel="prefetch" href="/assets/js/36.639c7323.js"><link rel="prefetch" href="/assets/js/37.0289ca07.js"><link rel="prefetch" href="/assets/js/38.381c8793.js"><link rel="prefetch" href="/assets/js/39.43721068.js"><link rel="prefetch" href="/assets/js/4.83fce895.js"><link rel="prefetch" href="/assets/js/40.cbb03517.js"><link rel="prefetch" href="/assets/js/41.2ebc4ae0.js"><link rel="prefetch" href="/assets/js/42.06525a68.js"><link rel="prefetch" href="/assets/js/43.97e88d4c.js"><link rel="prefetch" href="/assets/js/44.085b6bd1.js"><link rel="prefetch" href="/assets/js/45.c80fcf81.js"><link rel="prefetch" href="/assets/js/46.8fe276fe.js"><link rel="prefetch" href="/assets/js/47.117c8124.js"><link rel="prefetch" href="/assets/js/48.51f9a174.js"><link rel="prefetch" href="/assets/js/49.a5a598c2.js"><link rel="prefetch" href="/assets/js/5.33a173f2.js"><link rel="prefetch" href="/assets/js/50.dc5dcae8.js"><link rel="prefetch" href="/assets/js/51.fd36922b.js"><link rel="prefetch" href="/assets/js/52.a4f74214.js"><link rel="prefetch" href="/assets/js/53.21713e04.js"><link rel="prefetch" href="/assets/js/54.ec84d1e2.js"><link rel="prefetch" href="/assets/js/55.41170dcf.js"><link rel="prefetch" href="/assets/js/56.0a751b39.js"><link rel="prefetch" href="/assets/js/57.85308bb3.js"><link rel="prefetch" href="/assets/js/58.498fe7de.js"><link rel="prefetch" href="/assets/js/59.8e0666ca.js"><link rel="prefetch" href="/assets/js/6.7a505dc8.js"><link rel="prefetch" href="/assets/js/60.49ee332e.js"><link rel="prefetch" href="/assets/js/61.32f169d5.js"><link rel="prefetch" href="/assets/js/62.3b48e42a.js"><link rel="prefetch" href="/assets/js/63.80867ba0.js"><link rel="prefetch" href="/assets/js/64.988e3c0b.js"><link rel="prefetch" href="/assets/js/65.a796ede7.js"><link rel="prefetch" href="/assets/js/66.6e95ba5a.js"><link rel="prefetch" href="/assets/js/67.4a98de55.js"><link rel="prefetch" href="/assets/js/68.76898f42.js"><link rel="prefetch" href="/assets/js/69.495078d4.js"><link rel="prefetch" href="/assets/js/7.14b60190.js"><link rel="prefetch" href="/assets/js/70.5e2800c9.js"><link rel="prefetch" href="/assets/js/71.a4ba9ab7.js"><link rel="prefetch" href="/assets/js/72.444683ae.js"><link rel="prefetch" href="/assets/js/73.aad49508.js"><link rel="prefetch" href="/assets/js/74.268ce036.js"><link rel="prefetch" href="/assets/js/75.0b2be650.js"><link rel="prefetch" href="/assets/js/76.b08ef2ae.js"><link rel="prefetch" href="/assets/js/77.dd311c6f.js"><link rel="prefetch" href="/assets/js/78.3a934f8b.js"><link rel="prefetch" href="/assets/js/79.6be841ed.js"><link rel="prefetch" href="/assets/js/8.16f6f26a.js"><link rel="prefetch" href="/assets/js/80.0c90c4c5.js"><link rel="prefetch" href="/assets/js/81.996a7999.js"><link rel="prefetch" href="/assets/js/82.9f001d79.js"><link rel="prefetch" href="/assets/js/83.dab38f18.js"><link rel="prefetch" href="/assets/js/84.7797fcef.js"><link rel="prefetch" href="/assets/js/85.962b9055.js"><link rel="prefetch" href="/assets/js/86.f71a2271.js"><link rel="prefetch" href="/assets/js/87.42fbc276.js"><link rel="prefetch" href="/assets/js/88.356c05ab.js"><link rel="prefetch" href="/assets/js/89.00164c41.js"><link rel="prefetch" href="/assets/js/9.35501b87.js"><link rel="prefetch" href="/assets/js/90.a5a1c818.js"><link rel="prefetch" href="/assets/js/91.bf5b4ad8.js"><link rel="prefetch" href="/assets/js/92.3eaca204.js"><link rel="prefetch" href="/assets/js/93.97fd0439.js"><link rel="prefetch" href="/assets/js/94.cdaf22ac.js"><link rel="prefetch" href="/assets/js/95.45442ac9.js"><link rel="prefetch" href="/assets/js/96.e2590bec.js"><link rel="prefetch" href="/assets/js/97.c26816dd.js"><link rel="prefetch" href="/assets/js/98.1269e510.js"><link rel="prefetch" href="/assets/js/99.47f7e279.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7fad836b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">QIR Adaptor Tool Developer Documentation</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/Classes/" class="nav-link">
+  Classes
+</a></div><div class="nav-item"><a href="/Namespaces/" class="nav-link">
+  Namespaces
+</a></div><div class="nav-item"><a href="/Modules/" class="nav-link">
+  Modules
+</a></div><div class="nav-item"><a href="/Files/" class="nav-link router-link-active">
+  Files
+</a></div><div class="nav-item"><a href="/Pages/" class="nav-link">
+  Pages
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/Classes/" class="nav-link">
+  Classes
+</a></div><div class="nav-item"><a href="/Namespaces/" class="nav-link">
+  Namespaces
+</a></div><div class="nav-item"><a href="/Modules/" class="nav-link">
+  Modules
+</a></div><div class="nav-item"><a href="/Files/" class="nav-link router-link-active">
+  Files
+</a></div><div class="nav-item"><a href="/Pages/" class="nav-link">
+  Pages
+</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="transformationrulespass-transformationrulespass-cpp"><a href="#transformationrulespass-transformationrulespass-cpp" class="header-anchor">#</a> TransformationRulesPass/TransformationRulesPass.cpp</h1> <h2 id="namespaces"><a href="#namespaces" class="header-anchor">#</a> Namespaces</h2> <table><thead><tr><th>Name</th></tr></thead> <tbody><tr><td><strong><a href="/Namespaces/namespacemicrosoft.html">microsoft</a></strong></td></tr> <tr><td><strong><a href="/Namespaces/namespacemicrosoft_1_1quantum.html">microsoft::quantum</a></strong></td></tr></tbody></table> <h2 id="source-code"><a href="#source-code" class="header-anchor">#</a> Source code</h2> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// Copyright (c) Microsoft Corporation.</span>
+<span class="token comment">// Licensed under the MIT License.</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;Rules/Factory.hpp&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;Rules/Notation/Notation.hpp&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;Rules/ReplacementRule.hpp&quot;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;TransformationRulesPass/TransformationRulesPass.hpp&quot;</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&quot;Llvm/Llvm.hpp&quot;</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;fstream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">namespace</span> microsoft
+<span class="token punctuation">{</span>
+<span class="token keyword">namespace</span> quantum
+<span class="token punctuation">{</span>
+
+    <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">TransformationRulesPass</span><span class="token punctuation">(</span>
+        RuleSet<span class="token operator">&amp;&amp;</span>                                   rule_set<span class="token punctuation">,</span>
+        TransformationRulesPassConfiguration <span class="token keyword">const</span><span class="token operator">&amp;</span> config<span class="token punctuation">,</span>
+        Profile<span class="token operator">*</span>                                    profile<span class="token punctuation">)</span>
+      <span class="token operator">:</span> rule_set_<span class="token punctuation">{</span>std<span class="token double-colon punctuation">::</span><span class="token function">move</span><span class="token punctuation">(</span>rule_set<span class="token punctuation">)</span><span class="token punctuation">}</span>
+      <span class="token punctuation">,</span> config_<span class="token punctuation">{</span>config<span class="token punctuation">}</span>
+      <span class="token punctuation">,</span> profile_<span class="token punctuation">{</span>profile<span class="token punctuation">}</span>
+    <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">setupCopyAndExpand</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">using</span> <span class="token keyword">namespace</span> microsoft<span class="token double-colon punctuation">::</span>quantum<span class="token double-colon punctuation">::</span>notation<span class="token punctuation">;</span>
+        <span class="token function">addConstExprRule</span><span class="token punctuation">(</span>
+            <span class="token punctuation">{</span><span class="token function">branch</span><span class="token punctuation">(</span><span class="token string">&quot;cond&quot;</span>_cap <span class="token operator">=</span> <span class="token function">constInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;if_false&quot;</span>_cap <span class="token operator">=</span> _<span class="token punctuation">,</span> <span class="token string">&quot;if_true&quot;</span>_cap <span class="token operator">=</span> _<span class="token punctuation">)</span><span class="token punctuation">,</span>
+             <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>Builder<span class="token operator">&amp;</span> builder<span class="token punctuation">,</span> Value<span class="token operator">*</span> val<span class="token punctuation">,</span> Captures<span class="token operator">&amp;</span> captures<span class="token punctuation">,</span> Replacements<span class="token operator">&amp;</span> replacements<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                 <span class="token keyword">auto</span> cst   <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>ConstantInt<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>captures<span class="token punctuation">[</span><span class="token string">&quot;cond&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token keyword">auto</span> instr <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                 <span class="token keyword">if</span> <span class="token punctuation">(</span>cst <span class="token operator">==</span> <span class="token keyword">nullptr</span> <span class="token operator">||</span> instr <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                 <span class="token punctuation">{</span>
+                     <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                 <span class="token punctuation">}</span>
+
+                 <span class="token keyword">auto</span> type <span class="token operator">=</span> instr<span class="token operator">-&gt;</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                 <span class="token punctuation">{</span>
+                     <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                 <span class="token punctuation">}</span>
+
+                 <span class="token keyword">auto</span> branch_cond <span class="token operator">=</span> cst<span class="token operator">-&gt;</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getZExtValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                 <span class="token keyword">if</span> <span class="token punctuation">(</span>branch_cond<span class="token punctuation">)</span>
+                 <span class="token punctuation">{</span>
+                     <span class="token keyword">auto</span> if_true <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>BasicBlock<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>captures<span class="token punctuation">[</span><span class="token string">&quot;if_true&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                     builder<span class="token punctuation">.</span><span class="token function">CreateBr</span><span class="token punctuation">(</span>if_true<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                     instr<span class="token operator">-&gt;</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span><span class="token class-name">UndefValue</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token punctuation">}</span>
+                 <span class="token keyword">else</span>
+                 <span class="token punctuation">{</span>
+                     <span class="token keyword">auto</span> if_false <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>BasicBlock<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>captures<span class="token punctuation">[</span><span class="token string">&quot;if_false&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                     builder<span class="token punctuation">.</span><span class="token function">CreateBr</span><span class="token punctuation">(</span>if_false<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                     instr<span class="token operator">-&gt;</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span><span class="token class-name">UndefValue</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token punctuation">}</span>
+
+                 replacements<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token punctuation">{</span>val<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                 <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+             <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>config_<span class="token punctuation">.</span><span class="token function">assumeNoExceptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// Replacing all invokes with calls</span>
+            <span class="token function">addConstExprRule</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token function">unnamedInvoke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span>Builder<span class="token operator">&amp;</span> builder<span class="token punctuation">,</span> Value<span class="token operator">*</span> val<span class="token punctuation">,</span> Captures<span class="token operator">&amp;</span><span class="token punctuation">,</span> Replacements<span class="token operator">&amp;</span> replacements<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                                  <span class="token keyword">auto</span> invoke <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>InvokeInst<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                  <span class="token keyword">if</span> <span class="token punctuation">(</span>invoke <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                                  <span class="token punctuation">{</span>
+                                      <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                                  <span class="token punctuation">}</span>
+
+                                  <span class="token keyword">auto</span> callee_function <span class="token operator">=</span> invoke<span class="token operator">-&gt;</span><span class="token function">getCalledFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                                  <span class="token comment">// List with new call arguments</span>
+                                  std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span><span class="token operator">&gt;</span> new_arguments<span class="token punctuation">;</span>
+                                  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> invoke<span class="token operator">-&gt;</span><span class="token function">getNumArgOperands</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+                                  <span class="token punctuation">{</span>
+                                      <span class="token comment">// Getting the i'th argument</span>
+                                      llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> arg <span class="token operator">=</span> invoke<span class="token operator">-&gt;</span><span class="token function">getArgOperand</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                                      new_arguments<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                  <span class="token punctuation">}</span>
+
+                                  <span class="token comment">// Creating a new call</span>
+                                  <span class="token keyword">auto</span><span class="token operator">*</span> new_call <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">CreateCall</span><span class="token punctuation">(</span>callee_function<span class="token punctuation">,</span> new_arguments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                  builder<span class="token punctuation">.</span><span class="token function">CreateBr</span><span class="token punctuation">(</span>invoke<span class="token operator">-&gt;</span><span class="token function">getNormalDest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                                  new_call<span class="token operator">-&gt;</span><span class="token function">takeName</span><span class="token punctuation">(</span>invoke<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                                  <span class="token comment">// Replace all calls to old function with calls to new function</span>
+                                  invoke<span class="token operator">-&gt;</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>new_call<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                  replacements<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token punctuation">{</span>invoke<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                  <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                              <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">addConstExprRule</span><span class="token punctuation">(</span>ReplacementRule<span class="token operator">&amp;&amp;</span> rule<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span> ret <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">make_shared</span><span class="token generic class-name"><span class="token operator">&lt;</span>ReplacementRule<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">move</span><span class="token punctuation">(</span>rule<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        const_expr_replacements_<span class="token punctuation">.</span><span class="token function">addRule</span><span class="token punctuation">(</span>ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">constantFoldFunction</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Function<span class="token operator">&amp;</span> fnc<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">*</span><span class="token operator">&gt;</span> to_delete<span class="token punctuation">;</span>
+
+        <span class="token comment">// Folding all constants</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> basic_block <span class="token operator">:</span> fnc<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> instr <span class="token operator">:</span> basic_block<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">auto</span>        <span class="token keyword">module</span> <span class="token operator">=</span> instr<span class="token punctuation">.</span><span class="token function">getModule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">auto</span> <span class="token keyword">const</span><span class="token operator">&amp;</span> dl     <span class="token operator">=</span> <span class="token keyword">module</span><span class="token operator">-&gt;</span><span class="token function">getDataLayout</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">auto</span>        cst    <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token function">ConstantFoldInstruction</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">,</span> dl<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>cst <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    instr<span class="token punctuation">.</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>cst<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    to_delete<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Deleting constants</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> x <span class="token operator">:</span> to_delete<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            x<span class="token operator">-&gt;</span><span class="token function">eraseFromParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Folding constant expressions</span>
+        Replacements replacements<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> basic_block <span class="token operator">:</span> fnc<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> instr <span class="token operator">:</span> basic_block<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+
+                const_expr_replacements_<span class="token punctuation">.</span><span class="token function">matchAndReplace</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">,</span> replacements<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> r <span class="token operator">:</span> replacements<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token punctuation">.</span>second <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">&quot;Real replacements not implemented.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">auto</span> instr <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>first<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>instr <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                instr<span class="token operator">-&gt;</span><span class="token function">eraseFromParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">auto</span> block <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>BasicBlock<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>first<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>block <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                llvm<span class="token double-colon punctuation">::</span><span class="token function">DeleteDeadBlock</span><span class="token punctuation">(</span>block<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">copyAndExpand</span><span class="token punctuation">(</span>
+        llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span>           input<span class="token punctuation">,</span>
+        DeletableInstructions<span class="token operator">&amp;</span> schedule_instruction_deletion<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> ret        <span class="token operator">=</span> input<span class="token punctuation">;</span>
+        <span class="token keyword">auto</span><span class="token operator">*</span>        call_instr <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>CallInst<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">auto</span>         instr_ptr  <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>call_instr <span class="token operator">!=</span> <span class="token keyword">nullptr</span> <span class="token operator">&amp;&amp;</span> instr_ptr <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">auto</span><span class="token operator">&amp;</span> instr <span class="token operator">=</span> <span class="token operator">*</span>instr_ptr<span class="token punctuation">;</span>
+
+            <span class="token keyword">auto</span> callee_function <span class="token operator">=</span> call_instr<span class="token operator">-&gt;</span><span class="token function">getCalledFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>callee_function <span class="token operator">!=</span> <span class="token keyword">nullptr</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>callee_function<span class="token operator">-&gt;</span><span class="token function">isDeclaration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                ConstantArguments     argument_constants<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">uint32_t</span><span class="token operator">&gt;</span> remaining_arguments<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">uint32_t</span> idx <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token keyword">auto</span>     n   <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">uint32_t</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>callee_function<span class="token operator">-&gt;</span><span class="token function">arg_size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// Finding argument constants</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span>idx <span class="token operator">&lt;</span> n<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">auto</span> arg   <span class="token operator">=</span> callee_function<span class="token operator">-&gt;</span><span class="token function">getArg</span><span class="token punctuation">(</span>idx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">auto</span> value <span class="token operator">=</span> call_instr<span class="token operator">-&gt;</span><span class="token function">getArgOperand</span><span class="token punctuation">(</span>idx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">auto</span> cst <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>ConstantInt<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>cst <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        argument_constants<span class="token punctuation">[</span>arg<span class="token operator">-&gt;</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> cst<span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">else</span>
+                    <span class="token punctuation">{</span>
+                        remaining_arguments<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>idx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+
+                    <span class="token operator">++</span>idx<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// Making a function copy</span>
+                <span class="token keyword">auto</span> new_callee <span class="token operator">=</span> <span class="token function">expandFunctionCall</span><span class="token punctuation">(</span><span class="token operator">*</span>callee_function<span class="token punctuation">,</span> argument_constants<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// Replacing call if a new function was created</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>new_callee <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+
+                    llvm<span class="token double-colon punctuation">::</span>IRBuilder<span class="token operator">&lt;</span><span class="token operator">&gt;</span> <span class="token function">builder</span><span class="token punctuation">(</span>call_instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// List with new call arguments</span>
+                    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span><span class="token operator">&gt;</span> new_arguments<span class="token punctuation">;</span>
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> <span class="token keyword">const</span><span class="token operator">&amp;</span> i <span class="token operator">:</span> remaining_arguments<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment">// Getting the i'th argument</span>
+                        llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> arg <span class="token operator">=</span> call_instr<span class="token operator">-&gt;</span><span class="token function">getArgOperand</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                        <span class="token comment">// Adding arguments that were not constant</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>argument_constants<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>arg<span class="token operator">-&gt;</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> argument_constants<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            new_arguments<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+
+                    <span class="token comment">// Creating a new call</span>
+                    <span class="token keyword">auto</span><span class="token operator">*</span> new_call <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">CreateCall</span><span class="token punctuation">(</span>new_callee<span class="token punctuation">,</span> new_arguments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    new_call<span class="token operator">-&gt;</span><span class="token function">takeName</span><span class="token punctuation">(</span>call_instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    new_call<span class="token operator">-&gt;</span><span class="token function">setTailCall</span><span class="token punctuation">(</span>call_instr<span class="token operator">-&gt;</span><span class="token function">isTailCall</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    new_call<span class="token operator">-&gt;</span><span class="token function">setTailCallKind</span><span class="token punctuation">(</span>call_instr<span class="token operator">-&gt;</span><span class="token function">getTailCallKind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>call_instr<span class="token operator">-&gt;</span><span class="token function">canReturnTwice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        new_call<span class="token operator">-&gt;</span><span class="token function">setCanReturnTwice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+
+                    new_call<span class="token operator">-&gt;</span><span class="token function">setCallingConv</span><span class="token punctuation">(</span>call_instr<span class="token operator">-&gt;</span><span class="token function">getCallingConv</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    new_call<span class="token operator">-&gt;</span><span class="token function">setAttributes</span><span class="token punctuation">(</span>call_instr<span class="token operator">-&gt;</span><span class="token function">getAttributes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// Replace all calls to old function with calls to new function</span>
+                    instr<span class="token punctuation">.</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>new_call<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// Deleting instruction</span>
+                    schedule_instruction_deletion<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// Folding constants in the new function as we may have replaced some of</span>
+                    <span class="token comment">// the arguments with constants</span>
+                    <span class="token function">constantFoldFunction</span><span class="token punctuation">(</span><span class="token operator">*</span>new_callee<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// Recursion: Returning the new call as the instruction to be analysed</span>
+                    ret <span class="token operator">=</span> new_call<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// Deleting the function the original function if it is no longer in use</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>callee_function<span class="token operator">-&gt;</span><span class="token function">use_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    callee_function<span class="token operator">-&gt;</span><span class="token function">eraseFromParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">detectActiveCode</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> input<span class="token punctuation">,</span> DeletableInstructions<span class="token operator">&amp;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        active_pieces_<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> input<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">bool</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">runOnFunction</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Function<span class="token operator">&amp;</span> function<span class="token punctuation">,</span> InstructionModifier <span class="token keyword">const</span><span class="token operator">&amp;</span> modifier<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>function<span class="token punctuation">.</span><span class="token function">isDeclaration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>depth_ <span class="token operator">&gt;=</span> config_<span class="token punctuation">.</span><span class="token function">maxRecursion</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            llvm<span class="token double-colon punctuation">::</span><span class="token function">outs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Exceed max recursion of &quot;</span> <span class="token operator">&lt;&lt;</span> config_<span class="token punctuation">.</span><span class="token function">maxRecursion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token operator">++</span>depth_<span class="token punctuation">;</span>
+
+        <span class="token comment">// Keep track of instructions scheduled for deletion</span>
+        DeletableInstructions schedule_instruction_deletion<span class="token punctuation">;</span>
+
+        <span class="token comment">// Block queue</span>
+        std<span class="token double-colon punctuation">::</span>deque<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>BasicBlock<span class="token operator">*</span><span class="token operator">&gt;</span>         queue<span class="token punctuation">;</span>
+        std<span class="token double-colon punctuation">::</span>unordered_set<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>BasicBlock<span class="token operator">*</span><span class="token operator">&gt;</span> blocks_queued<span class="token punctuation">;</span>
+        queue<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>function<span class="token punctuation">.</span><span class="token function">getEntryBlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        blocks_queued<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>function<span class="token punctuation">.</span><span class="token function">getEntryBlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Executing the modifier on the function itsel</span>
+        <span class="token function">modifier</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>function<span class="token punctuation">,</span> schedule_instruction_deletion<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>queue<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">auto</span><span class="token operator">&amp;</span> basic_block <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            queue<span class="token punctuation">.</span><span class="token function">pop_front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Executing the modifier on the block</span>
+            <span class="token function">modifier</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>basic_block<span class="token punctuation">,</span> schedule_instruction_deletion<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> instr <span class="token operator">:</span> basic_block<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// Modifying instruction as needed</span>
+                <span class="token keyword">auto</span> instr_ptr <span class="token operator">=</span> <span class="token function">modifier</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">,</span> schedule_instruction_deletion<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// In case the instruction was scheduled for deletion</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>instr_ptr <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// Checking if we are calling a function</span>
+                <span class="token keyword">auto</span> call_instr <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>CallBase<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>instr_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>call_instr <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">auto</span> callee_function <span class="token operator">=</span> call_instr<span class="token operator">-&gt;</span><span class="token function">getCalledFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>callee_function <span class="token operator">!=</span> <span class="token keyword">nullptr</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>callee_function<span class="token operator">-&gt;</span><span class="token function">isDeclaration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token function">runOnFunction</span><span class="token punctuation">(</span><span class="token operator">*</span>callee_function<span class="token punctuation">,</span> modifier<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// Following the branches to their basic blocks</span>
+                <span class="token keyword">auto</span><span class="token operator">*</span> br_instr <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>BranchInst<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>br_instr <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">uint32_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> br_instr<span class="token operator">-&gt;</span><span class="token function">getNumOperands</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment">// TODO(tfr): This may not work on multi path branches (conditional)</span>
+                        <span class="token comment">// as we may accidentally add the final path (contains qubit release)</span>
+                        <span class="token comment">// and we cannot make assumptions since optimisation may have rearranged</span>
+                        <span class="token comment">// everything. In this case, we should revert to the order they appear in the</span>
+                        <span class="token comment">// function</span>
+                        <span class="token keyword">auto</span> bb <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>BasicBlock<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>br_instr<span class="token operator">-&gt;</span><span class="token function">getOperand</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>bb <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+
+                            <span class="token comment">// Ensuring that we are not scheduling the same block twice</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>blocks_queued<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>bb<span class="token punctuation">)</span> <span class="token operator">==</span> blocks_queued<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                            <span class="token punctuation">{</span>
+                                queue<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>bb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                blocks_queued<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>bb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// Follow the branches of</span>
+                <span class="token keyword">auto</span><span class="token operator">*</span> switch_instr <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>SwitchInst<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>switch_instr <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">uint64_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> switch_instr<span class="token operator">-&gt;</span><span class="token function">getNumSuccessors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">auto</span> bb <span class="token operator">=</span> switch_instr<span class="token operator">-&gt;</span><span class="token function">getSuccessor</span><span class="token punctuation">(</span><span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">uint32_t</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token comment">// Ensuring that we are not scheduling the same block twice</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>blocks_queued<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>bb<span class="token punctuation">)</span> <span class="token operator">==</span> blocks_queued<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            queue<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>bb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            blocks_queued<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>bb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// Checking if this is an invoke call</span>
+                <span class="token keyword">auto</span><span class="token operator">*</span> invoke_inst <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>InvokeInst<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>invoke_inst <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// Checking that configuration is correct</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>config_<span class="token punctuation">.</span><span class="token function">assumeNoExceptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment">// TODO(tfr): Unify error reporting</span>
+                        <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">&quot;Exceptions paths cannot be handled at compile time. Either disable &quot;</span>
+                                                 <span class="token string">&quot;transform-execution-path-only or add assumption assume-no-except&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+
+                    <span class="token comment">// Adding the block which is the on the &quot;no except&quot; path</span>
+                    <span class="token keyword">auto</span> bb <span class="token operator">=</span> invoke_inst<span class="token operator">-&gt;</span><span class="token function">getNormalDest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>blocks_queued<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>bb<span class="token punctuation">)</span> <span class="token operator">==</span> blocks_queued<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        queue<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>bb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        blocks_queued<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>bb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Deleting constants</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> x <span class="token operator">:</span> schedule_instruction_deletion<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            x<span class="token operator">-&gt;</span><span class="token function">eraseFromParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token operator">--</span>depth_<span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">bool</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">isActive</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> value<span class="token punctuation">)</span> <span class="token keyword">const</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> active_pieces_<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token operator">!=</span> active_pieces_<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">runCopyAndExpand</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Module<span class="token operator">&amp;</span> <span class="token keyword">module</span><span class="token punctuation">,</span> llvm<span class="token double-colon punctuation">::</span>ModuleAnalysisManager<span class="token operator">&amp;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        replacements_<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// For every instruction in every block, we attempt a match</span>
+        <span class="token comment">// and replace.</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> function <span class="token operator">:</span> <span class="token keyword">module</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>function<span class="token punctuation">.</span><span class="token function">hasFnAttribute</span><span class="token punctuation">(</span>config_<span class="token punctuation">.</span><span class="token function">entryPointAttr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">runOnFunction</span><span class="token punctuation">(</span>function<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">]</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> value<span class="token punctuation">,</span> DeletableInstructions<span class="token operator">&amp;</span> modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">return</span> <span class="token function">copyAndExpand</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> modifier<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Active code detection</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> global <span class="token operator">:</span> <span class="token keyword">module</span><span class="token punctuation">.</span><span class="token function">globals</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            active_pieces_<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>global<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> op <span class="token operator">:</span> global<span class="token punctuation">.</span><span class="token function">operands</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                active_pieces_<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>op<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> function <span class="token operator">:</span> <span class="token keyword">module</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">bool</span> is_active <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Checking if the function is referenced by a global variable</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> user <span class="token operator">:</span> function<span class="token punctuation">.</span><span class="token function">users</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// If the user is active, then it should be expected that the function is also active</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isActive</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    is_active <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>is_active <span class="token operator">||</span> function<span class="token punctuation">.</span><span class="token function">hasFnAttribute</span><span class="token punctuation">(</span>config_<span class="token punctuation">.</span><span class="token function">entryPointAttr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// Marking function as active</span>
+                active_pieces_<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>function<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// Detecting active code</span>
+                <span class="token function">runOnFunction</span><span class="token punctuation">(</span>function<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">]</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> value<span class="token punctuation">,</span> DeletableInstructions<span class="token operator">&amp;</span> modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">return</span> <span class="token function">detectActiveCode</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> modifier<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token function">processReplacements</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">processReplacements</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Applying all replacements</span>
+
+        std<span class="token double-colon punctuation">::</span>unordered_set<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span><span class="token operator">&gt;</span> already_removed<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> it <span class="token operator">=</span> replacements_<span class="token punctuation">.</span><span class="token function">rbegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> replacements_<span class="token punctuation">.</span><span class="token function">rend</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>it<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">auto</span> instr1 <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>it<span class="token operator">-&gt;</span>first<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>instr1 <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                llvm<span class="token double-colon punctuation">::</span><span class="token function">outs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;; WARNING: cannot deal with non-instruction replacements\n&quot;</span><span class="token punctuation">;</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token comment">// Checking if by accident the same instruction was added</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>already_removed<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>instr1<span class="token punctuation">)</span> <span class="token operator">!=</span> already_removed<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">&quot;Instruction was already removed.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            already_removed<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>instr1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Cheking if have a replacement for the instruction</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>it<span class="token operator">-&gt;</span>second <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// ... if so, we just replace it,</span>
+                <span class="token keyword">auto</span> instr2 <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>it<span class="token operator">-&gt;</span>second<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>instr2 <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    llvm<span class="token double-colon punctuation">::</span><span class="token function">outs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;; WARNING: cannot replace instruction with non-instruction\n&quot;</span><span class="token punctuation">;</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                llvm<span class="token double-colon punctuation">::</span><span class="token function">ReplaceInstWithInst</span><span class="token punctuation">(</span>instr1<span class="token punctuation">,</span> instr2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// ... otherwise we delete the the instruction</span>
+                <span class="token comment">// Removing all uses</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>instr1<span class="token operator">-&gt;</span><span class="token function">use_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">auto</span> type <span class="token operator">=</span> instr1<span class="token operator">-&gt;</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        instr1<span class="token operator">-&gt;</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span><span class="token class-name">UndefValue</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// And finally we delete the instruction. The if statement</span>
+                <span class="token comment">// is first and foremost a precaution which prevents the program</span>
+                <span class="token comment">// from seg-faulting in the unlikely case that instr1-&gt;getType() is null.</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>instr1<span class="token operator">-&gt;</span><span class="token function">use_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    instr1<span class="token operator">-&gt;</span><span class="token function">eraseFromParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        replacements_<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">runDetectActiveCode</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Module<span class="token operator">&amp;</span> <span class="token keyword">module</span><span class="token punctuation">,</span> llvm<span class="token double-colon punctuation">::</span>ModuleAnalysisManager<span class="token operator">&amp;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        blocks_to_delete_<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        functions_to_delete_<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> function <span class="token operator">:</span> <span class="token keyword">module</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isActive</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>function<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> block <span class="token operator">:</span> function<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isActive</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>block<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        blocks_to_delete_<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>block<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>function<span class="token punctuation">.</span><span class="token function">isDeclaration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                functions_to_delete_<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>function<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">runDeleteDeadCode</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Module<span class="token operator">&amp;</span><span class="token punctuation">,</span> llvm<span class="token double-colon punctuation">::</span>ModuleAnalysisManager<span class="token operator">&amp;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+
+        <span class="token comment">// Removing all function references and scheduling blocks for deletion</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> function <span class="token operator">:</span> functions_to_delete_<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// Schedule for deletion</span>
+            function<span class="token operator">-&gt;</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span><span class="token class-name">UndefValue</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span>function<span class="token operator">-&gt;</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            function<span class="token operator">-&gt;</span><span class="token function">clearGC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            function<span class="token operator">-&gt;</span><span class="token function">clearMetadata</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Deleteing blocks in reverse order</span>
+            std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>BasicBlock<span class="token operator">*</span><span class="token operator">&gt;</span> blocks<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> block <span class="token operator">:</span> <span class="token operator">*</span>function<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                blocks<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>block<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token comment">// Removing backwards to avoid segfault</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> it <span class="token operator">=</span> blocks<span class="token punctuation">.</span><span class="token function">rbegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> blocks<span class="token punctuation">.</span><span class="token function">rend</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>it<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">auto</span><span class="token operator">&amp;</span> block <span class="token operator">=</span> <span class="token operator">*</span><span class="token operator">*</span>it<span class="token punctuation">;</span>
+                <span class="token comment">// Deleting instructions in reverse order (needed because it is a DAG structure)</span>
+                std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">*</span><span class="token operator">&gt;</span> instructions<span class="token punctuation">;</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> instr <span class="token operator">:</span> block<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    instructions<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// Removing all instructions</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> it2 <span class="token operator">=</span> instructions<span class="token punctuation">.</span><span class="token function">rbegin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it2 <span class="token operator">!=</span> instructions<span class="token punctuation">.</span><span class="token function">rend</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>it2<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">auto</span><span class="token operator">&amp;</span> instr <span class="token operator">=</span> <span class="token operator">*</span><span class="token operator">*</span>it2<span class="token punctuation">;</span>
+                    instr<span class="token punctuation">.</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span><span class="token class-name">UndefValue</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span>instr<span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    instr<span class="token punctuation">.</span><span class="token function">eraseFromParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token comment">// Removing all block references</span>
+                block<span class="token punctuation">.</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span><span class="token class-name">UndefValue</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span>block<span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// Scheduling block deletion</span>
+                blocks_to_delete_<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>block<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Deleting all blocks</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> block <span class="token operator">:</span> blocks_to_delete_<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>block<span class="token operator">-&gt;</span><span class="token function">use_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                block<span class="token operator">-&gt;</span><span class="token function">eraseFromParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                llvm<span class="token double-colon punctuation">::</span><span class="token function">errs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;; INTERNAL ERROR: block was supposed to be unused.\n&quot;</span><span class="token punctuation">;</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> x <span class="token operator">:</span> block<span class="token operator">-&gt;</span><span class="token function">uses</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    llvm<span class="token double-colon punctuation">::</span><span class="token function">errs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; -x &quot;</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>x <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> x <span class="token operator">:</span> block<span class="token operator">-&gt;</span><span class="token function">users</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    llvm<span class="token double-colon punctuation">::</span><span class="token function">errs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; -: &quot;</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>x <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                llvm<span class="token double-colon punctuation">::</span><span class="token function">errs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot; ----- \n&quot;</span><span class="token punctuation">;</span>
+                llvm<span class="token double-colon punctuation">::</span><span class="token function">errs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>block <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Removing functions</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> function <span class="token operator">:</span> functions_to_delete_<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>function<span class="token operator">-&gt;</span><span class="token function">isDeclaration</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> function<span class="token operator">-&gt;</span><span class="token function">use_empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                function<span class="token operator">-&gt;</span><span class="token function">eraseFromParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">runReplacePhi</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Module<span class="token operator">&amp;</span> <span class="token keyword">module</span><span class="token punctuation">,</span> llvm<span class="token double-colon punctuation">::</span>ModuleAnalysisManager<span class="token operator">&amp;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">using</span> <span class="token keyword">namespace</span> microsoft<span class="token double-colon punctuation">::</span>quantum<span class="token double-colon punctuation">::</span>notation<span class="token punctuation">;</span>
+        <span class="token keyword">auto</span>                            rule <span class="token operator">=</span> <span class="token function">phi</span><span class="token punctuation">(</span><span class="token string">&quot;b1&quot;</span>_cap <span class="token operator">=</span> _<span class="token punctuation">,</span> <span class="token string">&quot;b2&quot;</span>_cap <span class="token operator">=</span> _<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        IOperandPrototype<span class="token double-colon punctuation">::</span>Captures     captures<span class="token punctuation">;</span>
+        std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">*</span><span class="token operator">&gt;</span> to_delete<span class="token punctuation">;</span>
+
+        std<span class="token double-colon punctuation">::</span>unordered_map<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">*</span><span class="token punctuation">,</span> llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span><span class="token operator">&gt;</span> replacements<span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> function <span class="token operator">:</span> <span class="token keyword">module</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> block <span class="token operator">:</span> function<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">*</span><span class="token operator">&gt;</span> instrs<span class="token punctuation">;</span>
+
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> instr <span class="token operator">:</span> block<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>rule<span class="token operator">-&gt;</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">,</span> captures<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">auto</span> phi <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>PHINode<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>phi <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+
+                        <span class="token keyword">auto</span> val1 <span class="token operator">=</span> captures<span class="token punctuation">[</span><span class="token string">&quot;b1&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">auto</span> val2 <span class="token operator">=</span> captures<span class="token punctuation">[</span><span class="token string">&quot;b2&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+                        <span class="token keyword">auto</span> block1 <span class="token operator">=</span> phi<span class="token operator">-&gt;</span><span class="token function">getIncomingBlock</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TODO(tfr): Make sure that block1 matches val1</span>
+                        <span class="token keyword">auto</span> block2 <span class="token operator">=</span> phi<span class="token operator">-&gt;</span><span class="token function">getIncomingBlock</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isActive</span><span class="token punctuation">(</span>block1<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            val2<span class="token operator">-&gt;</span><span class="token function">takeName</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                            replacements<span class="token punctuation">[</span><span class="token operator">&amp;</span>instr<span class="token punctuation">]</span> <span class="token operator">=</span> val2<span class="token punctuation">;</span>
+
+                            to_delete<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isActive</span><span class="token punctuation">(</span>block2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            val1<span class="token operator">-&gt;</span><span class="token function">takeName</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                            replacements<span class="token punctuation">[</span><span class="token operator">&amp;</span>instr<span class="token punctuation">]</span> <span class="token operator">=</span> val2<span class="token punctuation">;</span>
+                            to_delete<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+
+                        captures<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> r <span class="token operator">:</span> replacements<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            r<span class="token punctuation">.</span>first<span class="token operator">-&gt;</span><span class="token function">replaceAllUsesWith</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>second<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> x <span class="token operator">:</span> to_delete<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            x<span class="token operator">-&gt;</span><span class="token function">eraseFromParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">runApplyRules</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Module<span class="token operator">&amp;</span> <span class="token keyword">module</span><span class="token punctuation">,</span> llvm<span class="token double-colon punctuation">::</span>ModuleAnalysisManager<span class="token operator">&amp;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+
+        replacements_<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        std<span class="token double-colon punctuation">::</span>unordered_set<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span><span class="token operator">&gt;</span> already_visited<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> function <span class="token operator">:</span> <span class="token keyword">module</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>function<span class="token punctuation">.</span><span class="token function">hasFnAttribute</span><span class="token punctuation">(</span>config_<span class="token punctuation">.</span><span class="token function">entryPointAttr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">runOnFunction</span><span class="token punctuation">(</span>function<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>already_visited<span class="token punctuation">]</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Value<span class="token operator">*</span> value<span class="token punctuation">,</span> DeletableInstructions<span class="token operator">&amp;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">auto</span> instr <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">dyn_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Instruction<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// Sanity check</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>already_visited<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token operator">!=</span> already_visited<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">throw</span> std<span class="token double-colon punctuation">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">&quot;Already visited&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    already_visited<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// Checking if we should analyse</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>instr <span class="token operator">!=</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        rule_set_<span class="token punctuation">.</span><span class="token function">matchAndReplace</span><span class="token punctuation">(</span>instr<span class="token punctuation">,</span> replacements_<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">return</span> value<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>config_<span class="token punctuation">.</span><span class="token function">shouldAnnotateQubitUse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    std<span class="token double-colon punctuation">::</span>stringstream ss<span class="token punctuation">{</span><span class="token string">&quot;&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                    ss <span class="token operator">&lt;&lt;</span> profile_<span class="token operator">-&gt;</span><span class="token function">getQubitAllocationManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">maxAllocationsUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    function<span class="token punctuation">.</span><span class="token function">addFnAttr</span><span class="token punctuation">(</span><span class="token string">&quot;requiredQubits&quot;</span><span class="token punctuation">,</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>config_<span class="token punctuation">.</span><span class="token function">shouldAnnotateResultUse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    std<span class="token double-colon punctuation">::</span>stringstream ss<span class="token punctuation">{</span><span class="token string">&quot;&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                    ss <span class="token operator">&lt;&lt;</span> profile_<span class="token operator">-&gt;</span><span class="token function">getResultAllocationManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">maxAllocationsUsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    function<span class="token punctuation">.</span><span class="token function">addFnAttr</span><span class="token punctuation">(</span><span class="token string">&quot;requiredResults&quot;</span><span class="token punctuation">,</span> ss<span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token function">processReplacements</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    llvm<span class="token double-colon punctuation">::</span>PreservedAnalyses <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">run</span><span class="token punctuation">(</span>llvm<span class="token double-colon punctuation">::</span>Module<span class="token operator">&amp;</span> <span class="token keyword">module</span><span class="token punctuation">,</span> llvm<span class="token double-colon punctuation">::</span>ModuleAnalysisManager<span class="token operator">&amp;</span> mam<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// In case the module is istructed to clone functions,</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>config_<span class="token punctuation">.</span><span class="token function">shouldCloneFunctions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">setupCopyAndExpand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">runCopyAndExpand</span><span class="token punctuation">(</span><span class="token keyword">module</span><span class="token punctuation">,</span> mam<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Deleting dead code if configured to do so. This process consists</span>
+        <span class="token comment">// of three steps: detecting dead code, removing phi nodes (and references)</span>
+        <span class="token comment">// and finally deleting the code. This implementation is aggressive in the sense</span>
+        <span class="token comment">// that any code that we cannot prove to be active is considered dead.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>config_<span class="token punctuation">.</span><span class="token function">shouldDeleteDeadCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">runDetectActiveCode</span><span class="token punctuation">(</span><span class="token keyword">module</span><span class="token punctuation">,</span> mam<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">runReplacePhi</span><span class="token punctuation">(</span><span class="token keyword">module</span><span class="token punctuation">,</span> mam<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">runDeleteDeadCode</span><span class="token punctuation">(</span><span class="token keyword">module</span><span class="token punctuation">,</span> mam<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Applying rule set</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>config_<span class="token punctuation">.</span><span class="token function">shouldTransformExecutionPathOnly</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// We only apply transformation rules to code which is reachable</span>
+            <span class="token comment">// via the execution path.</span>
+            <span class="token function">runApplyRules</span><span class="token punctuation">(</span><span class="token keyword">module</span><span class="token punctuation">,</span> mam<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+
+            <span class="token comment">// Otherwise we apply to all sections of the code.</span>
+            replacements_<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> function <span class="token operator">:</span> <span class="token keyword">module</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> block <span class="token operator">:</span> function<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> instr <span class="token operator">:</span> block<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        rule_set_<span class="token punctuation">.</span><span class="token function">matchAndReplace</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>instr<span class="token punctuation">,</span> replacements_<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token function">processReplacements</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> llvm<span class="token double-colon punctuation">::</span><span class="token class-name">PreservedAnalyses</span><span class="token double-colon punctuation">::</span><span class="token function">none</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    llvm<span class="token double-colon punctuation">::</span>Function<span class="token operator">*</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">expandFunctionCall</span><span class="token punctuation">(</span>
+        llvm<span class="token double-colon punctuation">::</span>Function<span class="token operator">&amp;</span>          callee<span class="token punctuation">,</span>
+        ConstantArguments <span class="token keyword">const</span><span class="token operator">&amp;</span> const_args<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">auto</span>              <span class="token keyword">module</span>  <span class="token operator">=</span> callee<span class="token punctuation">.</span><span class="token function">getParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">auto</span><span class="token operator">&amp;</span>             context <span class="token operator">=</span> <span class="token keyword">module</span><span class="token operator">-&gt;</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        llvm<span class="token double-colon punctuation">::</span>IRBuilder<span class="token operator">&lt;</span><span class="token operator">&gt;</span> <span class="token function">builder</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Copying the original function</span>
+        llvm<span class="token double-colon punctuation">::</span>ValueToValueMapTy  remapper<span class="token punctuation">;</span>
+        std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>Type<span class="token operator">*</span><span class="token operator">&gt;</span> arg_types<span class="token punctuation">;</span>
+
+        <span class="token comment">// The user might be deleting arguments to the function by specifying them in</span>
+        <span class="token comment">// the VMap.  If so, we need to not add the arguments to the arg ty vector</span>
+        <span class="token comment">//</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> <span class="token keyword">const</span><span class="token operator">&amp;</span> arg <span class="token operator">:</span> callee<span class="token punctuation">.</span><span class="token function">args</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// Skipping constant arguments</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>const_args<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>arg<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> const_args<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            arg_types<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>arg<span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Creating a new function</span>
+        llvm<span class="token double-colon punctuation">::</span>FunctionType<span class="token operator">*</span> function_type <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token class-name">FunctionType</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span>
+            callee<span class="token punctuation">.</span><span class="token function">getFunctionType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">getReturnType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> arg_types<span class="token punctuation">,</span> callee<span class="token punctuation">.</span><span class="token function">getFunctionType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">isVarArg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">auto</span> function <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token class-name">Function</span><span class="token double-colon punctuation">::</span><span class="token function">Create</span><span class="token punctuation">(</span>
+            function_type<span class="token punctuation">,</span> callee<span class="token punctuation">.</span><span class="token function">getLinkage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> callee<span class="token punctuation">.</span><span class="token function">getAddressSpace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> callee<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">module</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Copying the non-const arguments</span>
+        <span class="token keyword">auto</span> dest_args_it <span class="token operator">=</span> function<span class="token operator">-&gt;</span><span class="token function">arg_begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> <span class="token keyword">const</span><span class="token operator">&amp;</span> arg <span class="token operator">:</span> callee<span class="token punctuation">.</span><span class="token function">args</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">auto</span> const_it <span class="token operator">=</span> const_args<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>arg<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>const_it <span class="token operator">==</span> const_args<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// Mapping remaining function arguments</span>
+                dest_args_it<span class="token operator">-&gt;</span><span class="token function">setName</span><span class="token punctuation">(</span>arg<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                remapper<span class="token punctuation">[</span><span class="token operator">&amp;</span>arg<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token operator">*</span>dest_args_it<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                remapper<span class="token punctuation">[</span><span class="token operator">&amp;</span>arg<span class="token punctuation">]</span> <span class="token operator">=</span> llvm<span class="token double-colon punctuation">::</span><span class="token class-name">ConstantInt</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> const_it<span class="token operator">-&gt;</span>second<span class="token operator">-&gt;</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        llvm<span class="token double-colon punctuation">::</span>SmallVector<span class="token operator">&lt;</span>llvm<span class="token double-colon punctuation">::</span>ReturnInst<span class="token operator">*</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token operator">&gt;</span> returns<span class="token punctuation">;</span> <span class="token comment">// Ignore returns cloned.</span>
+
+        <span class="token comment">// Note: In LLVM 13 upgrade 'true' to 'llvm::CloneFunctionChangeType::LocalChangesOnly'</span>
+        llvm<span class="token double-colon punctuation">::</span><span class="token function">CloneFunctionInto</span><span class="token punctuation">(</span>function<span class="token punctuation">,</span> <span class="token operator">&amp;</span>callee<span class="token punctuation">,</span> remapper<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> returns<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">verifyFunction</span><span class="token punctuation">(</span><span class="token operator">*</span>function<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> function<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">setLogger</span><span class="token punctuation">(</span>ILoggerPtr logger<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        logger_ <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">move</span><span class="token punctuation">(</span>logger<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">bool</span> <span class="token class-name">TransformationRulesPass</span><span class="token double-colon punctuation">::</span><span class="token function">isRequired</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span> <span class="token comment">// namespace quantum</span>
+<span class="token punctuation">}</span> <span class="token comment">// namespace microsoft</span>
+</code></pre></div><hr> <p>Updated on 16 November 2021 at 10:53:54 UTC</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.e2451f08.js" defer></script><script src="/assets/js/2.f962d3f5.js" defer></script><script src="/assets/js/151.80a4fac8.js" defer></script>
+  </body>
+</html>

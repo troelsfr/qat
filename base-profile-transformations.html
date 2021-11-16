@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Proposal: QIR Adaptor Tool Specification | QIR Adaptor Tool Developer Documentation</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/assets/css/0.styles.7fad836b.css" as="style"><link rel="preload" href="/assets/js/app.e2451f08.js" as="script"><link rel="preload" href="/assets/js/2.f962d3f5.js" as="script"><link rel="preload" href="/assets/js/208.cecd5551.js" as="script"><link rel="prefetch" href="/assets/js/10.21b52fb4.js"><link rel="prefetch" href="/assets/js/100.2a15072f.js"><link rel="prefetch" href="/assets/js/101.dd8d038d.js"><link rel="prefetch" href="/assets/js/102.703298f7.js"><link rel="prefetch" href="/assets/js/103.d22d31df.js"><link rel="prefetch" href="/assets/js/104.8a14eb8a.js"><link rel="prefetch" href="/assets/js/105.e4aaa8ac.js"><link rel="prefetch" href="/assets/js/106.4efa2a81.js"><link rel="prefetch" href="/assets/js/107.0db82b59.js"><link rel="prefetch" href="/assets/js/108.3d0caaf3.js"><link rel="prefetch" href="/assets/js/109.b4bea8c6.js"><link rel="prefetch" href="/assets/js/11.b9564042.js"><link rel="prefetch" href="/assets/js/110.41bd1513.js"><link rel="prefetch" href="/assets/js/111.98396cc0.js"><link rel="prefetch" href="/assets/js/112.771b52a2.js"><link rel="prefetch" href="/assets/js/113.4f2dc273.js"><link rel="prefetch" href="/assets/js/114.68182464.js"><link rel="prefetch" href="/assets/js/115.74db31ce.js"><link rel="prefetch" href="/assets/js/116.65694da4.js"><link rel="prefetch" href="/assets/js/117.79cf00fe.js"><link rel="prefetch" href="/assets/js/118.5174f2f0.js"><link rel="prefetch" href="/assets/js/119.9d9a0904.js"><link rel="prefetch" href="/assets/js/12.72e0a6a3.js"><link rel="prefetch" href="/assets/js/120.ad051ba4.js"><link rel="prefetch" href="/assets/js/121.7c710e93.js"><link rel="prefetch" href="/assets/js/122.f4f93a14.js"><link rel="prefetch" href="/assets/js/123.33d387ce.js"><link rel="prefetch" href="/assets/js/124.72c62fff.js"><link rel="prefetch" href="/assets/js/125.62908358.js"><link rel="prefetch" href="/assets/js/126.48ead500.js"><link rel="prefetch" href="/assets/js/127.4f5601a5.js"><link rel="prefetch" href="/assets/js/128.3fd5ad13.js"><link rel="prefetch" href="/assets/js/129.6b7f060e.js"><link rel="prefetch" href="/assets/js/13.4761b27f.js"><link rel="prefetch" href="/assets/js/130.88333d64.js"><link rel="prefetch" href="/assets/js/131.71c20e6e.js"><link rel="prefetch" href="/assets/js/132.355da14c.js"><link rel="prefetch" href="/assets/js/133.e297b9d9.js"><link rel="prefetch" href="/assets/js/134.8f3defae.js"><link rel="prefetch" href="/assets/js/135.1df6cee0.js"><link rel="prefetch" href="/assets/js/136.644147cf.js"><link rel="prefetch" href="/assets/js/137.4dfc11a8.js"><link rel="prefetch" href="/assets/js/138.83fb3c64.js"><link rel="prefetch" href="/assets/js/139.47a55a23.js"><link rel="prefetch" href="/assets/js/14.c966a810.js"><link rel="prefetch" href="/assets/js/140.26998966.js"><link rel="prefetch" href="/assets/js/141.644e5310.js"><link rel="prefetch" href="/assets/js/142.cd2abad1.js"><link rel="prefetch" href="/assets/js/143.cb3bbc4e.js"><link rel="prefetch" href="/assets/js/144.0d5cdf81.js"><link rel="prefetch" href="/assets/js/145.55cbfc98.js"><link rel="prefetch" href="/assets/js/146.742b7b7f.js"><link rel="prefetch" href="/assets/js/147.066d52b9.js"><link rel="prefetch" href="/assets/js/148.1edd49a1.js"><link rel="prefetch" href="/assets/js/149.7743b974.js"><link rel="prefetch" href="/assets/js/15.09a0fced.js"><link rel="prefetch" href="/assets/js/150.68bc7a55.js"><link rel="prefetch" href="/assets/js/151.80a4fac8.js"><link rel="prefetch" href="/assets/js/152.f317736e.js"><link rel="prefetch" href="/assets/js/153.5c55db22.js"><link rel="prefetch" href="/assets/js/154.48ef77fc.js"><link rel="prefetch" href="/assets/js/155.45850186.js"><link rel="prefetch" href="/assets/js/156.914a7530.js"><link rel="prefetch" href="/assets/js/157.4b3c2135.js"><link rel="prefetch" href="/assets/js/158.8c49c7d6.js"><link rel="prefetch" href="/assets/js/159.a0bcfc8b.js"><link rel="prefetch" href="/assets/js/16.a07bc44e.js"><link rel="prefetch" href="/assets/js/160.ddeff1b5.js"><link rel="prefetch" href="/assets/js/161.149cc46a.js"><link rel="prefetch" href="/assets/js/162.38f96915.js"><link rel="prefetch" href="/assets/js/163.8683ebae.js"><link rel="prefetch" href="/assets/js/164.f7a667b3.js"><link rel="prefetch" href="/assets/js/165.ce929292.js"><link rel="prefetch" href="/assets/js/166.882d001b.js"><link rel="prefetch" href="/assets/js/167.fd654ca8.js"><link rel="prefetch" href="/assets/js/168.9cdfe92d.js"><link rel="prefetch" href="/assets/js/169.05d08513.js"><link rel="prefetch" href="/assets/js/17.28543ff8.js"><link rel="prefetch" href="/assets/js/170.6fc063a9.js"><link rel="prefetch" href="/assets/js/171.6db9c3b6.js"><link rel="prefetch" href="/assets/js/172.62a7a908.js"><link rel="prefetch" href="/assets/js/173.93dda5f8.js"><link rel="prefetch" href="/assets/js/174.43138094.js"><link rel="prefetch" href="/assets/js/175.cae3c718.js"><link rel="prefetch" href="/assets/js/176.3ceee466.js"><link rel="prefetch" href="/assets/js/177.4c8edc64.js"><link rel="prefetch" href="/assets/js/178.66a4ab32.js"><link rel="prefetch" href="/assets/js/179.408b7eba.js"><link rel="prefetch" href="/assets/js/18.a0831207.js"><link rel="prefetch" href="/assets/js/180.abb66898.js"><link rel="prefetch" href="/assets/js/181.bf57fd1e.js"><link rel="prefetch" href="/assets/js/182.90d38991.js"><link rel="prefetch" href="/assets/js/183.f77676d0.js"><link rel="prefetch" href="/assets/js/184.94261fbf.js"><link rel="prefetch" href="/assets/js/185.d3aa411b.js"><link rel="prefetch" href="/assets/js/186.b881d6b8.js"><link rel="prefetch" href="/assets/js/187.516e097d.js"><link rel="prefetch" href="/assets/js/188.a8a3ebdf.js"><link rel="prefetch" href="/assets/js/189.a92ea38b.js"><link rel="prefetch" href="/assets/js/19.d1cd2ca7.js"><link rel="prefetch" href="/assets/js/190.894addd3.js"><link rel="prefetch" href="/assets/js/191.8c50f3b5.js"><link rel="prefetch" href="/assets/js/192.4e6cb8e2.js"><link rel="prefetch" href="/assets/js/193.856ca012.js"><link rel="prefetch" href="/assets/js/194.a9fe3eff.js"><link rel="prefetch" href="/assets/js/195.299d6ddb.js"><link rel="prefetch" href="/assets/js/196.5e416d9f.js"><link rel="prefetch" href="/assets/js/197.3a39c2f7.js"><link rel="prefetch" href="/assets/js/198.a60561c1.js"><link rel="prefetch" href="/assets/js/199.4a6c2745.js"><link rel="prefetch" href="/assets/js/20.3750701d.js"><link rel="prefetch" href="/assets/js/200.a2119e3a.js"><link rel="prefetch" href="/assets/js/201.1acc9a10.js"><link rel="prefetch" href="/assets/js/202.887bab82.js"><link rel="prefetch" href="/assets/js/203.676d2878.js"><link rel="prefetch" href="/assets/js/204.4298b47d.js"><link rel="prefetch" href="/assets/js/205.be5014fb.js"><link rel="prefetch" href="/assets/js/206.c90b8362.js"><link rel="prefetch" href="/assets/js/207.89ac6dfa.js"><link rel="prefetch" href="/assets/js/209.62755d5a.js"><link rel="prefetch" href="/assets/js/21.f6b3c20d.js"><link rel="prefetch" href="/assets/js/22.7488975a.js"><link rel="prefetch" href="/assets/js/23.0e41172b.js"><link rel="prefetch" href="/assets/js/24.c49c5026.js"><link rel="prefetch" href="/assets/js/25.3dd9d60f.js"><link rel="prefetch" href="/assets/js/26.5c7c4fe5.js"><link rel="prefetch" href="/assets/js/27.f90739d5.js"><link rel="prefetch" href="/assets/js/28.3c09e2b8.js"><link rel="prefetch" href="/assets/js/29.36d49238.js"><link rel="prefetch" href="/assets/js/3.03284f30.js"><link rel="prefetch" href="/assets/js/30.e6ed33bd.js"><link rel="prefetch" href="/assets/js/31.a1d862b6.js"><link rel="prefetch" href="/assets/js/32.38309a49.js"><link rel="prefetch" href="/assets/js/33.00c935c2.js"><link rel="prefetch" href="/assets/js/34.2d00063c.js"><link rel="prefetch" href="/assets/js/35.7acd66b4.js"><link rel="prefetch" href="/assets/js/36.639c7323.js"><link rel="prefetch" href="/assets/js/37.0289ca07.js"><link rel="prefetch" href="/assets/js/38.381c8793.js"><link rel="prefetch" href="/assets/js/39.43721068.js"><link rel="prefetch" href="/assets/js/4.83fce895.js"><link rel="prefetch" href="/assets/js/40.cbb03517.js"><link rel="prefetch" href="/assets/js/41.2ebc4ae0.js"><link rel="prefetch" href="/assets/js/42.06525a68.js"><link rel="prefetch" href="/assets/js/43.97e88d4c.js"><link rel="prefetch" href="/assets/js/44.085b6bd1.js"><link rel="prefetch" href="/assets/js/45.c80fcf81.js"><link rel="prefetch" href="/assets/js/46.8fe276fe.js"><link rel="prefetch" href="/assets/js/47.117c8124.js"><link rel="prefetch" href="/assets/js/48.51f9a174.js"><link rel="prefetch" href="/assets/js/49.a5a598c2.js"><link rel="prefetch" href="/assets/js/5.33a173f2.js"><link rel="prefetch" href="/assets/js/50.dc5dcae8.js"><link rel="prefetch" href="/assets/js/51.fd36922b.js"><link rel="prefetch" href="/assets/js/52.a4f74214.js"><link rel="prefetch" href="/assets/js/53.21713e04.js"><link rel="prefetch" href="/assets/js/54.ec84d1e2.js"><link rel="prefetch" href="/assets/js/55.41170dcf.js"><link rel="prefetch" href="/assets/js/56.0a751b39.js"><link rel="prefetch" href="/assets/js/57.85308bb3.js"><link rel="prefetch" href="/assets/js/58.498fe7de.js"><link rel="prefetch" href="/assets/js/59.8e0666ca.js"><link rel="prefetch" href="/assets/js/6.7a505dc8.js"><link rel="prefetch" href="/assets/js/60.49ee332e.js"><link rel="prefetch" href="/assets/js/61.32f169d5.js"><link rel="prefetch" href="/assets/js/62.3b48e42a.js"><link rel="prefetch" href="/assets/js/63.80867ba0.js"><link rel="prefetch" href="/assets/js/64.988e3c0b.js"><link rel="prefetch" href="/assets/js/65.a796ede7.js"><link rel="prefetch" href="/assets/js/66.6e95ba5a.js"><link rel="prefetch" href="/assets/js/67.4a98de55.js"><link rel="prefetch" href="/assets/js/68.76898f42.js"><link rel="prefetch" href="/assets/js/69.495078d4.js"><link rel="prefetch" href="/assets/js/7.14b60190.js"><link rel="prefetch" href="/assets/js/70.5e2800c9.js"><link rel="prefetch" href="/assets/js/71.a4ba9ab7.js"><link rel="prefetch" href="/assets/js/72.444683ae.js"><link rel="prefetch" href="/assets/js/73.aad49508.js"><link rel="prefetch" href="/assets/js/74.268ce036.js"><link rel="prefetch" href="/assets/js/75.0b2be650.js"><link rel="prefetch" href="/assets/js/76.b08ef2ae.js"><link rel="prefetch" href="/assets/js/77.dd311c6f.js"><link rel="prefetch" href="/assets/js/78.3a934f8b.js"><link rel="prefetch" href="/assets/js/79.6be841ed.js"><link rel="prefetch" href="/assets/js/8.16f6f26a.js"><link rel="prefetch" href="/assets/js/80.0c90c4c5.js"><link rel="prefetch" href="/assets/js/81.996a7999.js"><link rel="prefetch" href="/assets/js/82.9f001d79.js"><link rel="prefetch" href="/assets/js/83.dab38f18.js"><link rel="prefetch" href="/assets/js/84.7797fcef.js"><link rel="prefetch" href="/assets/js/85.962b9055.js"><link rel="prefetch" href="/assets/js/86.f71a2271.js"><link rel="prefetch" href="/assets/js/87.42fbc276.js"><link rel="prefetch" href="/assets/js/88.356c05ab.js"><link rel="prefetch" href="/assets/js/89.00164c41.js"><link rel="prefetch" href="/assets/js/9.35501b87.js"><link rel="prefetch" href="/assets/js/90.a5a1c818.js"><link rel="prefetch" href="/assets/js/91.bf5b4ad8.js"><link rel="prefetch" href="/assets/js/92.3eaca204.js"><link rel="prefetch" href="/assets/js/93.97fd0439.js"><link rel="prefetch" href="/assets/js/94.cdaf22ac.js"><link rel="prefetch" href="/assets/js/95.45442ac9.js"><link rel="prefetch" href="/assets/js/96.e2590bec.js"><link rel="prefetch" href="/assets/js/97.c26816dd.js"><link rel="prefetch" href="/assets/js/98.1269e510.js"><link rel="prefetch" href="/assets/js/99.47f7e279.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7fad836b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">QIR Adaptor Tool Developer Documentation</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/Classes/" class="nav-link">
+  Classes
+</a></div><div class="nav-item"><a href="/Namespaces/" class="nav-link">
+  Namespaces
+</a></div><div class="nav-item"><a href="/Modules/" class="nav-link">
+  Modules
+</a></div><div class="nav-item"><a href="/Files/" class="nav-link">
+  Files
+</a></div><div class="nav-item"><a href="/Pages/" class="nav-link">
+  Pages
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/Classes/" class="nav-link">
+  Classes
+</a></div><div class="nav-item"><a href="/Namespaces/" class="nav-link">
+  Namespaces
+</a></div><div class="nav-item"><a href="/Modules/" class="nav-link">
+  Modules
+</a></div><div class="nav-item"><a href="/Files/" class="nav-link">
+  Files
+</a></div><div class="nav-item"><a href="/Pages/" class="nav-link">
+  Pages
+</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="proposal-qir-adaptor-tool-specification"><a href="#proposal-qir-adaptor-tool-specification" class="header-anchor">#</a> Proposal: QIR Adaptor Tool Specification</h1> <p>This document discusses a tool that transforms QIR into a restricted version of the QIR (known as a profile).
+We aim to make a specification for a generic tool that allows the user to:</p> <ol><li>Create or use an existing profile without the need of writing code.</li> <li>Validate that a QIR is compliant with the specific profile.</li> <li>Generate a profile compliant QIR from a generic unconstrained QIR (if possible).</li></ol> <p>This document sets out to motivate and demonstrate feasibility of building such a tool.</p> <h2 id="motivation"><a href="#motivation" class="header-anchor">#</a> Motivation</h2> <p>It is anticipated that most usages of the QIR specification will need to only use a subset of it. These subsets
+may further be subject to constraints such as how one allocates or acquire a qubit handle. We refer to such a subset with
+constraints as a profile. For instance, it is likely that early versions of quantum hardware will have a limited
+set of classical instructions available. With this in mind, the vendor or user of said hardware would define a profile
+that only contains a specified subset. One example of such a profile is the base profile,
+which only allows function calls and branching, but no arithmetic, classical memory, or classical registers.</p> <p>The generation of QIR according to the spec with no constraints would typically be performed by the frontend. A couple
+of examples are Q# or OpenQASM 2.0/3.0. However, for the generated QIR to be practical it is necessary to reduce it using a profile
+which is compatible with the target platform:</p> <div class="language-text extra-class"><pre class="language-text"><code>┌──────────────────────┐
+│                      │
+│       Frontend       │
+│                      │
+└──────────────────────┘
+           │
+           │
+           ▼
+┌──────────────────────┐
+│                      │
+│         QIR          │
+│                      │
+└──────────────────────┘
+           │
+   QIR Adaptor Tool
+           │
+           ▼
+┌──────────────────────┐
+│                      │
+│    Restricted QIR    │
+│                      │
+└──────────────────────┘
+</code></pre></div><p>We propose that such a reduction could be done using the LLVM passes infrastructure to compose a profile
+which would map the QIR to a subset of the available instructions with any required constraints.</p> <h2 id="feasibility-study"><a href="#feasibility-study" class="header-anchor">#</a> Feasibility Study</h2> <p>In order to demonstrate feasibility of this proposal, we have built a proof-of-concept prototype based on LLVM passes which allows transformation from a generic QIR into one which does not have support for dynamic qubit allocation.</p> <p>This transformation is considered to be the smallest, non-trivial case of QIR transformation we can perform which demonstrates the feasibility of this proposal.</p> <p>To demonstrate the feasibility of this proposal, we use Q# as a frontend and will attempt to map the following code</p> <div class="language- extra-class"><pre class="language-text"><code>namespace Feasibility {
+    open Microsoft.Quantum.Intrinsic;
+
+    @EntryPoint()
+    operation Run() : Unit {
+        use qs = Qubit[3];
+        for q in 8..10 {
+            X(qs[q - 8]);
+        }
+    }
+}
+</code></pre></div><p>to the base profile. We will do so using a combination of existing LLVM passes and custom written passes which are specific to the QIR. The above code is interesting as it is not base profile compliant with regards to two aspects: 1) Qubit allocation is not allowed and 2) arithmetic operations are not supported. Using the Q# QIR generator, the <code>Run</code> functions body becomes:</p> <div class="language- extra-class"><pre class="language-text"><code>define internal void @Feasibility__Run__body() {
+entry:
+  %qs = call %Array* @__quantum__rt__qubit_allocate_array(i64 3)
+  call void @__quantum__rt__array_update_alias_count(%Array* %qs, i32 1)
+  br label %header__1
+
+header__1:                                        ; preds = %exiting__1, %entry
+  %q = phi i64 [ 8, %entry ], [ %4, %exiting__1 ]
+  %0 = icmp sle i64 %q, 10
+  br i1 %0, label %body__1, label %exit__1
+
+body__1:                                          ; preds = %header__1
+  %1 = sub i64 %q, 8
+  %2 = call i8* @__quantum__rt__array_get_element_ptr_1d(%Array* %qs, i64 %1)
+  %3 = bitcast i8* %2 to %Qubit**
+  %qubit = load %Qubit*, %Qubit** %3, align 8
+  call void @__quantum__qis__x__body(%Qubit* %qubit)
+  br label %exiting__1
+
+exiting__1:                                       ; preds = %body__1
+  %4 = add i64 %q, 1
+  br label %header__1
+
+exit__1:                                          ; preds = %header__1
+  call void @__quantum__rt__array_update_alias_count(%Array* %qs, i32 -1)
+  call void @__quantum__rt__qubit_release_array(%Array* %qs)
+  ret void
+}
+</code></pre></div><p>After applying the our demo profile transformation, the QIR is reduced to:</p> <div class="language- extra-class"><pre class="language-text"><code>define void @Feasibility__Run__Interop() local_unnamed_addr #0 {
+entry:
+  call void @__quantum__qis__x__body(%Qubit* null)
+  call void @__quantum__qis__x__body(%Qubit* nonnull inttoptr (i64 1 to %Qubit*))
+  call void @__quantum__qis__x__body(%Qubit* nonnull inttoptr (i64 2 to %Qubit*))
+  ret void
+}
+</code></pre></div><p>We note that we successfully have eliminated loops, arithmetic operations, dynamic qubit allocation and alias counting - all operations which are not supported by the base profile.</p> <h2 id="goal"><a href="#goal" class="header-anchor">#</a> Goal</h2> <p>We envision the tool to work as a stand-alone command line tool which can either validate or generate a QIR in accordance with a given profile. To validate, one would run:</p> <div class="language-language extra-class"><pre class="language-text"><code>qat -p profile.yaml --validate unvalidated-qir.ll
+</code></pre></div><p>In a similar fashion, generation is performed by adding <code>--generate</code> to the command line:</p> <div class="language-language extra-class"><pre class="language-text"><code>qat -p profile.yaml --generate qir.ll &gt; qir-profile.ll
+</code></pre></div><p>Default behaviour of the tool is that it always validates the generated profile. This behaviour can be disabled by</p> <div class="language-language extra-class"><pre class="language-text"><code>qat -p profile.yaml --generate --no-validate qir.ll &gt; qir-profile.ll
+</code></pre></div><h1 id="profile-specification"><a href="#profile-specification" class="header-anchor">#</a> Profile Specification</h1> <p>Every profile is specified through a YAML file which defines an object at the top-level. This object must contain the fields <code>name</code> and <code>displayName</code>:</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">name</span><span class="token punctuation">:</span> profile<span class="token punctuation">-</span>name
+<span class="token key atrule">displayName</span><span class="token punctuation">:</span> Profile Name
+<span class="token comment"># ...</span>
+</code></pre></div><p>Additionally, top level also contains the fields <code>version</code> and <code>mode</code>. The version refers to the QIR version which forms the basis for the specification and <code>mode</code> explains how the profile is defined.
+The final two top level fields are lists named <code>specification</code> and <code>generation</code>. These contains the specification and generation procedure, respectively.</p> <h2 id="specification"><a href="#specification" class="header-anchor">#</a> Specification</h2> <p>The default <code>mode</code> of specification is by <code>feature</code> which means that specification describes the feature set available. Alternatively, one can specify a profile by <code>limitation</code>. As an example profile for</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">name</span><span class="token punctuation">:</span> profile<span class="token punctuation">-</span>name
+<span class="token key atrule">displayName</span><span class="token punctuation">:</span> Profile Name
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">1.0</span>
+<span class="token key atrule">mode</span><span class="token punctuation">:</span> feature
+<span class="token key atrule">specification</span><span class="token punctuation">:</span>
+  <span class="token key atrule">functions</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> __quantum__qis__toffoli__body
+    <span class="token punctuation">-</span> __quantum__qis__cnot__body
+    <span class="token punctuation">-</span> __quantum__qis__cz__body
+    <span class="token punctuation">-</span> __quantum__qis__h__body
+    <span class="token punctuation">-</span> __quantum__qis__mz__body
+    <span class="token punctuation">-</span> __quantum__qis__reset__body
+    <span class="token punctuation">-</span> __quantum__qis__rx__body
+    <span class="token punctuation">-</span> __quantum__qis__ry__body
+    <span class="token punctuation">-</span> __quantum__qis__rz__body
+    <span class="token punctuation">-</span> __quantum__qis__s__body
+    <span class="token punctuation">-</span> __quantum__qis__s__adj
+    <span class="token punctuation">-</span> __quantum__qis__t__body
+    <span class="token punctuation">-</span> __quantum__qis__t__adj
+    <span class="token punctuation">-</span> __quantum__qis__x__body
+    <span class="token punctuation">-</span> __quantum__qis__y__body
+    <span class="token punctuation">-</span> __quantum__qis__z__body
+  <span class="token key atrule">instructions</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> call
+    <span class="token punctuation">-</span> br
+    <span class="token punctuation">-</span> ret
+    <span class="token punctuation">-</span> inttoptr
+<span class="token comment"># ...</span>
+</code></pre></div><p>This specification describes that 16 quantum instructions are available and 4 classical operations of the full QIR spec. Contrary, a specification by <code>limitation</code> could be as follows:</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">name</span><span class="token punctuation">:</span> profile<span class="token punctuation">-</span>name
+<span class="token key atrule">displayName</span><span class="token punctuation">:</span> Profile Name
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">1.0</span>
+<span class="token key atrule">mode</span><span class="token punctuation">:</span> limitation
+<span class="token key atrule">specification</span><span class="token punctuation">:</span>
+  <span class="token key atrule">functions</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> __quantum__rt__array_update_alias_count
+    <span class="token punctuation">-</span> __quantum__rt__array_update_reference_count
+  <span class="token key atrule">instructions</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> br
+<span class="token comment"># ...</span>
+</code></pre></div><p>This profile specifies a system that does not allow reference and alias counting and neither have support for branching, but otherwise has the full QIR vesion 1.0 available.</p> <h2 id="generation-specification"><a href="#generation-specification" class="header-anchor">#</a> Generation specification</h2> <p>To achieve the QIR generation in the feasibility section we made use of a number of different passes in order fold constants, unroll loops and map qubit allocations to static allocations. Based on this, we propose that generators are specified by creating a pipeline of LLVM passes to analyse and transform the QIR:</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">name</span><span class="token punctuation">:</span> profile<span class="token punctuation">-</span>name
+<span class="token key atrule">displayName</span><span class="token punctuation">:</span> Profile Name
+<span class="token comment"># ...</span>
+<span class="token key atrule">generation</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">passName</span><span class="token punctuation">:</span> loopUnroll
+  <span class="token punctuation">-</span> <span class="token key atrule">passName</span><span class="token punctuation">:</span> functionInline
+  <span class="token punctuation">-</span> <span class="token key atrule">passName</span><span class="token punctuation">:</span> useStaticQubitAllocation
+  <span class="token punctuation">-</span> <span class="token key atrule">passName</span><span class="token punctuation">:</span> eliminateClassicalMemoryUsage
+  <span class="token punctuation">-</span> <span class="token key atrule">passName</span><span class="token punctuation">:</span> ignoreCall
+    <span class="token key atrule">config</span><span class="token punctuation">:</span>
+      <span class="token key atrule">names</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> __quantum__rt__array_update_alias_count
+        <span class="token punctuation">-</span> __quantum__rt__array_update_reference_count
+</code></pre></div><p>For those passes which are defined specifically for QIR we we allow configuration to be passed to them. This will allow the end-user to fine-tune the behaviour of profile generator.</p> <h1 id="library-outline"><a href="#library-outline" class="header-anchor">#</a> Library outline</h1> <p>This is a placeholder for describing the outline of the QAT library. The aim is to create a dynamic library where we can add new components that allow to extend the QIR profile generation components with more passes and/or spefication options.</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.e2451f08.js" defer></script><script src="/assets/js/2.f962d3f5.js" defer></script><script src="/assets/js/208.cecd5551.js" defer></script>
+  </body>
+</html>
