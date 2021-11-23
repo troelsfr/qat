@@ -1,45 +1,595 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>QIR profile documentation | QIR Adaptor Tool Developer Documentation</title>
-    <meta name="generator" content="VuePress 1.8.2">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <meta name="description" content="">
-    <meta name="theme-color" content="#3eaf7c">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="description" content="Everything you need to know about QAT API." />
+     
+    <meta name="author" content="troels" />
+     
+    <link rel="canonical" href="https://qir-alliance.github.io/qat/" />
+     
+    <link rel="shortcut icon" href="img/favicon.ico" />
     
-    <link rel="preload" href="/qat/assets/css/0.styles.9ffaf24c.css" as="style"><link rel="preload" href="/qat/assets/js/app.da141efe.js" as="script"><link rel="preload" href="/qat/assets/js/2.c16f4dee.js" as="script"><link rel="preload" href="/qat/assets/js/209.79b24ee6.js" as="script"><link rel="prefetch" href="/qat/assets/js/10.d5b83d53.js"><link rel="prefetch" href="/qat/assets/js/100.da8bf5b0.js"><link rel="prefetch" href="/qat/assets/js/101.ca83184a.js"><link rel="prefetch" href="/qat/assets/js/102.8bdb008d.js"><link rel="prefetch" href="/qat/assets/js/103.787523eb.js"><link rel="prefetch" href="/qat/assets/js/104.f4ebe6ce.js"><link rel="prefetch" href="/qat/assets/js/105.9f62ca3d.js"><link rel="prefetch" href="/qat/assets/js/106.a1a9b1f3.js"><link rel="prefetch" href="/qat/assets/js/107.95558ed4.js"><link rel="prefetch" href="/qat/assets/js/108.29a546ba.js"><link rel="prefetch" href="/qat/assets/js/109.109456c4.js"><link rel="prefetch" href="/qat/assets/js/11.ca33c57b.js"><link rel="prefetch" href="/qat/assets/js/110.09c7d7d4.js"><link rel="prefetch" href="/qat/assets/js/111.ddb50660.js"><link rel="prefetch" href="/qat/assets/js/112.3cab522b.js"><link rel="prefetch" href="/qat/assets/js/113.1ec0685e.js"><link rel="prefetch" href="/qat/assets/js/114.02e6b04f.js"><link rel="prefetch" href="/qat/assets/js/115.067bd63b.js"><link rel="prefetch" href="/qat/assets/js/116.5f8d0589.js"><link rel="prefetch" href="/qat/assets/js/117.8e92e162.js"><link rel="prefetch" href="/qat/assets/js/118.5f84ad48.js"><link rel="prefetch" href="/qat/assets/js/119.84d0d6fa.js"><link rel="prefetch" href="/qat/assets/js/12.d921d486.js"><link rel="prefetch" href="/qat/assets/js/120.1ef64fd6.js"><link rel="prefetch" href="/qat/assets/js/121.92b573e6.js"><link rel="prefetch" href="/qat/assets/js/122.205e1250.js"><link rel="prefetch" href="/qat/assets/js/123.677a76f5.js"><link rel="prefetch" href="/qat/assets/js/124.bc892831.js"><link rel="prefetch" href="/qat/assets/js/125.a644214c.js"><link rel="prefetch" href="/qat/assets/js/126.1480b3c4.js"><link rel="prefetch" href="/qat/assets/js/127.057e8600.js"><link rel="prefetch" href="/qat/assets/js/128.a8a5bb2f.js"><link rel="prefetch" href="/qat/assets/js/129.1883d8f8.js"><link rel="prefetch" href="/qat/assets/js/13.ac008503.js"><link rel="prefetch" href="/qat/assets/js/130.0b5ef986.js"><link rel="prefetch" href="/qat/assets/js/131.b9114358.js"><link rel="prefetch" href="/qat/assets/js/132.830150f1.js"><link rel="prefetch" href="/qat/assets/js/133.63fa9c1f.js"><link rel="prefetch" href="/qat/assets/js/134.dc644829.js"><link rel="prefetch" href="/qat/assets/js/135.6278084a.js"><link rel="prefetch" href="/qat/assets/js/136.9a052c4d.js"><link rel="prefetch" href="/qat/assets/js/137.e3b87be5.js"><link rel="prefetch" href="/qat/assets/js/138.947a5930.js"><link rel="prefetch" href="/qat/assets/js/139.76daf150.js"><link rel="prefetch" href="/qat/assets/js/14.2ceb46c4.js"><link rel="prefetch" href="/qat/assets/js/140.ecb60f5d.js"><link rel="prefetch" href="/qat/assets/js/141.03df08ca.js"><link rel="prefetch" href="/qat/assets/js/142.61253ed9.js"><link rel="prefetch" href="/qat/assets/js/143.f7b6dfc5.js"><link rel="prefetch" href="/qat/assets/js/144.24e6d766.js"><link rel="prefetch" href="/qat/assets/js/145.64b5f53b.js"><link rel="prefetch" href="/qat/assets/js/146.366bb8d0.js"><link rel="prefetch" href="/qat/assets/js/147.23388f9f.js"><link rel="prefetch" href="/qat/assets/js/148.f9e6b6d4.js"><link rel="prefetch" href="/qat/assets/js/149.e103a40e.js"><link rel="prefetch" href="/qat/assets/js/15.fa6cbeee.js"><link rel="prefetch" href="/qat/assets/js/150.586114c8.js"><link rel="prefetch" href="/qat/assets/js/151.e08e94d1.js"><link rel="prefetch" href="/qat/assets/js/152.63629543.js"><link rel="prefetch" href="/qat/assets/js/153.8725b2bc.js"><link rel="prefetch" href="/qat/assets/js/154.4317799f.js"><link rel="prefetch" href="/qat/assets/js/155.3690b58d.js"><link rel="prefetch" href="/qat/assets/js/156.259e18e8.js"><link rel="prefetch" href="/qat/assets/js/157.6d4e1d33.js"><link rel="prefetch" href="/qat/assets/js/158.45d77a31.js"><link rel="prefetch" href="/qat/assets/js/159.0d12f5da.js"><link rel="prefetch" href="/qat/assets/js/16.cd1ac453.js"><link rel="prefetch" href="/qat/assets/js/160.4ddf0b54.js"><link rel="prefetch" href="/qat/assets/js/161.495b306f.js"><link rel="prefetch" href="/qat/assets/js/162.510eaa3f.js"><link rel="prefetch" href="/qat/assets/js/163.d8729b59.js"><link rel="prefetch" href="/qat/assets/js/164.84576679.js"><link rel="prefetch" href="/qat/assets/js/165.fc1301f0.js"><link rel="prefetch" href="/qat/assets/js/166.e8b82c16.js"><link rel="prefetch" href="/qat/assets/js/167.c0e27be2.js"><link rel="prefetch" href="/qat/assets/js/168.e40c6867.js"><link rel="prefetch" href="/qat/assets/js/169.83ba2abb.js"><link rel="prefetch" href="/qat/assets/js/17.9d91a80a.js"><link rel="prefetch" href="/qat/assets/js/170.2fad2b5e.js"><link rel="prefetch" href="/qat/assets/js/171.d249ba65.js"><link rel="prefetch" href="/qat/assets/js/172.1848f187.js"><link rel="prefetch" href="/qat/assets/js/173.770ebb0d.js"><link rel="prefetch" href="/qat/assets/js/174.b0575822.js"><link rel="prefetch" href="/qat/assets/js/175.68ed57f1.js"><link rel="prefetch" href="/qat/assets/js/176.ea05f1db.js"><link rel="prefetch" href="/qat/assets/js/177.2507d905.js"><link rel="prefetch" href="/qat/assets/js/178.3372fb82.js"><link rel="prefetch" href="/qat/assets/js/179.f982511c.js"><link rel="prefetch" href="/qat/assets/js/18.3b3b7c38.js"><link rel="prefetch" href="/qat/assets/js/180.f77c96b6.js"><link rel="prefetch" href="/qat/assets/js/181.7c61a7ed.js"><link rel="prefetch" href="/qat/assets/js/182.0ec1126f.js"><link rel="prefetch" href="/qat/assets/js/183.28b336bb.js"><link rel="prefetch" href="/qat/assets/js/184.5dcb720a.js"><link rel="prefetch" href="/qat/assets/js/185.d9986d1d.js"><link rel="prefetch" href="/qat/assets/js/186.7944e6eb.js"><link rel="prefetch" href="/qat/assets/js/187.0902837a.js"><link rel="prefetch" href="/qat/assets/js/188.6454f0fd.js"><link rel="prefetch" href="/qat/assets/js/189.b71bb95a.js"><link rel="prefetch" href="/qat/assets/js/19.10304a31.js"><link rel="prefetch" href="/qat/assets/js/190.d22e24f7.js"><link rel="prefetch" href="/qat/assets/js/191.a38205ec.js"><link rel="prefetch" href="/qat/assets/js/192.06e179a4.js"><link rel="prefetch" href="/qat/assets/js/193.9f88ff16.js"><link rel="prefetch" href="/qat/assets/js/194.65196772.js"><link rel="prefetch" href="/qat/assets/js/195.d8bece22.js"><link rel="prefetch" href="/qat/assets/js/196.9e9a0019.js"><link rel="prefetch" href="/qat/assets/js/197.70ba815a.js"><link rel="prefetch" href="/qat/assets/js/198.e2db8f36.js"><link rel="prefetch" href="/qat/assets/js/199.329d3d6f.js"><link rel="prefetch" href="/qat/assets/js/20.3fc6bb78.js"><link rel="prefetch" href="/qat/assets/js/200.425bfc82.js"><link rel="prefetch" href="/qat/assets/js/201.43c1e0bb.js"><link rel="prefetch" href="/qat/assets/js/202.a1a0e60e.js"><link rel="prefetch" href="/qat/assets/js/203.c756ddf1.js"><link rel="prefetch" href="/qat/assets/js/204.e13317ff.js"><link rel="prefetch" href="/qat/assets/js/205.9d5389d5.js"><link rel="prefetch" href="/qat/assets/js/206.3b70f0c2.js"><link rel="prefetch" href="/qat/assets/js/207.ad61ee16.js"><link rel="prefetch" href="/qat/assets/js/208.cecd5551.js"><link rel="prefetch" href="/qat/assets/js/21.dc91b696.js"><link rel="prefetch" href="/qat/assets/js/22.6993fb18.js"><link rel="prefetch" href="/qat/assets/js/23.dcb6ad10.js"><link rel="prefetch" href="/qat/assets/js/24.a5e4df89.js"><link rel="prefetch" href="/qat/assets/js/25.ebf5fb70.js"><link rel="prefetch" href="/qat/assets/js/26.b3b30ac6.js"><link rel="prefetch" href="/qat/assets/js/27.9db19c5c.js"><link rel="prefetch" href="/qat/assets/js/28.ee11d6de.js"><link rel="prefetch" href="/qat/assets/js/29.2090ef29.js"><link rel="prefetch" href="/qat/assets/js/3.03284f30.js"><link rel="prefetch" href="/qat/assets/js/30.f25f212e.js"><link rel="prefetch" href="/qat/assets/js/31.826631f8.js"><link rel="prefetch" href="/qat/assets/js/32.5f83590e.js"><link rel="prefetch" href="/qat/assets/js/33.3d1b8af6.js"><link rel="prefetch" href="/qat/assets/js/34.fe219b86.js"><link rel="prefetch" href="/qat/assets/js/35.8de714ce.js"><link rel="prefetch" href="/qat/assets/js/36.fe20f252.js"><link rel="prefetch" href="/qat/assets/js/37.4cc5ac3b.js"><link rel="prefetch" href="/qat/assets/js/38.60a8f9e6.js"><link rel="prefetch" href="/qat/assets/js/39.7108d784.js"><link rel="prefetch" href="/qat/assets/js/4.83fce895.js"><link rel="prefetch" href="/qat/assets/js/40.e3315f94.js"><link rel="prefetch" href="/qat/assets/js/41.2924c74f.js"><link rel="prefetch" href="/qat/assets/js/42.55eedfd8.js"><link rel="prefetch" href="/qat/assets/js/43.0e599d96.js"><link rel="prefetch" href="/qat/assets/js/44.f402ebc9.js"><link rel="prefetch" href="/qat/assets/js/45.b1a71a37.js"><link rel="prefetch" href="/qat/assets/js/46.146ae2bc.js"><link rel="prefetch" href="/qat/assets/js/47.e513fc82.js"><link rel="prefetch" href="/qat/assets/js/48.1fa4a4c9.js"><link rel="prefetch" href="/qat/assets/js/49.e8d332a0.js"><link rel="prefetch" href="/qat/assets/js/5.33a173f2.js"><link rel="prefetch" href="/qat/assets/js/50.26ebcd59.js"><link rel="prefetch" href="/qat/assets/js/51.7ad25214.js"><link rel="prefetch" href="/qat/assets/js/52.20cb9b21.js"><link rel="prefetch" href="/qat/assets/js/53.63bc4c0f.js"><link rel="prefetch" href="/qat/assets/js/54.357c132f.js"><link rel="prefetch" href="/qat/assets/js/55.ff1491f8.js"><link rel="prefetch" href="/qat/assets/js/56.faed8044.js"><link rel="prefetch" href="/qat/assets/js/57.02cf70e5.js"><link rel="prefetch" href="/qat/assets/js/58.88550088.js"><link rel="prefetch" href="/qat/assets/js/59.4adba173.js"><link rel="prefetch" href="/qat/assets/js/6.7a505dc8.js"><link rel="prefetch" href="/qat/assets/js/60.dc093b25.js"><link rel="prefetch" href="/qat/assets/js/61.32f169d5.js"><link rel="prefetch" href="/qat/assets/js/62.56d7d941.js"><link rel="prefetch" href="/qat/assets/js/63.f4073a80.js"><link rel="prefetch" href="/qat/assets/js/64.988e3c0b.js"><link rel="prefetch" href="/qat/assets/js/65.813f6216.js"><link rel="prefetch" href="/qat/assets/js/66.99496f38.js"><link rel="prefetch" href="/qat/assets/js/67.8913a6f5.js"><link rel="prefetch" href="/qat/assets/js/68.80d40ced.js"><link rel="prefetch" href="/qat/assets/js/69.a244e8ef.js"><link rel="prefetch" href="/qat/assets/js/7.14b60190.js"><link rel="prefetch" href="/qat/assets/js/70.cc01c4f1.js"><link rel="prefetch" href="/qat/assets/js/71.8122e483.js"><link rel="prefetch" href="/qat/assets/js/72.b46a8b77.js"><link rel="prefetch" href="/qat/assets/js/73.c67ab1bb.js"><link rel="prefetch" href="/qat/assets/js/74.8dd4e628.js"><link rel="prefetch" href="/qat/assets/js/75.48f51148.js"><link rel="prefetch" href="/qat/assets/js/76.7b3a0d47.js"><link rel="prefetch" href="/qat/assets/js/77.09c0f5eb.js"><link rel="prefetch" href="/qat/assets/js/78.1161c4a1.js"><link rel="prefetch" href="/qat/assets/js/79.27ec3d50.js"><link rel="prefetch" href="/qat/assets/js/8.16f6f26a.js"><link rel="prefetch" href="/qat/assets/js/80.cc7171fc.js"><link rel="prefetch" href="/qat/assets/js/81.f56ecaef.js"><link rel="prefetch" href="/qat/assets/js/82.3693b284.js"><link rel="prefetch" href="/qat/assets/js/83.681cd9bb.js"><link rel="prefetch" href="/qat/assets/js/84.daaa5856.js"><link rel="prefetch" href="/qat/assets/js/85.a5fc62ad.js"><link rel="prefetch" href="/qat/assets/js/86.b62a0865.js"><link rel="prefetch" href="/qat/assets/js/87.fe88a36b.js"><link rel="prefetch" href="/qat/assets/js/88.8feae6c5.js"><link rel="prefetch" href="/qat/assets/js/89.719871ed.js"><link rel="prefetch" href="/qat/assets/js/9.35501b87.js"><link rel="prefetch" href="/qat/assets/js/90.d96133e4.js"><link rel="prefetch" href="/qat/assets/js/91.ae4ff84e.js"><link rel="prefetch" href="/qat/assets/js/92.aee75724.js"><link rel="prefetch" href="/qat/assets/js/93.8ad748ae.js"><link rel="prefetch" href="/qat/assets/js/94.282f118d.js"><link rel="prefetch" href="/qat/assets/js/95.b48e15c8.js"><link rel="prefetch" href="/qat/assets/js/96.bd465e9b.js"><link rel="prefetch" href="/qat/assets/js/97.25b375a9.js"><link rel="prefetch" href="/qat/assets/js/98.006a2409.js"><link rel="prefetch" href="/qat/assets/js/99.7f1e6020.js">
-    <link rel="stylesheet" href="/qat/assets/css/0.styles.9ffaf24c.css">
+    <title>
+      QAT Documentation
+    </title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/monokai-sublime.min.css"
+    />
+    <link href="css/quantum-colors.css" rel="stylesheet" />
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/llvm.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>  
   </head>
+
   <body>
-    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/qat/" aria-current="page" class="home-link router-link-exact-active router-link-active"><!----> <span class="site-name">QIR Adaptor Tool Developer Documentation</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/qat/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
-  Home
-</a></div><div class="nav-item"><a href="/qat/Classes/" class="nav-link">
-  Classes
-</a></div><div class="nav-item"><a href="/qat/Namespaces/" class="nav-link">
-  Namespaces
-</a></div><div class="nav-item"><a href="/qat/Modules/" class="nav-link">
-  Modules
-</a></div><div class="nav-item"><a href="/qat/Files/" class="nav-link">
-  Files
-</a></div><div class="nav-item"><a href="/qat/Pages/" class="nav-link">
-  Pages
-</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/qat/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
-  Home
-</a></div><div class="nav-item"><a href="/qat/Classes/" class="nav-link">
-  Classes
-</a></div><div class="nav-item"><a href="/qat/Namespaces/" class="nav-link">
-  Namespaces
-</a></div><div class="nav-item"><a href="/qat/Modules/" class="nav-link">
-  Modules
-</a></div><div class="nav-item"><a href="/qat/Files/" class="nav-link">
-  Files
-</a></div><div class="nav-item"><a href="/qat/Pages/" class="nav-link">
-  Pages
-</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="qir-profile-documentation"><a href="#qir-profile-documentation" class="header-anchor">#</a> QIR profile documentation</h1> <p>Welcome to the QIR Profile SDK, a framework to manipulate QIR into specific profiles. The goal of this framework is to create tools that allow quantum hardware vendors to adapt a generic QIR to their specific hardware profile.</p> <p>User guide:</p> <ul><li><a href="/qat/UserGuide/QuickStart.html">Quick start</a></li> <li><a href="/qat/UserGuide/BuildingLibrary.html">Building the library</a></li> <li><a href="/qat/UserGuide/IntroductionToProfiles.html">Introduction to profiles</a></li> <li>Applying a profile (TODO(issue-8): Yet to be written)</li></ul> <p>Developer guide:</p> <ul><li><a href="/qat/DeveloperGuide/ArchitectureOverview.html">Architecture Overview</a></li> <li><a href="/qat/DeveloperGuide/WritingComponent.html">Writing a Component</a></li> <li><a href="/qat/DeveloperGuide/ConfigurationLibrary.html">Configuration Library</a></li> <li><a href="/qat/DeveloperGuide/WritingRuleTests.html">Rule based extensions</a></li></ul> <p>Additional developer info:</p> <ul><li><a href="/qat/DeveloperGuide/CodeQuality.html">Code quality</a></li> <li><a href="/qat/DeveloperGuide/DeveloperFAQ.html">Developer FAQ</a></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
-    <script src="/qat/assets/js/app.da141efe.js" defer></script><script src="/qat/assets/js/2.c16f4dee.js" defer></script><script src="/qat/assets/js/209.79b24ee6.js" defer></script>
+    <div class="h-screen flex overflow-hidden bg-white">
+      <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
+      <div class="lg:hidden hidden" id="sidebar">
+        <div class="fixed inset-0 flex z-40">
+          <!--
+        Off-canvas menu overlay, show/hide based on off-canvas menu state.
+
+        Entering: "transition-opacity ease-linear duration-300"
+          From: "opacity-0"
+          To: "opacity-100"
+        Leaving: "transition-opacity ease-linear duration-300"
+          From: "opacity-100"
+          To: "opacity-0"
+      -->
+          <div class="fixed inset-0" aria-hidden="true">
+            <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
+          </div>
+          <!--
+        Off-canvas menu, show/hide based on off-canvas menu state.
+
+        Entering: "transition ease-in-out duration-300 transform"
+          From: "-translate-x-full"
+          To: "translate-x-0"
+        Leaving: "transition ease-in-out duration-300 transform"
+          From: "translate-x-0"
+          To: "-translate-x-full"
+      -->
+          <div
+            class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800"
+          >
+            <div class="absolute top-0 right-0 -mr-12 pt-2">
+              <button
+                class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                id="sidebarClose"                
+              >
+                <span class="sr-only">Close sidebar</span>
+                <!-- Heroicon name: x -->
+                <svg
+                  class="h-6 w-6 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="flex flex-col justify-center items-center flex-shrink-0 px-4">
+<svg
+   class="h-16 w-16"
+   id="outputsvg"
+   width="302.20001"
+   height="292.73355"
+   viewBox="0 0 3022.0001 2927.3355"
+   version="1.1"
+   sodipodi:docname="93013746.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs40" />
+  <sodipodi:namedview
+     id="namedview38"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <g
+     id="l3qWAVepmhNjXiGFCK8Ygm8"
+     fill="#ffffff"
+     transform="translate(-510,-500.49862)">
+    <g
+       id="g26">
+      <path
+         id="powjCKlys"
+         d="M 890,2694 C 709,2646 609,2553 549,2375 l -24,-70 V 1605 905 l 27,-72 c 30,-83 86,-171 130,-208 16,-14 68,-44 114,-66 109,-53 228,-69 391,-52 92,9 120,16 186,49 103,49 166,107 204,186 58,119 65,152 71,326 4,133 7,162 18,158 10,-4 14,2 14,19 0,21 -13,30 -85,65 l -85,41 v 263 264 l 28,7 c 15,4 52,19 82,33 44,22 56,33 58,55 3,21 0,26 -12,21 -14,-5 -16,10 -16,127 0,211 -28,301 -115,378 -20,18 -36,34 -34,36 2,2 45,9 94,17 l 90,13 3,73 3,72 -373,-1 c -295,0 -385,-3 -428,-15 z m 327,-275 c 46,-26 87,-82 106,-144 9,-30 12,-201 12,-665 0,-592 -1,-628 -19,-684 -35,-105 -112,-158 -230,-157 -118,0 -203,62 -237,171 -19,63 -19,92 -17,690 l 3,625 26,56 c 28,59 76,105 131,126 54,21 175,11 225,-18 z" />
+      <path
+         id="pXDrvybHy"
+         d="m 2410,2340 c 0,-333 -2,-369 -16,-363 -12,4 -15,0 -12,-18 3,-24 15,-32 101,-69 l 47,-21 v -259 -259 l -75,-35 c -64,-30 -75,-38 -75,-60 0,-18 4,-24 15,-20 13,5 15,-36 15,-340 V 550 h 378 c 427,0 466,5 559,67 70,46 125,130 150,227 15,58 18,111 18,296 0,252 -9,305 -65,376 -36,45 -132,112 -172,121 -34,7 -37,23 -5,23 12,1 47,13 77,29 63,31 122,101 140,165 7,25 15,180 20,400 5,197 11,380 15,407 l 7,49 h -155 -155 l -6,-32 c -3,-18 -8,-190 -11,-383 -8,-429 -12,-446 -120,-496 -34,-16 -66,-19 -207,-19 h -168 v 465 465 h -150 -150 z m 695,-864 c 28,-8 48,-24 70,-55 l 30,-43 v -201 c 0,-349 -25,-377 -337,-377 h -158 v 345 345 l 178,-1 c 106,0 193,-5 217,-13 z" />
+    </g>
+  </g>
+  <g
+     id="l6geLyeKy0gshdvsOIcFawK"
+     fill="#14775d"
+     transform="translate(-510,-500.49862)">
+    <g
+       id="g30">
+      <path
+         id="pFwHav8Wh"
+         d="m 1830,2411 v -299 l -46,-38 c -78,-65 -217,-144 -281,-160 l -23,-6 v -293 -293 l 103,-52 c 57,-28 134,-75 173,-104 l 69,-53 3,-281 2,-282 h 38 c 20,0 61,-3 90,-6 48,-6 52,-5 52,15 0,12 -6,21 -15,21 -13,0 -15,38 -15,278 0,261 1,279 20,312 11,19 28,52 38,72 9,20 25,39 35,42 12,3 17,14 17,36 0,29 -2,31 -17,19 -10,-7 -25,-22 -34,-33 -17,-19 -18,-19 -73,31 -61,56 -126,102 -187,134 l -40,20 3,122 3,122 45,24 c 25,14 78,50 119,80 41,31 82,62 93,70 16,12 21,11 41,-8 31,-28 37,-27 37,9 0,17 9,48 20,70 19,37 20,59 20,385 v 345 h -145 -145 z" />
+    </g>
+  </g>
+  <g
+     id="ls88IYZfP5b5b8x7RYseij"
+     fill="#1cb78e"
+     transform="translate(-510,-500.49862)">
+    <g
+       id="g34">
+      <path
+         id="pCM7FVo6B"
+         d="m 2090,2378 v -333 l -31,-55 c -25,-46 -28,-58 -18,-76 14,-27 124,-110 197,-149 l 52,-28 v -122 -122 l -76,-48 c -98,-62 -176,-134 -222,-204 l -37,-56 -3,-317 c -3,-300 -2,-318 15,-319 17,-1 190,-1 226,0 16,1 17,21 17,271 0,235 2,274 17,296 23,36 123,104 236,159 l 97,48 -2,289 -3,289 -60,27 c -102,46 -195,102 -241,146 l -44,43 v 296 297 h -60 -60 z" />
+    </g>
+  </g>
+</svg>
+
+
+  <span class="text-white">Adaptor Tool</span>
+</div>
+            <div class="mt-5 flex-1 h-0 overflow-y-auto">
+              <nav class="px-2">
+              <h3
+                class="px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-1"
+                id="teams-headline"
+              >
+                User guide
+              </h3>
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="UserGuide/QuickStart/"
+                >Quick start</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="UserGuide/BuildingLibrary/"
+                >Building the library</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="UserGuide/IntroductionToProfiles/"
+                >Introduction to profiles</a
+              > 
+              <h3
+                class="px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-1"
+                id="teams-headline"
+              >
+                Developer guide
+              </h3>
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/ArchitectureOverview/"
+                >Architecture Overview</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/WritingComponent/"
+                >Writing a Component</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/ConfigurationLibrary/"
+                >Configuration Library</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/WritingRuleTests/"
+                >Rule based extensions</a
+              > 
+              <h3
+                class="px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-1"
+                id="teams-headline"
+              >
+                Api
+              </h3>
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Classes/"
+                >Classes</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Namespaces/"
+                >Namespaces</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Modules/"
+                >Modules</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Files/"
+                >Files</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Pages/"
+                >Pages</a
+              > 
+              <h3
+                class="px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-1"
+                id="teams-headline"
+              >
+                Contributing
+              </h3>
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/CodeQuality/"
+                >Code quality</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/DeveloperFAQ/"
+                >Developer FAQ</a
+              > 
+
+              </nav>
+            </div>
+          </div>
+          <div class="flex-shrink-0 w-14" aria-hidden="true">
+            <!-- Dummy element to force sidebar to shrink to fit close icon -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Static sidebar for desktop -->
+      <div class="hidden lg:flex lg:flex-shrink-0">
+        <div
+          class="flex flex-col w-64 border-r border-gray-200 pt-5 pb-4 bg-gray-800"
+        >
+          <div class="flex flex-col justify-center items-center flex-shrink-0 px-4">
+<svg
+   class="h-16 w-16"
+   id="outputsvg"
+   width="302.20001"
+   height="292.73355"
+   viewBox="0 0 3022.0001 2927.3355"
+   version="1.1"
+   sodipodi:docname="93013746.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs40" />
+  <sodipodi:namedview
+     id="namedview38"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <g
+     id="l3qWAVepmhNjXiGFCK8Ygm8"
+     fill="#ffffff"
+     transform="translate(-510,-500.49862)">
+    <g
+       id="g26">
+      <path
+         id="powjCKlys"
+         d="M 890,2694 C 709,2646 609,2553 549,2375 l -24,-70 V 1605 905 l 27,-72 c 30,-83 86,-171 130,-208 16,-14 68,-44 114,-66 109,-53 228,-69 391,-52 92,9 120,16 186,49 103,49 166,107 204,186 58,119 65,152 71,326 4,133 7,162 18,158 10,-4 14,2 14,19 0,21 -13,30 -85,65 l -85,41 v 263 264 l 28,7 c 15,4 52,19 82,33 44,22 56,33 58,55 3,21 0,26 -12,21 -14,-5 -16,10 -16,127 0,211 -28,301 -115,378 -20,18 -36,34 -34,36 2,2 45,9 94,17 l 90,13 3,73 3,72 -373,-1 c -295,0 -385,-3 -428,-15 z m 327,-275 c 46,-26 87,-82 106,-144 9,-30 12,-201 12,-665 0,-592 -1,-628 -19,-684 -35,-105 -112,-158 -230,-157 -118,0 -203,62 -237,171 -19,63 -19,92 -17,690 l 3,625 26,56 c 28,59 76,105 131,126 54,21 175,11 225,-18 z" />
+      <path
+         id="pXDrvybHy"
+         d="m 2410,2340 c 0,-333 -2,-369 -16,-363 -12,4 -15,0 -12,-18 3,-24 15,-32 101,-69 l 47,-21 v -259 -259 l -75,-35 c -64,-30 -75,-38 -75,-60 0,-18 4,-24 15,-20 13,5 15,-36 15,-340 V 550 h 378 c 427,0 466,5 559,67 70,46 125,130 150,227 15,58 18,111 18,296 0,252 -9,305 -65,376 -36,45 -132,112 -172,121 -34,7 -37,23 -5,23 12,1 47,13 77,29 63,31 122,101 140,165 7,25 15,180 20,400 5,197 11,380 15,407 l 7,49 h -155 -155 l -6,-32 c -3,-18 -8,-190 -11,-383 -8,-429 -12,-446 -120,-496 -34,-16 -66,-19 -207,-19 h -168 v 465 465 h -150 -150 z m 695,-864 c 28,-8 48,-24 70,-55 l 30,-43 v -201 c 0,-349 -25,-377 -337,-377 h -158 v 345 345 l 178,-1 c 106,0 193,-5 217,-13 z" />
+    </g>
+  </g>
+  <g
+     id="l6geLyeKy0gshdvsOIcFawK"
+     fill="#14775d"
+     transform="translate(-510,-500.49862)">
+    <g
+       id="g30">
+      <path
+         id="pFwHav8Wh"
+         d="m 1830,2411 v -299 l -46,-38 c -78,-65 -217,-144 -281,-160 l -23,-6 v -293 -293 l 103,-52 c 57,-28 134,-75 173,-104 l 69,-53 3,-281 2,-282 h 38 c 20,0 61,-3 90,-6 48,-6 52,-5 52,15 0,12 -6,21 -15,21 -13,0 -15,38 -15,278 0,261 1,279 20,312 11,19 28,52 38,72 9,20 25,39 35,42 12,3 17,14 17,36 0,29 -2,31 -17,19 -10,-7 -25,-22 -34,-33 -17,-19 -18,-19 -73,31 -61,56 -126,102 -187,134 l -40,20 3,122 3,122 45,24 c 25,14 78,50 119,80 41,31 82,62 93,70 16,12 21,11 41,-8 31,-28 37,-27 37,9 0,17 9,48 20,70 19,37 20,59 20,385 v 345 h -145 -145 z" />
+    </g>
+  </g>
+  <g
+     id="ls88IYZfP5b5b8x7RYseij"
+     fill="#1cb78e"
+     transform="translate(-510,-500.49862)">
+    <g
+       id="g34">
+      <path
+         id="pCM7FVo6B"
+         d="m 2090,2378 v -333 l -31,-55 c -25,-46 -28,-58 -18,-76 14,-27 124,-110 197,-149 l 52,-28 v -122 -122 l -76,-48 c -98,-62 -176,-134 -222,-204 l -37,-56 -3,-317 c -3,-300 -2,-318 15,-319 17,-1 190,-1 226,0 16,1 17,21 17,271 0,235 2,274 17,296 23,36 123,104 236,159 l 97,48 -2,289 -3,289 -60,27 c -102,46 -195,102 -241,146 l -44,43 v 296 297 h -60 -60 z" />
+    </g>
+  </g>
+</svg>
+
+
+  <span class="text-white">Adaptor Tool</span>
+</div>
+
+          <!-- Sidebar component, swap this element with another sidebar if you like -->
+          <div class="h-0 flex-1 flex flex-col overflow-y-auto">
+            <!-- Navigation -->
+            <nav class="mt-2 flex-1 px-2 bg-gray-800">
+              <h3
+                class="px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-1"
+                id="teams-headline"
+              >
+                User guide
+              </h3>
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="UserGuide/QuickStart/"
+                >Quick start</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="UserGuide/BuildingLibrary/"
+                >Building the library</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="UserGuide/IntroductionToProfiles/"
+                >Introduction to profiles</a
+              > 
+              <h3
+                class="px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-1"
+                id="teams-headline"
+              >
+                Developer guide
+              </h3>
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/ArchitectureOverview/"
+                >Architecture Overview</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/WritingComponent/"
+                >Writing a Component</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/ConfigurationLibrary/"
+                >Configuration Library</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/WritingRuleTests/"
+                >Rule based extensions</a
+              > 
+              <h3
+                class="px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-1"
+                id="teams-headline"
+              >
+                Api
+              </h3>
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Classes/"
+                >Classes</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Namespaces/"
+                >Namespaces</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Modules/"
+                >Modules</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Files/"
+                >Files</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="Api/Pages/"
+                >Pages</a
+              > 
+              <h3
+                class="px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-1"
+                id="teams-headline"
+              >
+                Contributing
+              </h3>
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/CodeQuality/"
+                >Code quality</a
+              >
+              <a
+                class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
+                href="DeveloperGuide/DeveloperFAQ/"
+                >Developer FAQ</a
+              > 
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main column -->
+      <div class="flex flex-col w-0 flex-1 overflow-hidden">
+
+        <!-- Top bar -->
+        <div
+          class="relative z-20 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 focus:outline-none"
+        >
+          <button
+            class="px-4 border-r border-gray-200 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 lg:hidden"
+            id="sidebarOpen"                            
+          >
+            <span class="sr-only">Open sidebar</span>
+            <!-- Heroicon name: menu-alt-1 -->
+            <svg
+              class="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </button>
+
+          <div
+            class="flex-1 px-4 flex justify-between sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8"
+          >
+            <div class="flex-1 flex">
+              <form class="w-full flex md:ml-0" action="#" method="GET">
+                <label for="mkdocs-search-query" class="sr-only">Search</label>
+                <div
+                  class="relative w-full text-gray-400 focus-within:text-gray-600"
+                >
+                  <div
+                    class="absolute inset-y-0 left-0 flex items-center pointer-events-none"
+                    aria-hidden="true"
+                  >
+                    <!-- Heroicon name: search -->
+                    <svg
+                      class="h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    id="mkdocs-search-query"
+                    name="mkdocs-search-query"
+                    class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"
+                    placeholder="Search documentation"
+                    type="search"
+                  />       
+                </div>
+              </form>
+              <div id="searchResults" class="fixed sm:absolute mt-16 z-10 inset-0 overflow-y-auto min-h-screen min-w-screen flex flex-col justify-start sm:pb-16 lg:pb-96 lg:max-w-6xl lg:mx-auto hidden">
+                  <div class="bg-gray-100 text-gray-400 p-2">
+                    Results
+                  </div>
+                  <div class="bg-white min-h-96 z-100 p-4 sm:p-8 rounded-b space-y-4 flex flex-col overflow-y-auto w-full max-h-full">
+                    <div class="prose"  id="mkdocs-search-results">
+                    </div>
+                  </div>
+              </div>                         
+            </div>
+            
+          </div>
+        </div>
+
+        <main
+          class="relative flex flex-col flex-grow h-0 min-h-full justify-between bg-white focus:outline-none overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+          tabindex="0"
+        >
+
+        <div class="fixed inset-0 transition-opacity hidden searchOverlayElement" aria-hidden="true" id="searchOverlay">
+          <div class="absolute inset-0 bg-gray-500 opacity-75 searchOverlayElement"></div>
+        </div>
+
+          <div
+            class="lg:px-8 flex flex-col space-y-4 p-4 md:px-6 sm:px-8 w-full mb-96"
+          > 
+
+            
+
+
+
+<div class="lg:max-w-6xl w-full lg:mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="text-lg max-w-prose mx-auto  py-10">
+    <h1>
+      <span class="block text-base text-center text-qauntum-600 font-semibold tracking-wide uppercase">
+        Documentation for
+      </span>
+      <span class="mt-2 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex flex-row justify-center">
+        <span class="text-center">
+          QIR Adaptor Tool
+        </span>
+      </span>
+    </h1>
+    
+  </div>
+  <div class="mt-6 text-gray-500 mx-auto blog-lg blog">
+    <h1 id="qir-adaptor-tool">QIR Adaptor Tool</h1>
+<p>Welcome to the QIR Adapator Tool, a tool to manipulate QIR into specific profiles. The goal of this framework is to create tools that allow quantum hardware vendors to adapt a generic QIR to their specific hardware profile.</p>
+<p>User guide:</p>
+<ul>
+<li><a href="UserGuide/QuickStart/">Quick start</a></li>
+<li><a href="UserGuide/BuildingLibrary/">Building the library</a></li>
+<li><a href="UserGuide/IntroductionToProfiles/">Introduction to profiles</a></li>
+<li>Applying a profile (TODO(issue-8): Yet to be written)</li>
+</ul>
+<p>Developer guide:</p>
+<ul>
+<li><a href="DeveloperGuide/ArchitectureOverview/">Architecture Overview</a></li>
+<li><a href="DeveloperGuide/WritingComponent/">Writing a Component</a></li>
+<li><a href="DeveloperGuide/ConfigurationLibrary/">Configuration Library</a></li>
+<li><a href="DeveloperGuide/WritingRuleTests/">Rule based extensions</a></li>
+</ul>
+<p>Additional developer info:</p>
+<ul>
+<li><a href="DeveloperGuide/CodeQuality/">Code quality</a></li>
+<li><a href="DeveloperGuide/DeveloperFAQ/">Developer FAQ</a></li>
+</ul>
+  </div>
+</div>
+
+          </div>
+        </main>
+
+      </div>
+    </div>
+    <script>
+      var base_url = ".",
+          shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+    </script>
+    <script src="js/base.js" defer></script>
+    <script src="search/main.js" defer></script>  
   </body>
+
 </html>
+
+<!--
+MkDocs version : 1.2.3
+Build Date UTC : 2021-11-23 06:10:45.385583+00:00
+-->
