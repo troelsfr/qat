@@ -582,7 +582,7 @@ that only contains a specified subset. One example of such a profile is the base
 profile, which only allows function calls and branching, but no arithmetic,
 classical memory, or classical registers.</p>
 <p>The generation of QIR according to the spec with no constraints would typically
-be performed by the frontend. A couple of examples are Q# or OpenQASM 2.0/3.0.
+be performed by the frontend. A couple of examples are Q# or OpenQASM 3.0.
 However, for the generated QIR to be practical it is necessary to reduce it
 using a profile which is compatible with the target platform:</p>
 <pre><code class="language-text">┌──────────────────────┐
@@ -684,13 +684,13 @@ validate or generate a QIR in accordance with a given profile. To validate, one
 would run:</p>
 <pre><code class="language-sh">qat -p profile.yaml --validate unvalidated-qir.ll
 </code></pre>
-<p>In a similar fashion, generation is performed by adding <code>--generate</code> to the
-command line:</p>
-<pre><code class="language-sh">qat -p profile.yaml --generate qir.ll &gt; qir-profile.ll
+<p>In a similar fashion, generation is performed by adding <code>--apply</code> to the command
+line:</p>
+<pre><code class="language-sh">qat -p profile.yaml --apply qir.ll &gt; qir-profile.ll
 </code></pre>
 <p>Default behaviour of the tool is that it always validates the generated profile.
 This behaviour can be disabled by</p>
-<pre><code class="language-sh">qat -p profile.yaml --generate --no-validate qir.ll &gt; qir-profile.ll
+<pre><code class="language-sh">qat -p profile.yaml --apply --no-validate qir.ll &gt; qir-profile.ll
 </code></pre>
 <h2 id="profile-specification">Profile Specification</h2>
 <p>Every profile is specified through a YAML file which defines an object at the

@@ -1189,14 +1189,14 @@ namespace quantum
 
     void RuleFactory::disableReferenceCounting()
     {
-        //  removeFunctionCall(&quot;__quantum__rt__array_update_reference_count&quot;);
+        removeFunctionCall(&quot;__quantum__rt__array_update_reference_count&quot;);
         removeFunctionCall(&quot;__quantum__rt__string_update_reference_count&quot;);
         removeFunctionCall(&quot;__quantum__rt__result_update_reference_count&quot;);
     }
 
     void RuleFactory::disableAliasCounting()
     {
-        //  removeFunctionCall(&quot;__quantum__rt__array_update_alias_count&quot;);
+        removeFunctionCall(&quot;__quantum__rt__array_update_alias_count&quot;);
         removeFunctionCall(&quot;__quantum__rt__string_update_alias_count&quot;);
         removeFunctionCall(&quot;__quantum__rt__result_update_alias_count&quot;);
     }
@@ -1242,7 +1242,7 @@ namespace quantum
 } // namespace microsoft
 </code></pre>
 <hr />
-<p>Updated on 30 November 2021 at 11:40:35 UTC</p></div>
+<p>Updated on 10 February 2022 at 04:03:10 UTC</p></div>
 </div>
           </div>
         </main>
