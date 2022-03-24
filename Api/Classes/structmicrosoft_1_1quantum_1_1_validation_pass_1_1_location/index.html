@@ -7,12 +7,12 @@
      
     <meta name="author" content="troels" />
      
-    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Files/_default_profile_generator_8cpp/" />
+    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/" />
      
     <link rel="shortcut icon" href="../../../img/favicon.ico" />
     
     <title>
-      Generators/DefaultProfileGenerator.cpp - QAT Documentation
+      microsoft::quantum::ValidationPass::Location - QAT Documentation
     </title>
     <link href="../../../css/styles.css" rel="stylesheet" />
     <link href="../../../css/font-awesome.min.css" rel="stylesheet" />
@@ -215,7 +215,7 @@
                 </h3>
                 <a
                   class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                  href="../../Classes/"
+                  href="../"
                   >Classes</a
                 >
                 <a
@@ -230,7 +230,7 @@
                 >
                 <a
                   class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                  href="../"
+                  href="../../Files/"
                   >Files</a
                 >
                 <a
@@ -398,7 +398,7 @@
               </h3>
               <a
                 class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                href="../../Classes/"
+                href="../"
                 >Classes</a
               >
               <a
@@ -413,7 +413,7 @@
               >
               <a
                 class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                href="../"
+                href="../../Files/"
                 >Files</a
               >
               <a
@@ -553,204 +553,54 @@
       <span
         class="mt-2 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex flex-row justify-center"
       >
-        <span class="text-center"> Generators/DefaultProfileGenerator.cpp </span>
+        <span class="text-center"> microsoft::quantum::ValidationPass::Location </span>
       </span>
     </h1>
     
   </div>
-  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="generatorsdefaultprofilegeneratorcpp">Generators/DefaultProfileGenerator.cpp</h1>
-<h2 id="namespaces">Namespaces</h2>
+  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="microsoftquantumvalidationpasslocation">microsoft::quantum::ValidationPass::Location</h1>
+<h2 id="public-attributes">Public Attributes</h2>
 <table>
 <thead>
 <tr>
+<th></th>
 <th>Name</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong><a href="/qat/Api/Namespaces/namespacemicrosoft/">microsoft</a></strong></td>
+<td>String</td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/#variable-filename">filename</a></strong></td>
 </tr>
 <tr>
-<td><strong><a href="/qat/Api/Namespaces/namespacemicrosoft_1_1quantum/">microsoft::quantum</a></strong></td>
+<td>uint64_t</td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/#variable-row">row</a></strong></td>
+</tr>
+<tr>
+<td>uint64_t</td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/#variable-col">col</a></strong></td>
+</tr>
+<tr>
+<td>String</td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/#variable-llvm_hint">llvm_hint</a></strong></td>
 </tr>
 </tbody>
 </table>
-<h2 id="source-code">Source code</h2>
-<pre><code class="language-cpp">// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
-
-#include &quot;Generators/DefaultProfileGenerator.hpp&quot;
-#include &quot;Rules/Factory.hpp&quot;
-#include &quot;Rules/FactoryConfig.hpp&quot;
-#include &quot;Rules/RuleSet.hpp&quot;
-#include &quot;TransformationRulesPass/TransformationRulesPass.hpp&quot;
-
-#include &quot;Llvm/Llvm.hpp&quot;
-
-#include &lt;iostream&gt;
-
-namespace microsoft
-{
-namespace quantum
-{
-
-    DefaultProfileGenerator::DefaultProfileGenerator()
-    {
-        configurationManager().addConfig&lt;ValidationPassConfiguration&gt;();
-
-        registerProfileComponent&lt;TransformationRulesPassConfiguration&gt;(
-            &quot;transformation-rules&quot;,
-            [](TransformationRulesPassConfiguration const&amp; config, ProfileGenerator* ptr, Profile&amp; profile) {
-                auto&amp; ret = ptr-&gt;modulePassManager();
-
-                // Default optimisation pipeline
-                if (config.shouldSimplifyPriorTransform())
-                {
-                    auto&amp;                   pass_builder = ptr-&gt;passBuilder();
-                    llvm::ModulePassManager pipeline =
-                        pass_builder.buildPerModuleDefaultPipeline(ptr-&gt;optimisationLevel());
-                    ret.addPass(std::move(pipeline));
-                }
-
-                // Defining the mapping
-                RuleSet rule_set;
-                auto    factory =
-                    RuleFactory(rule_set, profile.getQubitAllocationManager(), profile.getResultAllocationManager());
-                factory.usingConfiguration(ptr-&gt;configurationManager().get&lt;FactoryConfiguration&gt;());
-
-                // Creating profile pass
-                ret.addPass(TransformationRulesPass(std::move(rule_set), config, &amp;profile));
-            });
-
-        registerProfileComponent&lt;LlvmPassesConfiguration&gt;(
-            &quot;llvm-passes&quot;, [](LlvmPassesConfiguration const&amp; cfg, ProfileGenerator* ptr, Profile&amp;) {
-                auto pass_pipeline = cfg.passPipeline();
-                if (!pass_pipeline.empty())
-                {
-
-                    auto&amp; pass_builder = ptr-&gt;passBuilder();
-                    auto&amp; npm          = ptr-&gt;modulePassManager();
-                    if (!pass_builder.parsePassPipeline(npm, pass_pipeline, false, false))
-                    {
-                        throw std::runtime_error(&quot;Failed to set pass pipeline up.&quot;);
-                    }
-                }
-                else if (cfg.alwaysInline())
-                {
-                    auto&amp; ret          = ptr-&gt;modulePassManager();
-                    auto&amp; pass_builder = ptr-&gt;passBuilder();
-                    ret.addPass(llvm::AlwaysInlinerPass());
-
-                    auto inliner_pass = pass_builder.buildInlinerPipeline(
-                        ptr-&gt;optimisationLevel(), llvm::PassBuilder::ThinLTOPhase::None, ptr-&gt;isDebugMode());
-                    ret.addPass(std::move(inliner_pass));
-                }
-                else if (!cfg.disableDefaultPipeline())
-                {
-                    auto&amp; mpm = ptr-&gt;modulePassManager();
-
-                    // If not explicitly disabled, we fall back to the default LLVM pipeline
-                    auto&amp;                   pass_builder = ptr-&gt;passBuilder();
-                    llvm::ModulePassManager pipeline1 =
-                        pass_builder.buildPerModuleDefaultPipeline(ptr-&gt;optimisationLevel());
-                    mpm.addPass(std::move(pipeline1));
-
-                    llvm::ModulePassManager pipeline2 = pass_builder.buildModuleSimplificationPipeline(
-                        ptr-&gt;optimisationLevel(), llvm::PassBuilder::ThinLTOPhase::None);
-                    mpm.addPass(std::move(pipeline2));
-                }
-            });
-    }
-
-    DefaultProfileGenerator::DefaultProfileGenerator(
-        ConfigureFunction const&amp;                    configure,
-        TransformationRulesPassConfiguration const&amp; profile_pass_config,
-        LlvmPassesConfiguration const&amp;              llvm_config)
-    {
-        configurationManager().addConfig&lt;ValidationPassConfiguration&gt;();
-
-        registerProfileComponent&lt;TransformationRulesPassConfiguration&gt;(
-            &quot;transformation-rules&quot;,
-            [configure](TransformationRulesPassConfiguration const&amp; config, ProfileGenerator* ptr, Profile&amp; profile) {
-                auto&amp; ret = ptr-&gt;modulePassManager();
-
-                // Default optimisation pipeline
-                if (config.shouldSimplifyPriorTransform())
-                {
-                    auto&amp;                   pass_builder = ptr-&gt;passBuilder();
-                    llvm::ModulePassManager pipeline =
-                        pass_builder.buildPerModuleDefaultPipeline(ptr-&gt;optimisationLevel());
-                    ret.addPass(std::move(pipeline));
-                }
-
-                // Defining the mapping
-                RuleSet rule_set;
-                auto    factory =
-                    RuleFactory(rule_set, profile.getQubitAllocationManager(), profile.getResultAllocationManager());
-                configure(rule_set);
-
-                // Creating profile pass
-                ret.addPass(TransformationRulesPass(std::move(rule_set), config, &amp;profile));
-            });
-
-        registerProfileComponent&lt;LlvmPassesConfiguration&gt;(
-            &quot;llvm-passes&quot;, [](LlvmPassesConfiguration const&amp; cfg, ProfileGenerator* ptr, Profile&amp;) {
-                auto pass_pipeline = cfg.passPipeline();
-                if (!pass_pipeline.empty())
-                {
-
-                    auto&amp; pass_builder = ptr-&gt;passBuilder();
-                    auto&amp; npm          = ptr-&gt;modulePassManager();
-                    if (!pass_builder.parsePassPipeline(npm, pass_pipeline, false, false))
-                    {
-                        throw std::runtime_error(&quot;Failed to set pass pipeline up.&quot;);
-                    }
-                }
-                else if (cfg.alwaysInline())
-                {
-                    auto&amp; ret          = ptr-&gt;modulePassManager();
-                    auto&amp; pass_builder = ptr-&gt;passBuilder();
-                    ret.addPass(llvm::AlwaysInlinerPass());
-
-                    auto inliner_pass = pass_builder.buildInlinerPipeline(
-                        ptr-&gt;optimisationLevel(), llvm::PassBuilder::ThinLTOPhase::None, ptr-&gt;isDebugMode());
-                    ret.addPass(std::move(inliner_pass));
-                }
-                else if (!cfg.disableDefaultPipeline())
-                {
-                    auto&amp; mpm = ptr-&gt;modulePassManager();
-
-                    // If not explicitly disabled, we fall back to the default LLVM pipeline
-                    auto&amp;                   pass_builder = ptr-&gt;passBuilder();
-                    llvm::ModulePassManager pipeline1 =
-                        pass_builder.buildPerModuleDefaultPipeline(ptr-&gt;optimisationLevel());
-                    mpm.addPass(std::move(pipeline1));
-
-                    llvm::ModulePassManager pipeline2 = pass_builder.buildModuleSimplificationPipeline(
-                        ptr-&gt;optimisationLevel(), llvm::PassBuilder::ThinLTOPhase::None);
-                    mpm.addPass(std::move(pipeline2));
-                }
-            });
-
-        configurationManager().setConfig(profile_pass_config);
-        configurationManager().setConfig(llvm_config);
-    }
-
-    TransformationRulesPassConfiguration const&amp; DefaultProfileGenerator::ruleTransformationConfig() const
-    {
-        return configurationManager().get&lt;TransformationRulesPassConfiguration&gt;();
-    }
-
-    LlvmPassesConfiguration const&amp; DefaultProfileGenerator::llvmPassesConfig() const
-    {
-        return configurationManager().get&lt;LlvmPassesConfiguration&gt;();
-    }
-
-} // namespace quantum
-} // namespace microsoft
+<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
+<h3 id="variable-filename">variable filename</h3>
+<pre><code class="language-cpp">String filename {&quot;&quot;};
+</code></pre>
+<h3 id="variable-row">variable row</h3>
+<pre><code class="language-cpp">uint64_t row {0};
+</code></pre>
+<h3 id="variable-col">variable col</h3>
+<pre><code class="language-cpp">uint64_t col {0};
+</code></pre>
+<h3 id="variable-llvm_hint">variable llvm_hint</h3>
+<pre><code class="language-cpp">String llvm_hint {&quot;&quot;};
 </code></pre>
 <hr />
-<p>Updated on 10 February 2022 at 04:03:10 UTC</p></div>
+<p>Updated on 24 March 2022 at 12:08:07 UTC</p></div>
 </div>
           </div>
         </main>

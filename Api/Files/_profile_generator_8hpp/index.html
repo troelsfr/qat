@@ -638,33 +638,44 @@ namespace quantum
 
         ConfigurationManager const&amp; configurationManager() const;
 
-        Profile newProfile(String const&amp; name, OptimizationLevel const&amp; optimisation_level, bool debug);
+        Profile newProfile(String const&amp; name, OptimizationLevel const&amp; optimization_level, bool debug);
 
         // Defining the generator
+
         //
 
         template &lt;typename R&gt; void registerProfileComponent(String const&amp; id, SetupFunction&lt;R&gt; setup);
+
+        template &lt;typename R&gt; void replaceProfileComponent(String const&amp; id, SetupFunction&lt;R&gt; setup);
+
+        template &lt;typename R&gt; void registerAnonymousProfileComponent(SetupFunction&lt;R&gt; setup);
+
+        void replicateProfileComponent(String const&amp; id);
 
         // Support properties for generators
         //
 
         llvm::ModulePassManager&amp; modulePassManager();
 
+        llvm::FunctionPassManager&amp; functionPassManager();
+
         llvm::PassBuilder&amp; passBuilder();
 
-        OptimizationLevel optimisationLevel() const;
+        OptimizationLevel optimizationLevel() const;
 
         bool isDebugMode() const;
+
+        void setupDefaultComponentPipeline();
 
       protected:
         llvm::ModulePassManager createGenerationModulePassManager(
             Profile&amp;                 profile,
-            OptimizationLevel const&amp; optimisation_level,
+            OptimizationLevel const&amp; optimization_level,
             bool                     debug);
 
         llvm::ModulePassManager createValidationModulePass(
             PassBuilder&amp;             pass_builder,
-            OptimizationLevel const&amp; optimisation_level,
+            OptimizationLevel const&amp; optimization_level,
             bool                     debug);
 
       private:
@@ -673,9 +684,11 @@ namespace quantum
 
         llvm::ModulePassManager* module_pass_manager_{nullptr};
 
+        llvm::FunctionPassManager* function_pass_manager_{nullptr};
+
         llvm::PassBuilder* pass_builder_{nullptr};
 
-        OptimizationLevel optimisation_level_{OptimizationLevel::O0};
+        OptimizationLevel optimization_level_{OptimizationLevel::O0};
 
         bool debug_{false};
     };
@@ -696,11 +709,53 @@ namespace quantum
         components_.push_back({id, std::move(setup_wrapper)});
     }
 
+    template &lt;typename R&gt; void ProfileGenerator::replaceProfileComponent(String const&amp; id, SetupFunction&lt;R&gt; setup)
+    {
+        auto setup_wrapper = [setup](ProfileGenerator* ptr, Profile&amp; profile) {
+            if (ptr-&gt;configuration_manager_.isActive&lt;R&gt;())
+            {
+                auto&amp; config = ptr-&gt;configuration_manager_.get&lt;R&gt;();
+
+                setup(config, ptr, profile);
+            }
+        };
+
+        for (auto&amp; component : components_)
+        {
+            if (component.first == id)
+            {
+                component.second = std::move(setup_wrapper);
+                return;
+            }
+        }
+
+        throw std::runtime_error(&quot;Could not find component &quot; + id);
+    }
+
+    template &lt;typename R&gt; void ProfileGenerator::registerAnonymousProfileComponent(SetupFunction&lt;R&gt; setup)
+    {
+        if (!configuration_manager_.configWasRegistered&lt;R&gt;())
+        {
+            throw std::runtime_error(&quot;Configuration '&quot; + static_cast&lt;String&gt;(typeid(R).name()) + &quot;' does not exist.&quot;);
+        }
+
+        auto setup_wrapper = [setup](ProfileGenerator* ptr, Profile&amp; profile) {
+            if (ptr-&gt;configuration_manager_.isActive&lt;R&gt;())
+            {
+                auto&amp; config = ptr-&gt;configuration_manager_.get&lt;R&gt;();
+
+                setup(config, ptr, profile);
+            }
+        };
+
+        components_.push_back({&quot;__unnamed__&quot;, std::move(setup_wrapper)});
+    }
+
 } // namespace quantum
 } // namespace microsoft
 </code></pre>
 <hr />
-<p>Updated on 10 February 2022 at 04:03:10 UTC</p></div>
+<p>Updated on 24 March 2022 at 12:08:07 UTC</p></div>
 </div>
           </div>
         </main>
