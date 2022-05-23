@@ -588,14 +588,6 @@
 <td>class</td>
 <td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_log_collection/">microsoft::quantum::LogCollection</a></strong></td>
 </tr>
-<tr>
-<td>struct</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_location/">microsoft::quantum::LogCollection::Location</a></strong> <br>Class that holds the location of where the incident happened.</td>
-</tr>
-<tr>
-<td>struct</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_message/">microsoft::quantum::LogCollection::Message</a></strong> <br>Struct to hold a message together with its type and location.</td>
-</tr>
 </tbody>
 </table>
 <h2 id="source-code">Source code</h2>
@@ -604,6 +596,7 @@
 // Licensed under the MIT License.
 
 #include &quot;Logging/ILogger.hpp&quot;
+#include &quot;Logging/SourceLocation.hpp&quot;
 
 #include &lt;vector&gt;
 
@@ -615,33 +608,6 @@ namespace quantum
     class LogCollection : public ILogger
     {
       public:
-        struct Location
-        {
-            String   name{};
-            uint64_t row{0};
-            uint64_t col{0};
-            String   llvm_hint;
-            String   frontend_hint;
-        };
-
-        enum class Type
-        {
-            Debug,
-            Info,
-            Warning,
-            Error,
-            InternalError,
-        };
-
-        struct Message
-        {
-            Type     type;
-            Location location;
-            String   message;
-        };
-
-        using Messages = std::vector&lt;Message&gt;;
-
         // Interface implementation
         //
 
@@ -655,13 +621,15 @@ namespace quantum
 
         void internalError(String const&amp; message) override;
 
-        void setLocation(String const&amp; name, uint64_t row, uint64_t col) override;
+        void setLocation(SourceLocation const&amp; loc) override;
 
         void setLlvmHint(String const&amp; value) override;
 
         void setFrontendHint(String const&amp; value) override;
 
-        Messages const&amp; messages() const;
+        Messages const&amp; messages() const override;
+
+        void dump(std::ostream&amp; out) const override;
 
       private:
         Location current_location_{}; 
@@ -672,7 +640,7 @@ namespace quantum
 } // namespace microsoft
 </code></pre>
 <hr />
-<p>Updated on 24 March 2022 at 12:26:42 UTC</p></div>
+<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
 </div>
           </div>
         </main>

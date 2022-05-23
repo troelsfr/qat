@@ -562,6 +562,12 @@
 <ul>
 <li><strong>namespace <a href="/qat/Api/Namespaces/namespacemicrosoft/">microsoft</a></strong> <ul>
 <li><strong>namespace <a href="/qat/Api/Namespaces/namespacemicrosoft_1_1quantum/">quantum</a></strong> <ul>
+<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_allocation_analysis/">AllocationAnalysis</a></strong> <ul>
+<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_allocation_analysis_1_1_resource_access_location/">ResourceAccessLocation</a></strong> </li>
+</ul>
+</li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_allocation_analysis_pass/">AllocationAnalysisPass</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_allocation_analysis_pass_printer/">AllocationAnalysisPassPrinter</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_any_pattern/">AnyPattern</a></strong> <br>Pattern that matches any operand. </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_basic_allocation_manager/">BasicAllocationManager</a></strong> <ul>
 <li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_basic_allocation_manager_1_1_allocated_memory_block/">AllocatedMemoryBlock</a></strong> </li>
@@ -579,6 +585,8 @@
 </ul>
 </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_const_int_pattern/">ConstIntPattern</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_debug_info_updater/">DebugInfoUpdater</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_deferred_value/">DeferredValue</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_factory_configuration/">FactoryConfiguration</a></strong> </li>
 <li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_group_analysis/">GroupAnalysis</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_grouping_analysis_pass/">GroupingAnalysisPass</a></strong> </li>
@@ -587,42 +595,49 @@
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_grouping_pass_configuration/">GroupingPassConfiguration</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_allocation_manager/">IAllocationManager</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_config_bind/">IConfigBind</a></strong> </li>
-<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a></strong> <ul>
+<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_i_logger_1_1_location/">Location</a></strong> <br>Class that holds the location of where the incident happened. </li>
+<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_i_logger_1_1_message/">Message</a></strong> <br>Struct to hold a message together with its type and location. </li>
+</ul>
+</li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_operand_prototype/">IOperandPrototype</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_instruction_location_table/">InstructionLocationTable</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_int_to_ptr_pattern/">IntToPtrPattern</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_ir_manipulation_test_helper/">IrManipulationTestHelper</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_llvm_passes_configuration/">LlvmPassesConfiguration</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_load_pattern/">LoadPattern</a></strong> </li>
-<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_log_collection/">LogCollection</a></strong> <ul>
-<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_location/">Location</a></strong> <br>Class that holds the location of where the incident happened. </li>
-<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_message/">Message</a></strong> <br>Struct to hold a message together with its type and location. </li>
-</ul>
-</li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_log_collection/">LogCollection</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_module_loader/">ModuleLoader</a></strong> <ul>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_module_loader_1_1_single_module_transformation/">SingleModuleTransformation</a></strong> </li>
 </ul>
 </li>
+<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_opcode_value/">OpcodeValue</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_parameter_parser/">ParameterParser</a></strong> <ul>
 <li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_parameter_parser_1_1_parsed_value/">ParsedValue</a></strong> <br>Struct that contains parsed and interpreted values of command line arguments. </li>
 </ul>
 </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_phi_pattern/">PhiPattern</a></strong> </li>
+<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_post_transform_config/">PostTransformConfig</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/">PreTransformValidationPass</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass_configuration/">PreTransformValidationPassConfiguration</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_profile/">Profile</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_profile_generator/">ProfileGenerator</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_qubit_remap_pass/">QubitRemapPass</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_remove_disallowed_attributes_pass/">RemoveDisallowedAttributesPass</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_replace_qubit_on_reset_pass/">ReplaceQubitOnResetPass</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_replacement_rule/">ReplacementRule</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_resource_annotation_pass/">ResourceAnnotationPass</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_rule_factory/">RuleFactory</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_rule_set/">RuleSet</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_select_pattern/">SelectPattern</a></strong> </li>
+<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/">SourceLocation</a></strong> </li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_static_resource_component_configuration/">StaticResourceComponentConfiguration</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_store_pattern/">StorePattern</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_switch_pattern/">SwitchPattern</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_transformation_rules_pass/">TransformationRulesPass</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_transformation_rules_pass_configuration/">TransformationRulesPassConfiguration</a></strong> <br>Configuration class for the RuleTransformation pass. </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_unnamed_invoke_pattern/">UnnamedInvokePattern</a></strong> </li>
-<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_validation_pass/">ValidationPass</a></strong> <ul>
-<li><strong>struct <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/">Location</a></strong> </li>
-</ul>
-</li>
+<li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_validation_pass/">ValidationPass</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_validation_pass_configuration/">ValidationPassConfiguration</a></strong> </li>
 <li><strong>class <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_validator/">Validator</a></strong> </li>
 <li><strong>namespace <a href="/qat/Api/Namespaces/namespacemicrosoft_1_1quantum_1_1notation/">notation</a></strong> <ul>
@@ -633,10 +648,14 @@
 </li>
 </ul>
 </li>
-<li><strong>namespace <a href="/qat/Api/Namespaces/namespacemicrosoft_1_1quantum_1_1_0d33/">microsoft::quantum::@33</a></strong> </li>
+<li><strong>namespace <a href="/qat/Api/Namespaces/namespacemicrosoft_1_1quantum_1_1_0d42/">microsoft::quantum::@42</a></strong> </li>
+<li><strong>namespace <a href="/qat/Api/Namespaces/namespacestd/">std</a></strong> <ul>
+<li><strong>struct <a href="/qat/Api/Classes/structstd_1_1hash_3_01microsoft_1_1quantum_1_1_opcode_value_01_4/">hash&lt; microsoft::quantum::OpcodeValue &gt;</a></strong> </li>
+</ul>
+</li>
 </ul>
 <hr />
-<p>Updated on 24 March 2022 at 12:26:42 UTC</p></div>
+<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
 </div>
           </div>
         </main>

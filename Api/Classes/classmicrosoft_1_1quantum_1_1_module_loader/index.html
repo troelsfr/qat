@@ -593,7 +593,7 @@
 <tbody>
 <tr>
 <td></td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_module_loader/#function-moduleloader">ModuleLoader</a></strong>(Module * final_module)</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_module_loader/#function-moduleloader">ModuleLoader</a></strong>(Module * final_module, bool strip_existing_debug =false, bool add_ir_debug_info =false)</td>
 </tr>
 <tr>
 <td>bool</td>
@@ -601,7 +601,11 @@
 </tr>
 <tr>
 <td>bool</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_module_loader/#function-addirfile">addIrFile</a></strong>(String const &amp; filename)</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_module_loader/#function-addirfile">addIrFile</a></strong>(String input_file)</td>
+</tr>
+<tr>
+<td>InstructionLocationTablePtr</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_module_loader/#function-locationtable">locationTable</a></strong>() const</td>
 </tr>
 </tbody>
 </table>
@@ -618,7 +622,9 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-moduleloader">function ModuleLoader</h3>
 <pre><code class="language-cpp">inline explicit ModuleLoader(
-    Module * final_module
+    Module * final_module,
+    bool strip_existing_debug =false,
+    bool add_ir_debug_info =false
 )
 </code></pre>
 <h3 id="function-addmodule">function addModule</h3>
@@ -629,11 +635,14 @@
 </code></pre>
 <h3 id="function-addirfile">function addIrFile</h3>
 <pre><code class="language-cpp">inline bool addIrFile(
-    String const &amp; filename
+    String input_file
 )
 </code></pre>
+<h3 id="function-locationtable">function locationTable</h3>
+<pre><code class="language-cpp">inline InstructionLocationTablePtr locationTable() const
+</code></pre>
 <hr />
-<p>Updated on 24 March 2022 at 12:26:42 UTC</p></div>
+<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
 </div>
           </div>
         </main>

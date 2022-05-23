@@ -578,8 +578,16 @@
 <td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_validation_pass/#using-value">Value</a></strong></td>
 </tr>
 <tr>
-<td>using std::shared_ptr&lt; <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> &gt;</td>
+<td>using ILogger::ILoggerPtr</td>
 <td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_validation_pass/#using-iloggerptr">ILoggerPtr</a></strong></td>
+</tr>
+<tr>
+<td>using <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_i_logger_1_1_location/">ILogger::Location</a></td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_validation_pass/#using-location">Location</a></strong></td>
+</tr>
+<tr>
+<td>using llvm::StringRef</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_validation_pass/#using-stringref">StringRef</a></strong></td>
 </tr>
 </tbody>
 </table>
@@ -626,11 +634,17 @@
 <pre><code class="language-cpp">using microsoft::quantum::ValidationPass::Value =  llvm::Value;
 </code></pre>
 <h3 id="using-iloggerptr">using ILoggerPtr</h3>
-<pre><code class="language-cpp">using microsoft::quantum::ValidationPass::ILoggerPtr =  std::shared_ptr&lt;ILogger&gt;;
+<pre><code class="language-cpp">using microsoft::quantum::ValidationPass::ILoggerPtr =  ILogger::ILoggerPtr;
+</code></pre>
+<h3 id="using-location">using Location</h3>
+<pre><code class="language-cpp">using microsoft::quantum::ValidationPass::Location =  ILogger::Location;
+</code></pre>
+<h3 id="using-stringref">using StringRef</h3>
+<pre><code class="language-cpp">using microsoft::quantum::ValidationPass::StringRef =  llvm::StringRef;
 </code></pre>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-validationpass">function ValidationPass</h3>
-<pre><code class="language-cpp">inline explicit ValidationPass(
+<pre><code class="language-cpp">explicit ValidationPass(
     ValidationPassConfiguration const &amp; cfg,
     ILoggerPtr const &amp; logger =nullptr
 )
@@ -662,7 +676,7 @@
 </code></pre>
 <p>Whether or not this pass is required to run. </p>
 <hr />
-<p>Updated on 24 March 2022 at 12:26:42 UTC</p></div>
+<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
 </div>
           </div>
         </main>

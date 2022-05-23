@@ -863,7 +863,11 @@ namespace quantum
 
         if (depth_ &gt;= config_.maxRecursion())
         {
-            llvm::outs() &lt;&lt; &quot;Exceed max recursion of &quot; &lt;&lt; config_.maxRecursion() &lt;&lt; &quot;\n&quot;;
+            requireLogger();
+            logger_-&gt;setLocationFromValue(&amp;function);
+            logger_-&gt;error(
+                &quot;Function inlining exceeded maximum recursion depth of &quot; + std::to_string(config_.maxRecursion()));
+
             return false;
         }
         ++depth_;
@@ -1058,26 +1062,32 @@ namespace quantum
 
             if (instr1 == nullptr)
             {
-                llvm::outs() &lt;&lt; &quot;; WARNING: cannot deal with non-instruction replacements\n&quot;;
+                requireLogger();
+                logger_-&gt;setLocationFromValue(nullptr);
+                logger_-&gt;internalError(&quot;Cannot replace with non-instruction replacements&quot;);
                 continue;
             }
 
             // Checking if by accident the same instruction was added
             if (already_removed.find(instr1) != already_removed.end())
             {
-                throw std::runtime_error(&quot;Instruction was already removed.&quot;);
+                requireLogger();
+                logger_-&gt;setLocationFromValue(instr1);
+                logger_-&gt;internalError(&quot;Instruction was already removed.&quot;);
+                continue;
             }
             already_removed.insert(instr1);
 
-            // Cheking if have a replacement for the instruction
+            // Checking if have a replacement for the instruction
             if (it-&gt;second != nullptr)
             {
                 // ... if so, we just replace it,
                 auto instr2 = llvm::dyn_cast&lt;llvm::Instruction&gt;(it-&gt;second);
                 if (instr2 == nullptr)
                 {
-                    llvm::outs() &lt;&lt; &quot;; WARNING: cannot replace instruction with non-instruction\n&quot;;
-                    llvm::outs() &lt;&lt; &quot;; &quot; &lt;&lt; *it-&gt;second &lt;&lt; &quot;\n&quot;;
+                    requireLogger();
+                    logger_-&gt;setLocationFromValue(instr1);
+                    logger_-&gt;internalError(&quot;Attempt to replace with non-instruction value. This is not allowed.&quot;);
                     continue;
                 }
                 llvm::ReplaceInstWithInst(instr1, instr2);
@@ -1187,17 +1197,9 @@ namespace quantum
             }
             else
             {
-                llvm::errs() &lt;&lt; &quot;; INTERNAL ERROR: block was supposed to be unused.\n&quot;;
-                for (auto&amp; x : block-&gt;uses())
-                {
-                    llvm::errs() &lt;&lt; &quot; -x &quot; &lt;&lt; *x &lt;&lt; &quot;\n&quot;;
-                }
-                for (auto x : block-&gt;users())
-                {
-                    llvm::errs() &lt;&lt; &quot; -: &quot; &lt;&lt; *x &lt;&lt; &quot;\n&quot;;
-                }
-                llvm::errs() &lt;&lt; &quot; ----- \n&quot;;
-                llvm::errs() &lt;&lt; *block &lt;&lt; &quot;\n&quot;;
+                requireLogger();
+                logger_-&gt;setLocationFromValue(block);
+                logger_-&gt;internalError(&quot;Block was supposed to be unused&quot;);
             }
         }
 
@@ -1284,6 +1286,7 @@ namespace quantum
         std::unordered_set&lt;llvm::Value*&gt; already_visited;
         for (auto&amp; function : module)
         {
+
             if (function.hasFnAttribute(config_.entryPointAttr()))
             {
                 runOnFunction(function, [this, &amp;already_visited](llvm::Value* value, DeletableInstructions&amp;) {
@@ -1292,7 +1295,10 @@ namespace quantum
                     // Sanity check
                     if (already_visited.find(value) != already_visited.end())
                     {
-                        throw std::runtime_error(&quot;Already visited&quot;);
+                        requireLogger();
+                        logger_-&gt;setLocationFromValue(value);
+                        logger_-&gt;internalError(&quot;Instruction was visited twice while applying rule to function.&quot;);
+                        return value;
                     }
                     already_visited.insert(value);
 
@@ -1303,20 +1309,6 @@ namespace quantum
                     }
                     return value;
                 });
-
-                if (config_.shouldAnnotateQubitUse())
-                {
-                    std::stringstream ss{&quot;&quot;};
-                    ss &lt;&lt; profile_-&gt;getQubitAllocationManager()-&gt;maxAllocationsUsed();
-                    function.addFnAttr(&quot;requiredQubits&quot;, ss.str());
-                }
-
-                if (config_.shouldAnnotateResultUse())
-                {
-                    std::stringstream ss{&quot;&quot;};
-                    ss &lt;&lt; profile_-&gt;getResultAllocationManager()-&gt;maxAllocationsUsed();
-                    function.addFnAttr(&quot;requiredResults&quot;, ss.str());
-                }
             }
         }
 
@@ -1325,7 +1317,7 @@ namespace quantum
 
     llvm::PreservedAnalyses TransformationRulesPass::run(llvm::Module&amp; module, llvm::ModuleAnalysisManager&amp; mam)
     {
-        // In case the module is istructed to clone functions,
+        // In case the module is instructed to clone functions,
         if (config_.shouldCloneFunctions())
         {
             setupCopyAndExpand();
@@ -1353,10 +1345,12 @@ namespace quantum
         else
         {
 
-            // Otherwize we apply to all sections of the code.
+            // Otherwise we apply to all sections of the code.
             replacements_.clear();
             for (auto&amp; function : module)
             {
+
+                // Transforming each function
                 for (auto&amp; block : function)
                 {
                     for (auto&amp; instr : block)
@@ -1443,11 +1437,19 @@ namespace quantum
         return true;
     }
 
+    void TransformationRulesPass::requireLogger()
+    {
+        if (logger_ == nullptr)
+        {
+            throw std::runtime_error(&quot;TransformationRulesPass does not have a logger, but need it to emit messages.&quot;);
+        }
+    }
+
 } // namespace quantum
 } // namespace microsoft
 </code></pre>
 <hr />
-<p>Updated on 24 March 2022 at 12:26:42 UTC</p></div>
+<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
 </div>
           </div>
         </main>

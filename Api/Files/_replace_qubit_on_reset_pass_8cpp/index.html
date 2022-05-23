@@ -7,12 +7,12 @@
      
     <meta name="author" content="troels" />
      
-    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/" />
+    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Files/_replace_qubit_on_reset_pass_8cpp/" />
      
     <link rel="shortcut icon" href="../../../img/favicon.ico" />
     
     <title>
-      microsoft::quantum::ValidationPass::Location - QAT Documentation
+      StaticResourceComponent/ReplaceQubitOnResetPass.cpp - QAT Documentation
     </title>
     <link href="../../../css/styles.css" rel="stylesheet" />
     <link href="../../../css/font-awesome.min.css" rel="stylesheet" />
@@ -215,7 +215,7 @@
                 </h3>
                 <a
                   class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                  href="../"
+                  href="../../Classes/"
                   >Classes</a
                 >
                 <a
@@ -230,7 +230,7 @@
                 >
                 <a
                   class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                  href="../../Files/"
+                  href="../"
                   >Files</a
                 >
                 <a
@@ -398,7 +398,7 @@
               </h3>
               <a
                 class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                href="../"
+                href="../../Classes/"
                 >Classes</a
               >
               <a
@@ -413,7 +413,7 @@
               >
               <a
                 class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                href="../../Files/"
+                href="../"
                 >Files</a
               >
               <a
@@ -553,54 +553,256 @@
       <span
         class="mt-2 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex flex-row justify-center"
       >
-        <span class="text-center"> microsoft::quantum::ValidationPass::Location </span>
+        <span class="text-center"> StaticResourceComponent/ReplaceQubitOnResetPass.cpp </span>
       </span>
     </h1>
     
   </div>
-  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="microsoftquantumvalidationpasslocation">microsoft::quantum::ValidationPass::Location</h1>
-<h2 id="public-attributes">Public Attributes</h2>
+  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="staticresourcecomponentreplacequbitonresetpasscpp">StaticResourceComponent/ReplaceQubitOnResetPass.cpp</h1>
+<h2 id="namespaces">Namespaces</h2>
 <table>
 <thead>
 <tr>
-<th></th>
 <th>Name</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>String</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/#variable-filename">filename</a></strong></td>
+<td><strong><a href="/qat/Api/Namespaces/namespacemicrosoft/">microsoft</a></strong></td>
 </tr>
 <tr>
-<td>uint64_t</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/#variable-row">row</a></strong></td>
-</tr>
-<tr>
-<td>uint64_t</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/#variable-col">col</a></strong></td>
-</tr>
-<tr>
-<td>String</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_validation_pass_1_1_location/#variable-llvm_hint">llvm_hint</a></strong></td>
+<td><strong><a href="/qat/Api/Namespaces/namespacemicrosoft_1_1quantum/">microsoft::quantum</a></strong></td>
 </tr>
 </tbody>
 </table>
-<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
-<h3 id="variable-filename">variable filename</h3>
-<pre><code class="language-cpp">String filename {&quot;&quot;};
-</code></pre>
-<h3 id="variable-row">variable row</h3>
-<pre><code class="language-cpp">uint64_t row {0};
-</code></pre>
-<h3 id="variable-col">variable col</h3>
-<pre><code class="language-cpp">uint64_t col {0};
-</code></pre>
-<h3 id="variable-llvm_hint">variable llvm_hint</h3>
-<pre><code class="language-cpp">String llvm_hint {&quot;&quot;};
+<h2 id="source-code">Source code</h2>
+<pre><code class="language-cpp">// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+#include &quot;Logging/ILogger.hpp&quot;
+#include &quot;Profile/Profile.hpp&quot;
+#include &quot;QatTypes/QatTypes.hpp&quot;
+#include &quot;StaticResourceComponent/AllocationAnalysisPass.hpp&quot;
+#include &quot;StaticResourceComponent/ReplaceQubitOnResetPass.hpp&quot;
+#include &quot;StaticResourceComponent/StaticResourceComponentConfiguration.hpp&quot;
+
+#include &quot;Llvm/Llvm.hpp&quot;
+
+#include &lt;functional&gt;
+#include &lt;unordered_map&gt;
+#include &lt;vector&gt;
+
+namespace microsoft
+{
+namespace quantum
+{
+
+    ReplaceQubitOnResetPass::ReplaceQubitOnResetPass(
+        StaticResourceComponentConfiguration const&amp; cfg,
+        ILoggerPtr const&amp;                           logger)
+      : config_{cfg}
+      , logger_{logger}
+    {
+    }
+
+    llvm::PreservedAnalyses ReplaceQubitOnResetPass::run(llvm::Function&amp; function, llvm::FunctionAnalysisManager&amp; fam)
+    {
+        if (!config_.shouldReplaceQubitsOnReset())
+        {
+            return llvm::PreservedAnalyses::all();
+        }
+
+        auto&amp; function_details = fam.getResult&lt;AllocationAnalysisPass&gt;(function);
+        auto&amp; access_map       = function_details.access_map;
+
+        llvm::IRBuilder&lt;&gt; builder{function.getContext()};
+
+        std::unordered_map&lt;uint64_t, uint64_t&gt; qubits_mapping{};
+        std::unordered_map&lt;uint64_t, uint64_t&gt; results_mapping{};
+
+        // Re-indexing
+        for (auto const&amp; value : function_details.resource_access)
+        {
+            auto const&amp; index = value.index;
+            switch (value.type)
+            {
+            case AllocationAnalysis::QubitResource:
+                if (qubits_mapping.find(index) == qubits_mapping.end())
+                {
+                    qubits_mapping[index] = index;
+                }
+                break;
+            case AllocationAnalysis::ResultResource:
+                if (results_mapping.find(index) == results_mapping.end())
+                {
+                    results_mapping[index] = index;
+                }
+
+                break;
+            }
+        }
+
+        uint64_t                         next_qubit_index = qubits_mapping.size();
+        std::unordered_set&lt;llvm::Value*&gt; already_replaced{};
+        std::vector&lt;llvm::Instruction*&gt;  to_remove{};
+
+        // Updating values
+        for (auto&amp; block : function)
+        {
+            for (auto&amp; instr : block)
+            {
+                auto call_instr = llvm::dyn_cast&lt;llvm::CallInst&gt;(&amp;instr);
+                if (call_instr)
+                {
+                    auto f = call_instr-&gt;getCalledFunction();
+                    if (f == nullptr)
+                    {
+                        continue;
+                    }
+
+                    auto call_name = static_cast&lt;std::string&gt;(f-&gt;getName());
+                    if (call_name == &quot;__quantum__qis__reset__body&quot;)
+                    {
+                        auto op = call_instr-&gt;getOperand(0);
+                        auto it = access_map.find(op);
+
+                        if (it != access_map.end())
+                        {
+                            qubits_mapping[it-&gt;second.index] = next_qubit_index++;
+                            to_remove.push_back(&amp;instr);
+                        }
+                        continue;
+                    }
+                }
+
+                for (uint64_t i = 0; i &lt; instr.getNumOperands(); ++i)
+                {
+                    auto op = instr.getOperand(i);
+
+                    // In case we already did the mapping, we skip to next instruction
+                    if (already_replaced.find(op) != already_replaced.end())
+                    {
+                        continue;
+                    }
+
+                    // We only perform the mapping for constant integer casts. Anything else
+                    // cannot be remapped.
+                    auto it = access_map.find(op);
+                    if (it != access_map.end())
+                    {
+                        auto     n              = it-&gt;second.index;
+                        auto&amp;    type           = it-&gt;second.type;
+                        uint64_t remapped_index = 0;
+
+                        // Getting remapped index based on resource type
+                        if (type == Qubit)
+                        {
+                            if (qubits_mapping.find(n) != qubits_mapping.end())
+                            {
+                                remapped_index = qubits_mapping[n];
+                            }
+                            else
+                            {
+                                if (logger_)
+                                {
+                                    logger_-&gt;setLocationFromValue(op);
+                                    logger_-&gt;internalError(&quot;Original qubit index not found.&quot;);
+                                }
+                                else
+                                {
+                                    throw std::runtime_error(&quot;Original qubit index not found.&quot;);
+                                }
+                                continue;
+                            }
+                        }
+                        else if (type == Result)
+                        {
+                            if (results_mapping.find(n) != results_mapping.end())
+                            {
+                                remapped_index = results_mapping[n];
+                            }
+                            else
+                            {
+                                if (logger_)
+                                {
+                                    logger_-&gt;setLocationFromValue(op);
+                                    logger_-&gt;internalError(&quot;Original result index not found.&quot;);
+                                }
+                                else
+                                {
+                                    throw std::runtime_error(&quot;Original result index not found.&quot;);
+                                }
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            if (logger_)
+                            {
+                                logger_-&gt;setLocationFromValue(op);
+                                logger_-&gt;internalError(&quot;Operand class could not be determined&quot;);
+                            }
+                            else
+                            {
+                                throw std::runtime_error(&quot;Operand class could not be determined&quot;);
+                            }
+
+                            continue;
+                        }
+
+                        auto pointer_type = llvm::dyn_cast&lt;llvm::PointerType&gt;(op-&gt;getType());
+                        if (!pointer_type)
+                        {
+                            continue;
+                        }
+
+                        // Creating new instruction with remapped index
+                        builder.SetInsertPoint(&amp;instr);
+
+                        auto idx = llvm::APInt(64, remapped_index);
+
+                        auto         new_index = llvm::ConstantInt::get(function.getContext(), idx);
+                        llvm::Value* new_instr = nullptr;
+                        new_instr              = nullptr;
+
+                        new_instr = new llvm::IntToPtrInst(new_index, pointer_type);
+                        builder.Insert(new_instr);
+
+                        auto op_as_instr = llvm::dyn_cast&lt;llvm::Instruction&gt;(op);
+                        if (op_as_instr)
+                        {
+                            to_remove.push_back(op_as_instr);
+                        }
+
+                        instr.setOperand(i, new_instr);
+                        already_replaced.insert(new_instr);
+                    }
+                }
+            }
+        }
+
+        // Removing reset instructions
+        std::reverse(to_remove.begin(), to_remove.end());
+        for (auto ptr : to_remove)
+        {
+            if (ptr-&gt;use_empty())
+            {
+                ptr-&gt;eraseFromParent();
+            }
+        }
+
+        return llvm::PreservedAnalyses::none();
+    }
+
+    bool ReplaceQubitOnResetPass::isRequired()
+    {
+        return true;
+    }
+} // namespace quantum
+} // namespace microsoft
 </code></pre>
 <hr />
-<p>Updated on 24 March 2022 at 12:26:42 UTC</p></div>
+<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
 </div>
           </div>
         </main>

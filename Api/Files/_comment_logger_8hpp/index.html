@@ -596,6 +596,7 @@
 // Licensed under the MIT License.
 
 #include &quot;Logging/ILogger.hpp&quot;
+#include &quot;Logging/SourceLocation.hpp&quot;
 
 #include &lt;vector&gt;
 
@@ -620,23 +621,21 @@ namespace quantum
 
         void internalError(String const&amp; message) override;
 
-        void setLocation(String const&amp; name, uint64_t row, uint64_t col) override;
+        void setLocation(SourceLocation const&amp; loc) override;
 
         void setLlvmHint(String const&amp; value) override;
 
         void setFrontendHint(String const&amp; value) override;
 
       private:
-        String   location_name_{&quot;&quot;};
-        uint64_t location_row_{0};
-        uint64_t location_col_{0};
+        SourceLocation location_;
     };
 
 } // namespace quantum
 } // namespace microsoft
 </code></pre>
 <hr />
-<p>Updated on 24 March 2022 at 12:26:42 UTC</p></div>
+<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
 </div>
           </div>
         </main>

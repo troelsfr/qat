@@ -7,12 +7,12 @@
      
     <meta name="author" content="troels" />
      
-    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_location/" />
+    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/" />
      
     <link rel="shortcut icon" href="../../../img/favicon.ico" />
     
     <title>
-      microsoft::quantum::LogCollection::Location - QAT Documentation
+      microsoft::quantum::SourceLocation - QAT Documentation
     </title>
     <link href="../../../css/styles.css" rel="stylesheet" />
     <link href="../../../css/font-awesome.min.css" rel="stylesheet" />
@@ -553,16 +553,59 @@
       <span
         class="mt-2 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex flex-row justify-center"
       >
-        <span class="text-center"> microsoft::quantum::LogCollection::Location </span>
+        <span class="text-center"> microsoft::quantum::SourceLocation </span>
       </span>
     </h1>
     
-    <p class="mt-8 text-xl text-gray-500 leading-8">Class that holds the location of where the incident happened.</p>
-    
   </div>
-  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="microsoftquantumlogcollectionlocation">microsoft::quantum::LogCollection::Location</h1>
-<p>Class that holds the location of where the incident happened. </p>
-<p><code>#include &lt;Logging/LogCollection.hpp&gt;</code></p>
+  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="microsoftquantumsourcelocation">microsoft::quantum::SourceLocation</h1>
+<p>Inherited by <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_i_logger_1_1_location/">microsoft::quantum::ILogger::Location</a></p>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enum</td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/#enum-@1">@1</a></strong> { INVALID_POSITION = -1}</td>
+</tr>
+<tr>
+<td>using llvm::StringRef</td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/#using-stringref">StringRef</a></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/#function-sourcelocation">SourceLocation</a></strong>() =default</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/#function-sourcelocation">SourceLocation</a></strong>(String v_name, int64_t v_line, int64_t v_column)</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/#function-operator-bool">operator bool</a></strong>() const</td>
+</tr>
+<tr>
+<td><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/">SourceLocation</a></td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/#function-invalidposition">InvalidPosition</a></strong>()</td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-attributes">Public Attributes</h2>
 <table>
 <thead>
@@ -574,44 +617,68 @@
 <tbody>
 <tr>
 <td>String</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_location/#variable-name">name</a></strong></td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/#variable-name">name</a></strong></td>
 </tr>
 <tr>
-<td>uint64_t</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_location/#variable-row">row</a></strong></td>
+<td>int64_t</td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/#variable-line">line</a></strong></td>
 </tr>
 <tr>
-<td>uint64_t</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_location/#variable-col">col</a></strong></td>
-</tr>
-<tr>
-<td>String</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_location/#variable-llvm_hint">llvm_hint</a></strong></td>
-</tr>
-<tr>
-<td>String</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_log_collection_1_1_location/#variable-frontend_hint">frontend_hint</a></strong></td>
+<td>int64_t</td>
+<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/#variable-column">column</a></strong></td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="enum-1">enum @1</h3>
+<table>
+<thead>
+<tr>
+<th>Enumerator</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INVALID_POSITION</td>
+<td>-1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="using-stringref">using StringRef</h3>
+<pre><code class="language-cpp">using microsoft::quantum::SourceLocation::StringRef =  llvm::StringRef;
+</code></pre>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-sourcelocation">function SourceLocation</h3>
+<pre><code class="language-cpp">SourceLocation() =default
+</code></pre>
+<h3 id="function-sourcelocation_1">function SourceLocation</h3>
+<pre><code class="language-cpp">inline SourceLocation(
+    String v_name,
+    int64_t v_line,
+    int64_t v_column
+)
+</code></pre>
+<h3 id="function-operator-bool">function operator bool</h3>
+<pre><code class="language-cpp">inline operator bool() const
+</code></pre>
+<h3 id="function-invalidposition">function InvalidPosition</h3>
+<pre><code class="language-cpp">static inline SourceLocation InvalidPosition()
+</code></pre>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
 <h3 id="variable-name">variable name</h3>
 <pre><code class="language-cpp">String name {};
 </code></pre>
-<h3 id="variable-row">variable row</h3>
-<pre><code class="language-cpp">uint64_t row {0};
+<h3 id="variable-line">variable line</h3>
+<pre><code class="language-cpp">int64_t line {0};
 </code></pre>
-<h3 id="variable-col">variable col</h3>
-<pre><code class="language-cpp">uint64_t col {0};
-</code></pre>
-<h3 id="variable-llvm_hint">variable llvm_hint</h3>
-<pre><code class="language-cpp">String llvm_hint;
-</code></pre>
-<h3 id="variable-frontend_hint">variable frontend_hint</h3>
-<pre><code class="language-cpp">String frontend_hint;
+<h3 id="variable-column">variable column</h3>
+<pre><code class="language-cpp">int64_t column {0};
 </code></pre>
 <hr />
-<p>Updated on 24 March 2022 at 12:26:42 UTC</p></div>
+<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
 </div>
           </div>
         </main>

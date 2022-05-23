@@ -596,6 +596,7 @@
 // Licensed under the MIT License.
 
 #include &quot;Commandline/ConfigurationManager.hpp&quot;
+#include &quot;PreTransformValidation/PreTransformValidationPassConfiguration.hpp&quot;
 #include &quot;Profile/Profile.hpp&quot;
 #include &quot;QatTypes/QatTypes.hpp&quot;
 
@@ -620,6 +621,8 @@ namespace quantum
         using SetupFunctionWrapper = std::function&lt;void(ProfileGenerator*, Profile&amp;)&gt;;
 
         using Components = std::vector&lt;std::pair&lt;String, SetupFunctionWrapper&gt;&gt;;
+
+        using ILoggerPtr = ILogger::ILoggerPtr;
 
         // Construction, moves and copies
         //
@@ -667,6 +670,8 @@ namespace quantum
 
         void setupDefaultComponentPipeline();
 
+        void setLogger(ILoggerPtr const&amp; logger = nullptr);
+
       protected:
         llvm::ModulePassManager createGenerationModulePassManager(
             Profile&amp;                 profile,
@@ -679,6 +684,7 @@ namespace quantum
             bool                     debug);
 
       private:
+        ILoggerPtr           logger_{nullptr};       
         ConfigurationManager configuration_manager_; 
         Components           components_;            
 
@@ -755,7 +761,7 @@ namespace quantum
 } // namespace microsoft
 </code></pre>
 <hr />
-<p>Updated on 24 March 2022 at 12:26:42 UTC</p></div>
+<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
 </div>
           </div>
         </main>
