@@ -7,12 +7,12 @@
      
     <meta name="author" content="troels" />
      
-    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/" />
+    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_post_transform_validation_pass_configuration/" />
      
     <link rel="shortcut icon" href="../../../img/favicon.ico" />
     
     <title>
-      microsoft::quantum::PreTransformValidationPass - QAT Documentation
+      microsoft::quantum::PostTransformValidationPassConfiguration - QAT Documentation
     </title>
     <link href="../../../css/styles.css" rel="stylesheet" />
     <link href="../../../css/font-awesome.min.css" rel="stylesheet" />
@@ -553,13 +553,12 @@
       <span
         class="mt-2 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex flex-row justify-center"
       >
-        <span class="text-center"> microsoft::quantum::PreTransformValidationPass </span>
+        <span class="text-center"> microsoft::quantum::PostTransformValidationPassConfiguration </span>
       </span>
     </h1>
     
   </div>
-  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="microsoftquantumpretransformvalidationpass">microsoft::quantum::PreTransformValidationPass</h1>
-<p>Inherits from llvm::PassInfoMixin&lt; PreTransformValidationPass &gt;</p>
+  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="microsoftquantumposttransformvalidationpassconfiguration">microsoft::quantum::PostTransformValidationPassConfiguration</h1>
 <h2 id="public-types">Public Types</h2>
 <table>
 <thead>
@@ -570,24 +569,8 @@
 </thead>
 <tbody>
 <tr>
-<td>using llvm::Instruction</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#using-instruction">Instruction</a></strong></td>
-</tr>
-<tr>
-<td>using llvm::Value</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#using-value">Value</a></strong></td>
-</tr>
-<tr>
-<td>using ILogger::ILoggerPtr</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#using-iloggerptr">ILoggerPtr</a></strong></td>
-</tr>
-<tr>
-<td>using <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_i_logger_1_1_location/">ILogger::Location</a></td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#using-location">Location</a></strong></td>
-</tr>
-<tr>
-<td>using llvm::StringRef</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#using-stringref">StringRef</a></strong></td>
+<td>using DeferredValue::DeferredValuePtr</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_post_transform_validation_pass_configuration/#using-deferredvalueptr">DeferredValuePtr</a></strong></td>
 </tr>
 </tbody>
 </table>
@@ -601,82 +584,37 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#function-pretransformvalidationpass">PreTransformValidationPass</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass_configuration/">PreTransformValidationPassConfiguration</a> const &amp; cfg, ILoggerPtr const &amp; logger =nullptr)</td>
-</tr>
-<tr>
-<td></td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#function-pretransformvalidationpass">PreTransformValidationPass</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/">PreTransformValidationPass</a> const &amp; )<br>Copy construction is banned.</td>
-</tr>
-<tr>
-<td></td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#function-pretransformvalidationpass">PreTransformValidationPass</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/">PreTransformValidationPass</a> &amp;&amp; ) =default<br>We allow move semantics.</td>
-</tr>
-<tr>
-<td></td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#function-~pretransformvalidationpass">~PreTransformValidationPass</a></strong>() =default<br>Default destruction.</td>
-</tr>
-<tr>
-<td>llvm::PreservedAnalyses</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#function-run">run</a></strong>(llvm::Module &amp; module, llvm::ModuleAnalysisManager &amp; mam)</td>
+<td>void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_post_transform_validation_pass_configuration/#function-setup">setup</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_configuration_manager/">ConfigurationManager</a> &amp; config)</td>
 </tr>
 <tr>
 <td>bool</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass/#function-isrequired">isRequired</a></strong>()<br>Whether or not this pass is required to run.</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_post_transform_validation_pass_configuration/#function-requirestraightlinecode">requireStraightLineCode</a></strong>() const</td>
+</tr>
+<tr>
+<td><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_post_transform_validation_pass_configuration/">PostTransformValidationPassConfiguration</a></td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_post_transform_validation_pass_configuration/#function-createdisabled">createDisabled</a></strong>()</td>
 </tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="using-instruction">using Instruction</h3>
-<pre><code class="language-cpp">using microsoft::quantum::PreTransformValidationPass::Instruction =  llvm::Instruction;
-</code></pre>
-<h3 id="using-value">using Value</h3>
-<pre><code class="language-cpp">using microsoft::quantum::PreTransformValidationPass::Value =  llvm::Value;
-</code></pre>
-<h3 id="using-iloggerptr">using ILoggerPtr</h3>
-<pre><code class="language-cpp">using microsoft::quantum::PreTransformValidationPass::ILoggerPtr =  ILogger::ILoggerPtr;
-</code></pre>
-<h3 id="using-location">using Location</h3>
-<pre><code class="language-cpp">using microsoft::quantum::PreTransformValidationPass::Location =  ILogger::Location;
-</code></pre>
-<h3 id="using-stringref">using StringRef</h3>
-<pre><code class="language-cpp">using microsoft::quantum::PreTransformValidationPass::StringRef =  llvm::StringRef;
+<h3 id="using-deferredvalueptr">using DeferredValuePtr</h3>
+<pre><code class="language-cpp">using microsoft::quantum::PostTransformValidationPassConfiguration::DeferredValuePtr =  DeferredValue::DeferredValuePtr;
 </code></pre>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-pretransformvalidationpass">function PreTransformValidationPass</h3>
-<pre><code class="language-cpp">explicit PreTransformValidationPass(
-    PreTransformValidationPassConfiguration const &amp; cfg,
-    ILoggerPtr const &amp; logger =nullptr
+<h3 id="function-setup">function setup</h3>
+<pre><code class="language-cpp">inline void setup(
+    ConfigurationManager &amp; config
 )
 </code></pre>
-<h3 id="function-pretransformvalidationpass_1">function PreTransformValidationPass</h3>
-<pre><code class="language-cpp">PreTransformValidationPass(
-    PreTransformValidationPass const &amp; 
-)
+<h3 id="function-requirestraightlinecode">function requireStraightLineCode</h3>
+<pre><code class="language-cpp">inline bool requireStraightLineCode() const
 </code></pre>
-<p>Copy construction is banned. </p>
-<h3 id="function-pretransformvalidationpass_2">function PreTransformValidationPass</h3>
-<pre><code class="language-cpp">PreTransformValidationPass(
-    PreTransformValidationPass &amp;&amp; 
-) =default
+<h3 id="function-createdisabled">function createDisabled</h3>
+<pre><code class="language-cpp">static inline PostTransformValidationPassConfiguration createDisabled()
 </code></pre>
-<p>We allow move semantics. </p>
-<h3 id="function-pretransformvalidationpass_3">function ~PreTransformValidationPass</h3>
-<pre><code class="language-cpp">~PreTransformValidationPass() =default
-</code></pre>
-<p>Default destruction. </p>
-<h3 id="function-run">function run</h3>
-<pre><code class="language-cpp">llvm::PreservedAnalyses run(
-    llvm::Module &amp; module,
-    llvm::ModuleAnalysisManager &amp; mam
-)
-</code></pre>
-<h3 id="function-isrequired">function isRequired</h3>
-<pre><code class="language-cpp">static bool isRequired()
-</code></pre>
-<p>Whether or not this pass is required to run. </p>
 <hr />
-<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
+<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
 </div>
           </div>
         </main>

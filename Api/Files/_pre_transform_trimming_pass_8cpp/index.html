@@ -7,12 +7,12 @@
      
     <meta name="author" content="troels" />
      
-    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Namespaces/namespacemicrosoft_1_1quantum_1_1_0d42/" />
+    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Files/_pre_transform_trimming_pass_8cpp/" />
      
     <link rel="shortcut icon" href="../../../img/favicon.ico" />
     
     <title>
-      microsoft::quantum::@42 - QAT Documentation
+      PreTransformTrimming/PreTransformTrimmingPass.cpp - QAT Documentation
     </title>
     <link href="../../../css/styles.css" rel="stylesheet" />
     <link href="../../../css/font-awesome.min.css" rel="stylesheet" />
@@ -220,7 +220,7 @@
                 >
                 <a
                   class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                  href="../"
+                  href="../../Namespaces/"
                   >Namespaces</a
                 >
                 <a
@@ -230,7 +230,7 @@
                 >
                 <a
                   class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                  href="../../Files/"
+                  href="../"
                   >Files</a
                 >
                 <a
@@ -403,7 +403,7 @@
               >
               <a
                 class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                href="../"
+                href="../../Namespaces/"
                 >Namespaces</a
               >
               <a
@@ -413,7 +413,7 @@
               >
               <a
                 class=" hover:bg-gray-700 text-gray-300 hover:text-white group flex items-center px-2 py-4 text-sm font-medium rounded"
-                href="../../Files/"
+                href="../"
                 >Files</a
               >
               <a
@@ -553,14 +553,94 @@
       <span
         class="mt-2 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex flex-row justify-center"
       >
-        <span class="text-center"> microsoft::quantum::@42 </span>
+        <span class="text-center"> PreTransformTrimming/PreTransformTrimmingPass.cpp </span>
       </span>
     </h1>
     
   </div>
-  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="microsoftquantum42">microsoft::quantum::@42</h1>
+  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="pretransformtrimmingpretransformtrimmingpasscpp">PreTransformTrimming/PreTransformTrimmingPass.cpp</h1>
+<h2 id="namespaces">Namespaces</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="/qat/Api/Namespaces/namespacemicrosoft/">microsoft</a></strong></td>
+</tr>
+<tr>
+<td><strong><a href="/qat/Api/Namespaces/namespacemicrosoft_1_1quantum/">microsoft::quantum</a></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="source-code">Source code</h2>
+<pre><code class="language-cpp">// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+#include &quot;PreTransformTrimming/PreTransformTrimmingPass.hpp&quot;
+
+#include &quot;Llvm/Llvm.hpp&quot;
+
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+
+namespace microsoft
+{
+namespace quantum
+{
+
+    PreTransformTrimmingPass::PreTransformTrimmingPass(
+        PreTransformTrimmingPassConfiguration const&amp; cfg,
+        ILoggerPtr const&amp;                            logger)
+      : config_{cfg}
+      , logger_{logger}
+    {
+    }
+
+    llvm::PreservedAnalyses PreTransformTrimmingPass::run(llvm::Module&amp; module, llvm::ModuleAnalysisManager&amp; /*mam*/)
+    {
+
+        std::vector&lt;llvm::Function*&gt; deletables;
+        auto                         entry_point_attr = config_.entryPointAttr();
+        for (auto&amp; function : module)
+        {
+
+            if (function.isDeclaration())
+            {
+                continue;
+            }
+
+            if (function.hasFnAttribute(entry_point_attr))
+            {
+                continue;
+            }
+
+            deletables.push_back(&amp;function);
+        }
+
+        for (auto&amp; x : deletables)
+        {
+            if (x-&gt;use_empty())
+            {
+                x-&gt;eraseFromParent();
+            }
+        }
+
+        return llvm::PreservedAnalyses::none();
+    }
+
+    bool PreTransformTrimmingPass::isRequired()
+    {
+        return true;
+    }
+
+} // namespace quantum
+} // namespace microsoft
+</code></pre>
 <hr />
-<p>Updated on 23 May 2022 at 13:43:00 UTC</p></div>
+<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
 </div>
           </div>
         </main>

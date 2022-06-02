@@ -7,12 +7,12 @@
      
     <meta name="author" content="troels" />
      
-    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Files/_pre_transform_validation_pass_configuration_8hpp/" />
+    <link rel="canonical" href="https://qir-alliance.github.io/qat/Api/Files/_post_transform_validation_pass_8hpp/" />
      
     <link rel="shortcut icon" href="../../../img/favicon.ico" />
     
     <title>
-      PreTransformValidation/PreTransformValidationPassConfiguration.hpp - QAT Documentation
+      PostTransformValidation/PostTransformValidationPass.hpp - QAT Documentation
     </title>
     <link href="../../../css/styles.css" rel="stylesheet" />
     <link href="../../../css/font-awesome.min.css" rel="stylesheet" />
@@ -553,12 +553,12 @@
       <span
         class="mt-2 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex flex-row justify-center"
       >
-        <span class="text-center"> PreTransformValidation/PreTransformValidationPassConfiguration.hpp </span>
+        <span class="text-center"> PostTransformValidation/PostTransformValidationPass.hpp </span>
       </span>
     </h1>
     
   </div>
-  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="pretransformvalidationpretransformvalidationpassconfigurationhpp">PreTransformValidation/PreTransformValidationPassConfiguration.hpp</h1>
+  <div class="mt-6 text-gray-500 mx-auto blog-lg blog"><h1 id="posttransformvalidationposttransformvalidationpasshpp">PostTransformValidation/PostTransformValidationPass.hpp</h1>
 <h2 id="namespaces">Namespaces</h2>
 <table>
 <thead>
@@ -586,7 +586,7 @@
 <tbody>
 <tr>
 <td>class</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_pre_transform_validation_pass_configuration/">microsoft::quantum::PreTransformValidationPassConfiguration</a></strong></td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_post_transform_validation_pass/">microsoft::quantum::PostTransformValidationPass</a></strong></td>
 </tr>
 </tbody>
 </table>
@@ -595,53 +595,60 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Commandline/ConfigurationManager.hpp&quot;
+#include &quot;Logging/ILogger.hpp&quot;
+#include &quot;PostTransformValidation/PostTransformValidationPass.hpp&quot;
+#include &quot;PostTransformValidation/PostTransformValidationPassConfiguration.hpp&quot;
+#include &quot;Profile/Profile.hpp&quot;
+#include &quot;QatTypes/QatTypes.hpp&quot;
 
-#include &lt;limits&gt;
+#include &quot;Llvm/Llvm.hpp&quot;
+
+#include &lt;functional&gt;
+#include &lt;unordered_map&gt;
+#include &lt;vector&gt;
 
 namespace microsoft
 {
 namespace quantum
 {
 
-    class PreTransformValidationPassConfiguration
+    class PostTransformValidationPass : public llvm::PassInfoMixin&lt;PostTransformValidationPass&gt;
     {
       public:
-        using DeferredValuePtr = DeferredValue::DeferredValuePtr;
+        using Instruction = llvm::Instruction;
+        using Value       = llvm::Value;
+        using ILoggerPtr  = ILogger::ILoggerPtr;
+        using Location    = ILogger::Location;
+        using StringRef   = llvm::StringRef;
 
-        void setup(ConfigurationManager&amp; config)
-        {
-            config.setSectionName(&quot;Pre-transform validation&quot;, &quot;&quot;);
-            replace_qubits_on_reset_ = config.getParameter(&quot;replace-qubit-on-reset&quot;);
-        }
+        // Construction and destruction configuration.
+        //
 
-        static PreTransformValidationPassConfiguration createDisabled()
-        {
-            PreTransformValidationPassConfiguration ret;
-            ret.disable_straightline_code_requirement_ = true;
-            return ret;
-        }
+        explicit PostTransformValidationPass(
+            PostTransformValidationPassConfiguration const&amp; cfg,
+            ILoggerPtr const&amp;                               logger = nullptr);
 
-        bool requireStraightLineCode() const
-        {
-            if (disable_straightline_code_requirement_)
-            {
-                return false;
-            }
+        PostTransformValidationPass(PostTransformValidationPass const&amp;) = delete;
 
-            return replace_qubits_on_reset_-&gt;value&lt;bool&gt;();
-        }
+        PostTransformValidationPass(PostTransformValidationPass&amp;&amp;) = default;
+
+        ~PostTransformValidationPass() = default;
+
+        llvm::PreservedAnalyses run(llvm::Module&amp; module, llvm::ModuleAnalysisManager&amp; mam);
+        static bool isRequired();
 
       private:
-        bool             disable_straightline_code_requirement_{false};
-        DeferredValuePtr replace_qubits_on_reset_{nullptr};
+        using Locations = std::vector&lt;Location&gt;;
+
+        PostTransformValidationPassConfiguration config_{};
+        ILoggerPtr                               logger_{nullptr};
     };
 
 } // namespace quantum
 } // namespace microsoft
 </code></pre>
 <hr />
-<p>Updated on 23 May 2022 at 13:43:01 UTC</p></div>
+<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
 </div>
           </div>
         </main>
