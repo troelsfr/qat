@@ -595,47 +595,44 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Logging/ILogger.hpp&quot;
-#include &quot;Logging/SourceLocation.hpp&quot;
+#include &quot;qir/qat/Logging/ILogger.hpp&quot;
+#include &quot;qir/qat/Logging/SourceLocation.hpp&quot;
 
 #include &lt;vector&gt;
 
-namespace microsoft
-{
-namespace quantum
+namespace microsoft::quantum
 {
 
-    class CommentLogger : public ILogger
-    {
-      public:
-        // Interface implementation
-        //
+class CommentLogger : public ILogger
+{
+  public:
+    // Interface implementation
+    //
 
-        void debug(String const&amp; message) override;
+    void debug(String const&amp; message) override;
 
-        void info(String const&amp; message) override;
+    void info(String const&amp; message) override;
 
-        void warning(String const&amp; message) override;
+    void warning(String const&amp; message) override;
 
-        void error(String const&amp; message) override;
+    void error(String const&amp; message) override;
 
-        void internalError(String const&amp; message) override;
+    void internalError(String const&amp; message) override;
 
-        void setLocation(SourceLocation const&amp; loc) override;
+    void setLocation(SourceLocation const&amp; loc) override;
 
-        void setLlvmHint(String const&amp; value) override;
+    void setLlvmHint(String const&amp; value) override;
 
-        void setFrontendHint(String const&amp; value) override;
+    void setFrontendHint(String const&amp; value) override;
 
-      private:
-        SourceLocation location_;
-    };
+  private:
+    SourceLocation location_;
+};
 
-} // namespace quantum
-} // namespace microsoft
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

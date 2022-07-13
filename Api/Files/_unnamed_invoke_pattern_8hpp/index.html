@@ -595,49 +595,45 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Rules/IOperandPrototype.hpp&quot;
-
-#include &quot;Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Rules/IOperandPrototype.hpp&quot;
 
 #include &lt;unordered_map&gt;
 #include &lt;vector&gt;
 
-namespace microsoft
-{
-namespace quantum
+namespace microsoft::quantum
 {
 
-    class UnnamedInvokePattern : public IOperandPrototype
-    {
-      public:
-        using String = std::string;
+class UnnamedInvokePattern : public IOperandPrototype
+{
+  public:
+    using String = std::string;
 
-        // Construction
-        //
+    // Construction
+    //
 
-        UnnamedInvokePattern() = default;
+    UnnamedInvokePattern() = default;
 
-        UnnamedInvokePattern(UnnamedInvokePattern const&amp; other) = delete;
+    UnnamedInvokePattern(UnnamedInvokePattern const&amp; other) = delete;
 
-        UnnamedInvokePattern(UnnamedInvokePattern&amp;&amp; other) = default;
+    UnnamedInvokePattern(UnnamedInvokePattern&amp;&amp; other) = default;
 
-        ~UnnamedInvokePattern() override;
+    ~UnnamedInvokePattern() override;
 
-        // Call implementation of the member functions in IOperandPrototype.
-        //
+    // Call implementation of the member functions in IOperandPrototype.
+    //
 
-        bool match(Value* instr, Captures&amp; captures) const override;
+    bool match(Value* instr, Captures&amp; captures) const override;
 
-        Child copy() const override;
+    Child copy() const override;
 
-      private:
-    };
+  private:
+};
 
-} // namespace quantum
-} // namespace microsoft
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

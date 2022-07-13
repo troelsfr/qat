@@ -595,61 +595,66 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Commandline/ConfigurationManager.hpp&quot;
-#include &quot;QatTypes/QatTypes.hpp&quot;
+#include &quot;qir/qat/Commandline/ConfigurationManager.hpp&quot;
+#include &quot;qir/qat/QatTypes/QatTypes.hpp&quot;
 
-namespace microsoft
-{
-namespace quantum
+namespace microsoft::quantum
 {
 
-    class StaticResourceComponentConfiguration
-    {
-      public:
-        using Set = std::unordered_set&lt;std::string&gt;;
-        // Setup and construction
-        //
+class StaticResourceComponentConfiguration
+{
+  public:
+    using Set = std::unordered_set&lt;std::string&gt;;
+    // Setup and construction
+    //
 
-        StaticResourceComponentConfiguration() = default;
+    StaticResourceComponentConfiguration() = default;
 
-        void setup(ConfigurationManager&amp; config);
+    void setup(ConfigurationManager&amp; config);
 
-        bool shouldAnnotateQubitUse() const;
+    bool shouldAnnotateQubitUse() const;
 
-        bool shouldAnnotateResultUse() const;
+    bool shouldAnnotateResultUse() const;
 
-        bool shouldAnnotateMaxQubitIndex() const;
+    bool shouldAnnotateMaxQubitIndex() const;
 
-        bool shouldAnnotateMaxResultIndex() const;
+    bool shouldAnnotateMaxResultIndex() const;
 
-        bool shouldReplaceQubitsOnReset() const;
+    bool shouldReplaceQubitsOnReset() const;
 
-        bool shouldReindexQubits() const;
+    bool shouldReindexQubits() const;
 
-        bool shouldInlineAfterIdChange() const;
+    bool shouldInlineAfterIdChange() const;
 
-        bool isChangingIds() const;
+    bool isChangingIds() const;
 
-        static StaticResourceComponentConfiguration createDisabled();
+    static StaticResourceComponentConfiguration createDisabled();
 
-      protected:
-        bool annotate_qubit_use_{true};
-        bool annotate_result_use_{true};
+    void enableAnnotateQubitUse();
+    void enableAnnotateResultUse();
+    void enableAnnotateMaxQubitIndex();
+    void enableAnnotateMaxResultIndex();
+    void enableReplaceQubitOnReset();
+    void enableReindexQubits();
+    void enableInlineAfterIdChange();
 
-        bool annotate_max_qubit_index_{true};
-        bool annotate_max_result_index_{true};
+  private:
+    bool annotate_qubit_use_{true};
+    bool annotate_result_use_{true};
 
-        bool replace_qubit_on_reset_{false};
-        bool reindex_qubits_{false};
+    bool annotate_max_qubit_index_{true};
+    bool annotate_max_result_index_{true};
 
-        bool inline_after_id_change_{true};
-    };
+    bool replace_qubit_on_reset_{false};
+    bool reindex_qubits_{false};
 
-} // namespace quantum
-} // namespace microsoft
+    bool inline_after_id_change_{true};
+};
+
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

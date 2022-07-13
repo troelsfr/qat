@@ -595,92 +595,93 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Commandline/ConfigurationManager.hpp&quot;
+#include &quot;qir/qat/Commandline/ConfigurationManager.hpp&quot;
 
 #include &lt;limits&gt;
 
-namespace microsoft
-{
-namespace quantum
+namespace microsoft::quantum
 {
 
-    class LlvmPassesConfiguration
+class LlvmPassesConfiguration
+{
+  public:
+    void setup(ConfigurationManager&amp; config);
+
+    bool alwaysInline() const;
+
+    bool unrollLoops() const;
+
+    int32_t inlineParameter() const;
+
+    bool unrollAllowPartial() const;
+
+    bool unrollAllowPeeling() const;
+
+    bool unrollAllowRuntime() const;
+
+    bool unrollAllowUpperBound() const;
+
+    bool unrollAllowProfilBasedPeeling() const;
+
+    uint64_t unrolFullUnrollCount() const;
+
+    int32_t unrollOptLevel() const;
+
+    bool unrollOnlyWhenForced() const;
+
+    bool unrollForgeScev() const;
+
+    bool eliminateConstants() const;
+
+    bool eliminateDeadCode() const;
+
+    bool eliminateMemory() const;
+
+    // Configuration classification
+
+    bool isDisabled() const;
+
+    bool operator==(LlvmPassesConfiguration const&amp; o) const
     {
-      public:
-        void setup(ConfigurationManager&amp; config);
+        return always_inline_ == o.always_inline_ &amp;&amp; inline_parameter_ == o.inline_parameter_ &amp;&amp;
+               unroll_loops_ == o.unroll_loops_ &amp;&amp; unroll_allow_partial_ == o.unroll_allow_partial_ &amp;&amp;
+               unroll_allow_peeling_ == o.unroll_allow_peeling_ &amp;&amp; unroll_allow_runtime_ == o.unroll_allow_runtime_ &amp;&amp;
+               unroll_allow_upper_bound_ == o.unroll_allow_upper_bound_ &amp;&amp;
+               unroll_allow_profile_based_peeling_ == o.unroll_allow_profile_based_peeling_ &amp;&amp;
+               unroll_full_unroll_count_ == o.unroll_full_unroll_count_ &amp;&amp; unroll_opt_level_ == o.unroll_opt_level_ &amp;&amp;
+               unroll_only_when_forced_ == o.unroll_only_when_forced_ &amp;&amp; unroll_forget_scev_ == o.unroll_forget_scev_ &amp;&amp;
+               eliminate_constants_ == o.eliminate_constants_ &amp;&amp; eliminate_dead_code_ == o.eliminate_dead_code_ &amp;&amp;
+               eliminate_memory_ == o.eliminate_memory_;
+    }
 
-        bool alwaysInline() const;
+    static LlvmPassesConfiguration createDisabled();
 
-        bool unrollLoops() const;
+    static LlvmPassesConfiguration createUnrollInline();
 
-        int32_t inlineParameter() const;
+  private:
+    bool    always_inline_{false};
+    int32_t inline_parameter_{std::numeric_limits&lt;int32_t&gt;::max()};
 
-        bool unrollAllowPartial() const;
+    bool     unroll_loops_{false};
+    bool     unroll_allow_partial_{true};
+    bool     unroll_allow_peeling_{true};
+    bool     unroll_allow_runtime_{true};
+    bool     unroll_allow_upper_bound_{true};
+    bool     unroll_allow_profile_based_peeling_{true};
+    uint64_t unroll_full_unroll_count_{1024};
+    int32_t  unroll_opt_level_{3};
+    bool     unroll_only_when_forced_{false};
+    bool     unroll_forget_scev_{false};
 
-        bool unrollAllowPeeling() const;
+    bool eliminate_constants_{true};
+    bool eliminate_dead_code_{true};
+    bool eliminate_memory_{true};
+};
 
-        bool unrollAllowRuntime() const;
-
-        bool unrollAllowUpperBound() const;
-
-        bool unrollAllowProfilBasedPeeling() const;
-
-        uint64_t unrolFullUnrollCount() const;
-
-        int32_t unrollOptLevel() const;
-
-        bool unrollOnlyWhenForced() const;
-
-        bool unrollForgeScev() const;
-
-        bool useLlvmOptPipeline() const;
-
-        String optPipelineConfig() const;
-
-        bool eliminateConstants() const;
-
-        bool eliminateDeadCode() const;
-
-        bool eliminateMemory() const;
-
-        // Configuration classification
-
-        bool isDisabled() const;
-
-        bool operator==(LlvmPassesConfiguration const&amp; o) const = default;
-
-        static LlvmPassesConfiguration createDisabled();
-
-        static LlvmPassesConfiguration createUnrollInline();
-
-      private:
-        bool    always_inline_{false};
-        int32_t inline_parameter_{std::numeric_limits&lt;int32_t&gt;::max()};
-
-        bool     unroll_loops_{false};
-        bool     unroll_allow_partial_{true};
-        bool     unroll_allow_peeling_{true};
-        bool     unroll_allow_runtime_{true};
-        bool     unroll_allow_upper_bound_{true};
-        bool     unroll_allow_profile_based_peeling_{true};
-        uint64_t unroll_full_unroll_count_{1024};
-        int32_t  unroll_opt_level_{3};
-        bool     unroll_only_when_forced_{false};
-        bool     unroll_forget_scev_{false};
-
-        bool eliminate_constants_{true};
-        bool eliminate_dead_code_{true};
-        bool eliminate_memory_{true};
-
-        bool   use_llvm_opt_pipeline_{false};
-        String opt_pipeline_config_{&quot;&quot;};
-    };
-
-} // namespace quantum
-} // namespace microsoft
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

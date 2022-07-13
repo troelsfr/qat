@@ -579,31 +579,29 @@
 <pre><code class="language-cpp">// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Rules/IOperandPrototype.hpp&quot;
-#include &quot;Rules/Patterns/AnyPattern.hpp&quot;
+#include &quot;qir/qat/Rules/Patterns/AnyPattern.hpp&quot;
 
-namespace microsoft
+#include &quot;qir/qat/Rules/IOperandPrototype.hpp&quot;
+
+namespace microsoft::quantum
 {
-namespace quantum
+
+AnyPattern::AnyPattern()  = default;
+AnyPattern::~AnyPattern() = default;
+bool AnyPattern::match(Value* instr, Captures&amp; captures) const
 {
+    return success(instr, captures);
+}
 
-    AnyPattern::AnyPattern()  = default;
-    AnyPattern::~AnyPattern() = default;
-    bool AnyPattern::match(Value* instr, Captures&amp; captures) const
-    {
-        return success(instr, captures);
-    }
+AnyPattern::Child AnyPattern::copy() const
+{
+    return std::make_shared&lt;AnyPattern&gt;();
+}
 
-    AnyPattern::Child AnyPattern::copy() const
-    {
-        return std::make_shared&lt;AnyPattern&gt;();
-    }
-
-} // namespace quantum
-} // namespace microsoft
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

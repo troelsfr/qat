@@ -595,46 +595,42 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Commandline/ConfigurationManager.hpp&quot;
-#include &quot;Generators/LlvmPassesConfiguration.hpp&quot;
-#include &quot;Generators/ProfileGenerator.hpp&quot;
-#include &quot;Rules/FactoryConfig.hpp&quot;
-#include &quot;Rules/RuleSet.hpp&quot;
-#include &quot;TransformationRulesPass/TransformationRulesPassConfiguration.hpp&quot;
+#include &quot;qir/qat/Commandline/ConfigurationManager.hpp&quot;
+#include &quot;qir/qat/Generators/LlvmPassesConfiguration.hpp&quot;
+#include &quot;qir/qat/Generators/ProfileGenerator.hpp&quot;
+#include &quot;qir/qat/Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Rules/FactoryConfig.hpp&quot;
+#include &quot;qir/qat/Rules/RuleSet.hpp&quot;
+#include &quot;qir/qat/TransformationRulesPass/TransformationRulesPassConfiguration.hpp&quot;
 
-#include &quot;Llvm/Llvm.hpp&quot;
-
-namespace microsoft
-{
-namespace quantum
+namespace microsoft::quantum
 {
 
-    class ConfigurableProfileGenerator : public ProfileGenerator
-    {
-      public:
-        using ConfigureFunction = std::function&lt;void(RuleSet&amp;)&gt;; 
+class ConfigurableProfileGenerator : public ProfileGenerator
+{
+  public:
+    using ConfigureFunction = std::function&lt;void(RuleSet&amp;)&gt;; 
 
-        ConfigurableProfileGenerator();
+    ConfigurableProfileGenerator();
 
-        explicit ConfigurableProfileGenerator(
-            ConfigureFunction const&amp;                    configure,
-            TransformationRulesPassConfiguration const&amp; profile_pass_config =
-                TransformationRulesPassConfiguration::createDisabled(),
-            LlvmPassesConfiguration const&amp; llvm_config = LlvmPassesConfiguration::createDisabled());
+    explicit ConfigurableProfileGenerator(
+        ConfigureFunction const&amp;                    configure,
+        TransformationRulesPassConfiguration const&amp; profile_pass_config =
+            TransformationRulesPassConfiguration::createDisabled(),
+        LlvmPassesConfiguration const&amp; llvm_config = LlvmPassesConfiguration::createDisabled());
 
-        // Shorthand notation to access configurations
-        //
+    // Shorthand notation to access configurations
+    //
 
-        TransformationRulesPassConfiguration const&amp; ruleTransformationConfig() const;
+    TransformationRulesPassConfiguration const&amp; ruleTransformationConfig() const;
 
-        LlvmPassesConfiguration const&amp; llvmPassesConfig() const;
-    };
+    LlvmPassesConfiguration const&amp; llvmPassesConfig() const;
+};
 
-} // namespace quantum
-} // namespace microsoft
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

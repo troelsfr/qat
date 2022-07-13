@@ -579,77 +579,74 @@
 <pre><code class="language-cpp">// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;StaticResourceComponent/AllocationAnalysisPass.hpp&quot;
-#include &quot;StaticResourceComponent/ResourceAnnotationPass.hpp&quot;
+#include &quot;qir/qat/StaticResourceComponent/ResourceAnnotationPass.hpp&quot;
 
-#include &quot;Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/StaticResourceComponent/AllocationAnalysisPass.hpp&quot;
 
 #include &lt;fstream&gt;
 #include &lt;iostream&gt;
 
-namespace microsoft
-{
-namespace quantum
+namespace microsoft::quantum
 {
 
-    ResourceAnnotationPass::ResourceAnnotationPass(
-        StaticResourceComponentConfiguration const&amp; cfg,
-        ILoggerPtr const&amp;                           logger)
-      : config_{cfg}
-      , logger_{logger}
+ResourceAnnotationPass::ResourceAnnotationPass(
+    StaticResourceComponentConfiguration const&amp; cfg,
+    ILoggerPtr const&amp;                           logger)
+  : config_{cfg}
+  , logger_{logger}
+{
+}
+
+llvm::PreservedAnalyses ResourceAnnotationPass::run(llvm::Function&amp; function, llvm::FunctionAnalysisManager&amp; fam)
+{
+    if (!config_.shouldAnnotateResultUse() &amp;&amp; !config_.shouldAnnotateQubitUse())
     {
+        return llvm::PreservedAnalyses::all();
     }
 
-    llvm::PreservedAnalyses ResourceAnnotationPass::run(llvm::Function&amp; function, llvm::FunctionAnalysisManager&amp; fam)
+    auto stats = fam.getResult&lt;AllocationAnalysisPass&gt;(function);
+
+    if (config_.shouldAnnotateQubitUse())
     {
-        if (!config_.shouldAnnotateResultUse() &amp;&amp; !config_.shouldAnnotateQubitUse())
-        {
-            return;
-        }
-
-        auto stats = fam.getResult&lt;AllocationAnalysisPass&gt;(function);
-
-        if (config_.shouldAnnotateQubitUse())
-        {
-            std::stringstream ss{&quot;&quot;};
-            ss &lt;&lt; stats.usage_qubit_counts;
-            function.addFnAttr(&quot;requiredQubits&quot;, ss.str());
-        }
-
-        if (config_.shouldAnnotateMaxQubitIndex())
-        {
-            std::stringstream ss{&quot;&quot;};
-            ss &lt;&lt; stats.largest_qubit_index;
-            function.addFnAttr(&quot;maxQubitIndex&quot;, ss.str());
-        }
-
-        if (config_.shouldAnnotateResultUse())
-        {
-            std::stringstream ss{&quot;&quot;};
-            ss &lt;&lt; stats.usage_result_counts;
-            function.addFnAttr(&quot;requiredResults&quot;, ss.str());
-        }
-
-        if (config_.shouldAnnotateMaxResultIndex())
-        {
-            std::stringstream ss{&quot;&quot;};
-            ss &lt;&lt; stats.largest_result_index;
-            function.addFnAttr(&quot;maxResultIndex&quot;, ss.str());
-        }
-
-        return llvm::PreservedAnalyses::none();
+        std::stringstream ss{&quot;&quot;};
+        ss &lt;&lt; stats.usage_qubit_counts;
+        function.addFnAttr(&quot;requiredQubits&quot;, ss.str());
     }
 
-    bool ResourceAnnotationPass::isRequired()
+    if (config_.shouldAnnotateMaxQubitIndex())
     {
-        return true;
+        std::stringstream ss{&quot;&quot;};
+        ss &lt;&lt; stats.largest_qubit_index;
+        function.addFnAttr(&quot;maxQubitIndex&quot;, ss.str());
     }
 
-} // namespace quantum
-} // namespace microsoft
+    if (config_.shouldAnnotateResultUse())
+    {
+        std::stringstream ss{&quot;&quot;};
+        ss &lt;&lt; stats.usage_result_counts;
+        function.addFnAttr(&quot;requiredResults&quot;, ss.str());
+    }
+
+    if (config_.shouldAnnotateMaxResultIndex())
+    {
+        std::stringstream ss{&quot;&quot;};
+        ss &lt;&lt; stats.largest_result_index;
+        function.addFnAttr(&quot;maxResultIndex&quot;, ss.str());
+    }
+
+    return llvm::PreservedAnalyses::none();
+}
+
+bool ResourceAnnotationPass::isRequired()
+{
+    return true;
+}
+
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

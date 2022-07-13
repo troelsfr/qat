@@ -599,99 +599,97 @@
 // Licensed under the MIT License.
 
 
-#include &quot;Rules/Notation/Call.hpp&quot;
-#include &quot;Rules/Notation/Call.ipp&quot;
-#include &quot;Rules/Notation/Phi.ipp&quot;
-#include &quot;Rules/Patterns/AnyPattern.hpp&quot;
-#include &quot;Rules/Patterns/CallPattern.hpp&quot;
-#include &quot;Rules/Patterns/Instruction.hpp&quot;
-#include &quot;Rules/Patterns/PhiPattern.hpp&quot;
-
-#include &quot;Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Rules/Notation/Call.hpp&quot;
+#include &quot;qir/qat/Rules/Notation/Call.ipp&quot;
+#include &quot;qir/qat/Rules/Notation/Phi.ipp&quot;
+#include &quot;qir/qat/Rules/Patterns/AnyPattern.hpp&quot;
+#include &quot;qir/qat/Rules/Patterns/CallPattern.hpp&quot;
+#include &quot;qir/qat/Rules/Patterns/Instruction.hpp&quot;
+#include &quot;qir/qat/Rules/Patterns/PhiPattern.hpp&quot;
 
 #include &lt;unordered_map&gt;
 #include &lt;vector&gt;
 
-namespace microsoft
+namespace microsoft::quantum
 {
-namespace quantum
+namespace notation
 {
-    namespace notation
+
+    using IOperandPrototypePtr = std::shared_ptr&lt;IOperandPrototype&gt;;
+    using ReplacerFunction     = std::function&lt;bool(
+        ReplacementRule::Builder&amp;,
+        ReplacementRule::Value*,
+        ReplacementRule::Captures&amp;,
+        ReplacementRule::Replacements&amp;)&gt;;
+
+    class Capture
     {
+      public:
+        explicit Capture(std::string const&amp; name);
 
-        using IOperandPrototypePtr = std::shared_ptr&lt;IOperandPrototype&gt;;
-        using ReplacerFunction     = std::function&lt;bool(
-            ReplacementRule::Builder&amp;,
-            ReplacementRule::Value*,
-            ReplacementRule::Captures&amp;,
-            ReplacementRule::Replacements&amp;)&gt;;
+        // Note that this operator is delibrately unconventional
+        IOperandPrototypePtr operator=(IOperandPrototypePtr const&amp; other); // NOLINT
 
-        class Capture
-        {
-          public:
-            explicit Capture(std::string const&amp; name);
-
-            // Note that this operator is delibrately unconventional
-            IOperandPrototypePtr operator=(IOperandPrototypePtr const&amp; other); // NOLINT
-
-          private:
-            std::string name_{}; 
-        };
+      private:
+        std::string name_{}; 
+    };
 
 
-        template &lt;typename... Args&gt; IOperandPrototypePtr call(std::string const&amp; name, Args... args);
+    template &lt;typename... Args&gt; IOperandPrototypePtr call(std::string const&amp; name, Args... args);
 
-        IOperandPrototypePtr unnamedInvoke();
+    IOperandPrototypePtr unnamedInvoke();
 
-        template &lt;typename... Args&gt; IOperandPrototypePtr phi(Args... args);
+    template &lt;typename... Args&gt; IOperandPrototypePtr phi(Args... args);
 
-        IOperandPrototypePtr callByNameOnly(std::string const&amp; name);
+    IOperandPrototypePtr callByNameOnly(std::string const&amp; name);
 
-        IOperandPrototypePtr bitCast(IOperandPrototypePtr const&amp; arg);
+    IOperandPrototypePtr bitCast(IOperandPrototypePtr const&amp; arg);
 
-        IOperandPrototypePtr intToPtr(IOperandPrototypePtr const&amp; arg);
+    IOperandPrototypePtr intToPtr(IOperandPrototypePtr const&amp; arg);
 
-        IOperandPrototypePtr constInt();
+    IOperandPrototypePtr constInt();
 
-        IOperandPrototypePtr branch(
-            IOperandPrototypePtr const&amp; cond,
-            IOperandPrototypePtr const&amp; arg1,
-            IOperandPrototypePtr const&amp; arg2);
+    IOperandPrototypePtr branch(
+        IOperandPrototypePtr const&amp; cond,
+        IOperandPrototypePtr const&amp; arg1,
+        IOperandPrototypePtr const&amp; arg2);
 
-        IOperandPrototypePtr switchOp(
-            IOperandPrototypePtr const&amp; cond,
-            IOperandPrototypePtr const&amp; arg1,
-            IOperandPrototypePtr const&amp; arg2);
+    IOperandPrototypePtr switchOp(
+        IOperandPrototypePtr const&amp; cond,
+        IOperandPrototypePtr const&amp; arg1,
+        IOperandPrototypePtr const&amp; arg2);
 
-        IOperandPrototypePtr select(
-            IOperandPrototypePtr const&amp; cond,
-            IOperandPrototypePtr const&amp; arg1,
-            IOperandPrototypePtr const&amp; arg2);
+    IOperandPrototypePtr select(
+        IOperandPrototypePtr const&amp; cond,
+        IOperandPrototypePtr const&amp; arg1,
+        IOperandPrototypePtr const&amp; arg2);
 
-        IOperandPrototypePtr load(IOperandPrototypePtr const&amp; arg);
+    IOperandPrototypePtr load(IOperandPrototypePtr const&amp; arg);
 
-        IOperandPrototypePtr store(IOperandPrototypePtr const&amp; target, IOperandPrototypePtr const&amp; value);
+    IOperandPrototypePtr zExt(IOperandPrototypePtr const&amp; value);
 
-        IOperandPrototypePtr basicBlock();
+    IOperandPrototypePtr store(IOperandPrototypePtr const&amp; target, IOperandPrototypePtr const&amp; value);
+
+    IOperandPrototypePtr basicBlock();
 
 
-        static std::shared_ptr&lt;AnyPattern&gt; const _ = std::make_shared&lt;AnyPattern&gt;(); // NOLINT
+    static std::shared_ptr&lt;AnyPattern&gt; const _ = std::make_shared&lt;AnyPattern&gt;(); // NOLINT
 
 
 
-        ReplacerFunction deleteInstruction();
+    ReplacerFunction deleteInstruction();
 
-        ReplacerFunction deleteUnusedInstruction();
+    ReplacerFunction deleteUnusedInstruction();
 
 
-        Capture operator&quot;&quot;_cap(char const* name, std::size_t);
+    Capture operator&quot;&quot;_cap(char const* name, std::size_t);
 
-    } // namespace notation
-} // namespace quantum
-} // namespace microsoft
+} // namespace notation
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

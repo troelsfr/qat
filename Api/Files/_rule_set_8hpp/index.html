@@ -595,79 +595,72 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;AllocationManager/IAllocationManager.hpp&quot;
-#include &quot;Rules/IOperandPrototype.hpp&quot;
-#include &quot;Rules/ReplacementRule.hpp&quot;
-
-#include &quot;Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/AllocationManager/IAllocationManager.hpp&quot;
+#include &quot;qir/qat/Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Rules/IOperandPrototype.hpp&quot;
+#include &quot;qir/qat/Rules/ReplacementRule.hpp&quot;
 
 #include &lt;memory&gt;
 #include &lt;vector&gt;
 
-namespace microsoft
-{
-namespace quantum
+namespace microsoft::quantum
 {
 
-    class RuleSet
+class RuleSet
+{
+  public:
+    using ReplacementRulePtr   = std::shared_ptr&lt;ReplacementRule&gt;;
+    using Rules                = std::vector&lt;ReplacementRulePtr&gt;;
+    using Replacements         = ReplacementRule::Replacements;
+    using Captures             = IOperandPrototype::Captures;
+    using Instruction          = llvm::Instruction;
+    using Value                = llvm::Value;
+    using Builder              = ReplacementRule::Builder;
+    using AllocationManagerPtr = IAllocationManager::AllocationManagerPtr;
+
+    enum ReplaceDirection
     {
-      public:
-        using ReplacementRulePtr   = std::shared_ptr&lt;ReplacementRule&gt;;
-        using Rules                = std::vector&lt;ReplacementRulePtr&gt;;
-        using Replacements         = ReplacementRule::Replacements;
-        using Captures             = IOperandPrototype::Captures;
-        using Instruction          = llvm::Instruction;
-        using Value                = llvm::Value;
-        using Builder              = ReplacementRule::Builder;
-        using AllocationManagerPtr = IAllocationManager::AllocationManagerPtr;
-
-        enum ReplaceDirection
-        {
-            ReplaceForwards,
-            ReplaceBackwards
-        };
-
-        // Constructors
-        //
-        RuleSet()               = default;
-        RuleSet(RuleSet const&amp;) = default;
-        RuleSet(RuleSet&amp;&amp;)      = default;
-        ~RuleSet()              = default;
-
-        // Operators
-        //
-
-        RuleSet&amp; operator=(RuleSet const&amp;) = default;
-        RuleSet&amp; operator=(RuleSet&amp;&amp;) = default;
-
-        // Operating rule sets
-        //
-
-        bool matchAndReplace(
-            Instruction*            value,
-            Replacements&amp;           replacements,
-            ReplaceDirection const&amp; dir = ReplaceForwards);
-
-        // Set up and configuration
-        //
-
-        void addRule(ReplacementRulePtr const&amp; rule, ReplaceDirection const&amp; dir = ReplaceForwards);
-        void addRule(ReplacementRule&amp;&amp; rule, ReplaceDirection const&amp; dir = ReplaceForwards);
-
-        void clear();
-
-        uint64_t size() const;
-
-      private:
-        Rules rules_;           
-        Rules rules_backwards_; 
+        ReplaceForwards,
+        ReplaceBackwards
     };
 
-} // namespace quantum
-} // namespace microsoft
+    // Constructors
+    //
+    RuleSet()               = default;
+    RuleSet(RuleSet const&amp;) = default;
+    RuleSet(RuleSet&amp;&amp;)      = default;
+    ~RuleSet()              = default;
+
+    // Operators
+    //
+
+    RuleSet&amp; operator=(RuleSet const&amp;) = default;
+    RuleSet&amp; operator=(RuleSet&amp;&amp;) = default;
+
+    // Operating rule sets
+    //
+
+    bool matchAndReplace(Instruction* value, Replacements&amp; replacements, ReplaceDirection const&amp; dir = ReplaceForwards);
+
+    // Set up and configuration
+    //
+
+    void addRule(ReplacementRulePtr const&amp; rule, ReplaceDirection const&amp; dir = ReplaceForwards);
+    void addRule(ReplacementRule&amp;&amp; rule, ReplaceDirection const&amp; dir = ReplaceForwards);
+
+    void clear();
+
+    uint64_t size() const;
+
+  private:
+    Rules rules_;           
+    Rules rules_backwards_; 
+};
+
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

@@ -599,75 +599,71 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;AllocationManager/IAllocationManager.hpp&quot;
-
-#include &quot;Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/AllocationManager/IAllocationManager.hpp&quot;
+#include &quot;qir/qat/Llvm/Llvm.hpp&quot;
 
 #include &lt;memory&gt;
 #include &lt;string&gt;
 #include &lt;unordered_map&gt;
 #include &lt;vector&gt;
 
-namespace microsoft
+namespace microsoft::quantum
 {
-namespace quantum
+class BasicAllocationManager : public IAllocationManager
 {
-    class BasicAllocationManager : public IAllocationManager
+  public:
+    struct AllocatedMemoryBlock
     {
-      public:
-        struct AllocatedMemoryBlock
-        {
-            String  name{&quot;&quot;}; 
-            Index   count{0}; 
-            Address start{0}; 
-            Address end{0};   
-        };
-
-        using Mappings                  = std::vector&lt;AllocatedMemoryBlock&gt;;       
-        using BasicAllocationManagerPtr = std::shared_ptr&lt;BasicAllocationManager&gt;; 
-
-        // Construction only allowed using smart pointer allocation through static functions.
-        // Constructors are private to prevent
-        //
-
-        static BasicAllocationManagerPtr createNew();
-
-        // Allocation and release functions
-        //
-
-        Address allocate(String const&amp; name = &quot;&quot;, Index const&amp; count = 1) override;
-
-        void release(Address const&amp; address) override;
-
-        void reset() override;
-
-        void setReuseRegisters(bool val);
-
-      private:
-        // Private constructors
-        //
-
-        BasicAllocationManager() = default;
-
-        Index next_qubit_index_{0};
-
-        // Memory mapping
-        //
-
-        Mappings mappings_{};
-        Index    allocation_index_{0};
-
-        // Configuration
-        //
-
-        bool reuse_qubits_{true}; 
+        String  name{&quot;&quot;}; 
+        Index   count{0}; 
+        Address start{0}; 
+        Address end{0};   
     };
 
-} // namespace quantum
-} // namespace microsoft
+    using Mappings                  = std::vector&lt;AllocatedMemoryBlock&gt;;       
+    using BasicAllocationManagerPtr = std::shared_ptr&lt;BasicAllocationManager&gt;; 
+
+    // Construction only allowed using smart pointer allocation through static functions.
+    // Constructors are private to prevent
+    //
+
+    static BasicAllocationManagerPtr createNew();
+
+    // Allocation and release functions
+    //
+
+    Address allocate(String const&amp; name = &quot;&quot;, Index const&amp; count = 1) override;
+
+    void release(Address const&amp; address) override;
+
+    void reset() override;
+
+    void setReuseRegisters(bool val);
+
+  private:
+    // Private constructors
+    //
+
+    BasicAllocationManager() = default;
+
+    Index next_qubit_index_{0};
+
+    // Memory mapping
+    //
+
+    Mappings mappings_{};
+    Index    allocation_index_{0};
+
+    // Configuration
+    //
+
+    bool reuse_qubits_{true}; 
+};
+
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

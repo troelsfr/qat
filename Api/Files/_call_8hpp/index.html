@@ -584,31 +584,27 @@
 // Licensed under the MIT License.
 
 
-#include &quot;Rules/IOperandPrototype.hpp&quot;
-
-#include &quot;Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Rules/IOperandPrototype.hpp&quot;
 
 #include &lt;unordered_map&gt;
 #include &lt;vector&gt;
 
-namespace microsoft
+namespace microsoft::quantum
 {
-namespace quantum
+namespace notation
 {
-    namespace notation
-    {
 
-        using IOperandPrototypePtr = std::shared_ptr&lt;IOperandPrototype&gt;;
+    using IOperandPrototypePtr = std::shared_ptr&lt;IOperandPrototype&gt;;
 
 
-        template &lt;typename... Args&gt; IOperandPrototypePtr call(std::string const&amp; name, Args... args);
+    template &lt;typename... Args&gt; IOperandPrototypePtr call(std::string const&amp; name, Args... args);
 
-    } // namespace notation
-} // namespace quantum
-} // namespace microsoft
+} // namespace notation
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

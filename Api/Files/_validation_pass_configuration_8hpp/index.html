@@ -588,8 +588,8 @@
 </thead>
 <tbody>
 <tr>
-<td>struct</td>
-<td><strong><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_opcode_value/">microsoft::quantum::OpcodeValue</a></strong></td>
+<td>class</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_opcode_value/">microsoft::quantum::OpcodeValue</a></strong></td>
 </tr>
 <tr>
 <td>struct</td>
@@ -606,38 +606,57 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Commandline/ConfigurationManager.hpp&quot;
-#include &quot;QatTypes/QatTypes.hpp&quot;
+#include &quot;qir/qat/Commandline/ConfigurationManager.hpp&quot;
+#include &quot;qir/qat/QatTypes/QatTypes.hpp&quot;
 
 #include &lt;functional&gt;
 #include &lt;set&gt;
 
-namespace microsoft
+namespace microsoft::quantum
 {
-namespace quantum
+class OpcodeValue
 {
-    struct OpcodeValue
+  public:
+    OpcodeValue(String const&amp; name, String const&amp; fi = &quot;&quot;) // NOLINT
+      : id_{name}
+      , predicate_{fi}
     {
-        String id{&quot;&quot;};
-        String predicate{&quot;&quot;};
-        OpcodeValue(String const&amp; name, String const&amp; fi = &quot;&quot;)
-          : id{name}
-          , predicate{fi}
-        {
-        }
+    }
 
-        OpcodeValue()                   = default;
-        OpcodeValue(OpcodeValue&amp;&amp;)      = default;
-        OpcodeValue(OpcodeValue const&amp;) = default;
-        OpcodeValue&amp; operator=(OpcodeValue&amp;&amp;) = default;
-        OpcodeValue&amp; operator=(OpcodeValue const&amp;) = default;
-        bool         operator==(OpcodeValue const&amp; other) const
-        {
-            return id == other.id &amp;&amp; predicate == other.predicate;
-        }
-    };
-} // namespace quantum
-} // namespace microsoft
+    OpcodeValue()                   = default;
+    OpcodeValue(OpcodeValue&amp;&amp;)      = default;
+    OpcodeValue(OpcodeValue const&amp;) = default;
+    OpcodeValue&amp; operator=(OpcodeValue&amp;&amp;) = default;
+    OpcodeValue&amp; operator=(OpcodeValue const&amp;) = default;
+    bool         operator==(OpcodeValue const&amp; other) const
+    {
+        return id_ == other.id_ &amp;&amp; predicate_ == other.predicate_;
+    }
+
+    String&amp; id()
+    {
+        return id_;
+    }
+    String const&amp; id() const
+    {
+        return id_;
+    }
+
+    String&amp; predicate()
+    {
+        return predicate_;
+    }
+
+    String const&amp; predicate() const
+    {
+        return predicate_;
+    }
+
+  private:
+    String id_{&quot;&quot;};
+    String predicate_{&quot;&quot;};
+};
+} // namespace microsoft::quantum
 
 namespace std
 {
@@ -646,68 +665,77 @@ template &lt;&gt; struct hash&lt;microsoft::quantum::OpcodeValue&gt;
     size_t operator()(microsoft::quantum::OpcodeValue const&amp; x) const
     {
         hash&lt;std::string&gt; hasher;
-        return hasher(x.id + &quot;.&quot; + x.predicate);
+        return hasher(x.id() + &quot;.&quot; + x.predicate());
     }
 };
 } // namespace std
 
-namespace microsoft
-{
-namespace quantum
+namespace microsoft::quantum
 {
 
-    class ValidationPassConfiguration
-    {
-      public:
-        using Set       = std::unordered_set&lt;std::string&gt;;
-        using OpcodeSet = std::unordered_set&lt;OpcodeValue&gt;;
+class ValidationPassConfiguration
+{
+  public:
+    using Set       = std::unordered_set&lt;std::string&gt;;
+    using OpcodeSet = std::unordered_set&lt;OpcodeValue&gt;;
 
-        // Setup and construction
-        //
+    // Setup and construction
+    //
 
-        ValidationPassConfiguration() = default;
+    ValidationPassConfiguration() = default;
 
-        void setup(ConfigurationManager&amp; config);
+    void setup(ConfigurationManager&amp; config);
 
-        static ValidationPassConfiguration fromProfileName(String const&amp; name);
-        OpcodeSet const&amp;                   allowedOpcodes() const;
-        Set const&amp;                         allowedExternalCallNames() const;
+    static ValidationPassConfiguration fromProfileName(String const&amp; name);
+    OpcodeSet const&amp;                   allowedOpcodes() const;
+    Set const&amp;                         allowedExternalCallNames() const;
 
-        bool allowInternalCalls() const;
-        bool allowlistOpcodes() const;
-        bool allowlistExternalCalls() const;
+    bool allowInternalCalls() const;
+    bool allowlistOpcodes() const;
+    bool allowlistExternalCalls() const;
 
-        bool       allowlistPointerTypes() const;
-        Set const&amp; allowedPointerTypes() const;
+    bool       allowlistPointerTypes() const;
+    Set const&amp; allowedPointerTypes() const;
 
-        String profileName() const;
+    bool requiresQubits() const;
+    bool requiresResults() const;
 
-      private:
-        void addAllowedExternalCall(String const&amp; name);
-        void addAllowedOpcode(String const&amp; name);
-        void addAllowedPointerType(String const&amp; name);
+    bool allowPoison() const;
+    bool allowUndef() const;
 
-        String profile_name_{&quot;null&quot;};
+    String profileName() const;
 
-        OpcodeSet opcodes_{};
-        Set       external_calls_{};
-        Set       allowed_pointer_types_{};
+  private:
+    void addAllowedExternalCall(String const&amp; name);
+    void addAllowedOpcode(String const&amp; name);
+    void addAllowedPointerType(String const&amp; name);
 
-        bool allowlist_opcodes_{true};
-        bool allowlist_external_calls_{true};
-        bool allow_internal_calls_{false};
-        bool allowlist_pointer_types_{false};
+    String profile_name_{&quot;null&quot;};
 
-        bool allow_primitive_return_{true};
-        bool allow_struct_return_{true};
-        bool allow_pointer_return_{true};
-    };
+    OpcodeSet opcodes_{};
+    Set       external_calls_{};
+    Set       allowed_pointer_types_{};
 
-} // namespace quantum
-} // namespace microsoft
+    bool allowlist_opcodes_{true};
+    bool allowlist_external_calls_{true};
+    bool allow_internal_calls_{false};
+    bool allowlist_pointer_types_{false};
+
+    bool allow_primitive_return_{true};
+    bool allow_struct_return_{true};
+    bool allow_pointer_return_{true};
+
+    bool requires_qubits_{false};
+    bool requires_results_{false};
+
+    bool allow_poison_{true};
+    bool allow_undef_{true};
+};
+
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

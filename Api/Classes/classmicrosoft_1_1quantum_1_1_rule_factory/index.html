@@ -655,6 +655,10 @@
 </tr>
 <tr>
 <td>void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_rule_factory/#function-optimizeresultcomparison">optimizeResultComparison</a></strong>()<br>Replacing comparison between two results.</td>
+</tr>
+<tr>
+<td>void</td>
 <td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_rule_factory/#function-removegetzeroorone">removeGetZeroOrOne</a></strong>()<br>Removes unused quantum zeros or ones.</td>
 </tr>
 <tr>
@@ -757,7 +761,6 @@
 <p>by changing it to a constant pointer</p>
 <p>leftPreshared = inttoptr i64 0 to Array*</p>
 <p>In this way, we use the</p>
-<p>Array access replacement</p>
 <p>Release replacement</p>
 <h3 id="function-usestaticqubitallocation">function useStaticQubitAllocation</h3>
 <pre><code class="language-cpp">void useStaticQubitAllocation()
@@ -785,11 +788,9 @@
 <h3 id="function-resolveconstantarraysizes">function resolveConstantArraySizes</h3>
 <pre><code class="language-cpp">void resolveConstantArraySizes()
 </code></pre>
-<p>Array access replacement</p>
 <h3 id="function-inlinecallables">function inlineCallables</h3>
 <pre><code class="language-cpp">void inlineCallables()
 </code></pre>
-<p>Array access replacement</p>
 <h3 id="function-optimizeresultone">function optimizeResultOne</h3>
 <pre><code class="language-cpp">void optimizeResultOne()
 </code></pre>
@@ -811,6 +812,10 @@ br i1 %1, label %then0__1, label %continue__1
 <pre><code class="language-cpp">void optimizeConstantResult()
 </code></pre>
 <p>Replaces branching of quantum constant results. </p>
+<h3 id="function-optimizeresultcomparison">function optimizeResultComparison</h3>
+<pre><code class="language-cpp">void optimizeResultComparison()
+</code></pre>
+<p>Replacing comparison between two results. </p>
 <h3 id="function-removegetzeroorone">function removeGetZeroOrOne</h3>
 <pre><code class="language-cpp">void removeGetZeroOrOne()
 </code></pre>
@@ -838,7 +843,7 @@ br i1 %1, label %then0__1, label %continue__1
 </code></pre>
 <p>Sets the integer width used when it cannot be deducted from the context of the transformation. </p>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:27 UTC</p></div>
 </div>
           </div>
         </main>

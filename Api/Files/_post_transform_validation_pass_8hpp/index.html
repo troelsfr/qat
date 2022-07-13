@@ -595,60 +595,55 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Logging/ILogger.hpp&quot;
-#include &quot;PostTransformValidation/PostTransformValidationPass.hpp&quot;
-#include &quot;PostTransformValidation/PostTransformValidationPassConfiguration.hpp&quot;
-#include &quot;Profile/Profile.hpp&quot;
-#include &quot;QatTypes/QatTypes.hpp&quot;
-
-#include &quot;Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Llvm/Llvm.hpp&quot;
+#include &quot;qir/qat/Logging/ILogger.hpp&quot;
+#include &quot;qir/qat/PostTransformValidation/PostTransformValidationPass.hpp&quot;
+#include &quot;qir/qat/PostTransformValidation/PostTransformValidationPassConfiguration.hpp&quot;
+#include &quot;qir/qat/QatTypes/QatTypes.hpp&quot;
 
 #include &lt;functional&gt;
 #include &lt;unordered_map&gt;
 #include &lt;vector&gt;
 
-namespace microsoft
-{
-namespace quantum
+namespace microsoft::quantum
 {
 
-    class PostTransformValidationPass : public llvm::PassInfoMixin&lt;PostTransformValidationPass&gt;
-    {
-      public:
-        using Instruction = llvm::Instruction;
-        using Value       = llvm::Value;
-        using ILoggerPtr  = ILogger::ILoggerPtr;
-        using Location    = ILogger::Location;
-        using StringRef   = llvm::StringRef;
+class PostTransformValidationPass : public llvm::PassInfoMixin&lt;PostTransformValidationPass&gt;
+{
+  public:
+    using Instruction = llvm::Instruction;
+    using Value       = llvm::Value;
+    using ILoggerPtr  = ILogger::ILoggerPtr;
+    using Location    = ILogger::Location;
+    using StringRef   = llvm::StringRef;
 
-        // Construction and destruction configuration.
-        //
+    // Construction and destruction configuration.
+    //
 
-        explicit PostTransformValidationPass(
-            PostTransformValidationPassConfiguration const&amp; cfg,
-            ILoggerPtr const&amp;                               logger = nullptr);
+    explicit PostTransformValidationPass(
+        PostTransformValidationPassConfiguration const&amp; cfg,
+        ILoggerPtr const&amp;                               logger = nullptr);
 
-        PostTransformValidationPass(PostTransformValidationPass const&amp;) = delete;
+    PostTransformValidationPass(PostTransformValidationPass const&amp;) = delete;
 
-        PostTransformValidationPass(PostTransformValidationPass&amp;&amp;) = default;
+    PostTransformValidationPass(PostTransformValidationPass&amp;&amp;) = default;
 
-        ~PostTransformValidationPass() = default;
+    ~PostTransformValidationPass() = default;
 
-        llvm::PreservedAnalyses run(llvm::Module&amp; module, llvm::ModuleAnalysisManager&amp; mam);
-        static bool isRequired();
+    llvm::PreservedAnalyses run(llvm::Module&amp; module, llvm::ModuleAnalysisManager&amp; mam);
+    static bool isRequired();
 
-      private:
-        using Locations = std::vector&lt;Location&gt;;
+  private:
+    using Locations = std::vector&lt;Location&gt;;
 
-        PostTransformValidationPassConfiguration config_{};
-        ILoggerPtr                               logger_{nullptr};
-    };
+    PostTransformValidationPassConfiguration config_{};
+    ILoggerPtr                               logger_{nullptr};
+};
 
-} // namespace quantum
-} // namespace microsoft
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

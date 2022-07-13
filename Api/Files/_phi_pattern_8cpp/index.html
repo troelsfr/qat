@@ -579,39 +579,37 @@
 <pre><code class="language-cpp">// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-#include &quot;Rules/IOperandPrototype.hpp&quot;
-#include &quot;Rules/Patterns/PhiPattern.hpp&quot;
+#include &quot;qir/qat/Rules/Patterns/PhiPattern.hpp&quot;
 
-namespace microsoft
+#include &quot;qir/qat/Rules/IOperandPrototype.hpp&quot;
+
+namespace microsoft::quantum
 {
-namespace quantum
+
+PhiPattern::~PhiPattern() = default;
+
+bool PhiPattern::match(Value* instr, Captures&amp; captures) const
 {
-
-    PhiPattern::~PhiPattern() = default;
-
-    bool PhiPattern::match(Value* instr, Captures&amp; captures) const
+    auto* phi_node = llvm::dyn_cast&lt;llvm::PHINode&gt;(instr);
+    if (phi_node == nullptr)
     {
-        auto* phi_node = llvm::dyn_cast&lt;llvm::PHINode&gt;(instr);
-        if (phi_node == nullptr)
-        {
-            return fail(instr, captures);
-        }
-
-        return success(instr, captures);
+        return fail(instr, captures);
     }
 
-    PhiPattern::Child PhiPattern::copy() const
-    {
-        auto ret = std::make_shared&lt;PhiPattern&gt;();
-        ret-&gt;copyPropertiesFrom(*this);
-        return std::move(ret);
-    }
+    return success(instr, captures);
+}
 
-} // namespace quantum
-} // namespace microsoft
+PhiPattern::Child PhiPattern::copy() const
+{
+    auto ret = std::make_shared&lt;PhiPattern&gt;();
+    ret-&gt;copyPropertiesFrom(*this);
+    return std::move(ret);
+}
+
+} // namespace microsoft::quantum
 </code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:28 UTC</p></div>
 </div>
           </div>
         </main>

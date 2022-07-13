@@ -599,7 +599,7 @@
 <td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#using-value">Value</a></strong></td>
 </tr>
 <tr>
-<td>using std::function&lt; <a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/">SourceLocation</a>(Value const  *)&gt;</td>
+<td>using std::function&lt; <a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_source_location/">SourceLocation</a>(Value const  *)&gt;</td>
 <td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#using-locationresolver">LocationResolver</a></strong></td>
 </tr>
 <tr>
@@ -627,19 +627,19 @@
 </tr>
 <tr>
 <td></td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-ilogger">ILogger</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> const &amp; ) =default</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-ilogger">ILogger</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> const &amp; )</td>
 </tr>
 <tr>
 <td></td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-ilogger">ILogger</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> &amp;&amp; ) =default</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-ilogger">ILogger</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> &amp;&amp; )</td>
 </tr>
 <tr>
 <td><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> &amp;</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-operator=">operator=</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> const &amp; ) =default</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-operator=">operator=</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> const &amp; )</td>
 </tr>
 <tr>
 <td><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> &amp;</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-operator=">operator=</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> &amp;&amp; ) =default</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-operator=">operator=</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/">ILogger</a> &amp;&amp; )</td>
 </tr>
 <tr>
 <td>virtual</td>
@@ -667,7 +667,7 @@
 </tr>
 <tr>
 <td>virtual void</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-setlocation">setLocation</a></strong>(<a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/">SourceLocation</a> const &amp; location) =0</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-setlocation">setLocation</a></strong>(<a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_source_location/">SourceLocation</a> const &amp; location) =0</td>
 </tr>
 <tr>
 <td>virtual void</td>
@@ -694,7 +694,7 @@
 <td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-setlocationresolver">setLocationResolver</a></strong>(LocationResolver const &amp; r)<br>Sets a resolver which that translates a LLVM value into a position in the source.</td>
 </tr>
 <tr>
-<td><a href="/qat/Api/Classes/structmicrosoft_1_1quantum_1_1_source_location/">SourceLocation</a></td>
+<td><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_source_location/">SourceLocation</a></td>
 <td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-resolvelocation">resolveLocation</a></strong>(llvm::Value const * value)<br>Returns a source location from the value pointer (if possible)</td>
 </tr>
 <tr>
@@ -705,9 +705,69 @@
 <td>bool</td>
 <td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-hadwarnings">hadWarnings</a></strong>() const<br>Whether or not warnings were logged.</td>
 </tr>
+<tr>
+<td>void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorwithlocation">errorWithLocation</a></strong>(String const &amp; message, llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorcouldnotdeletenode">errorCouldNotDeleteNode</a></strong>(llvm::Value * ptr =nullptr)<br>Standard messages.</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorexpectedstraightlinecodemultiplefunctions">errorExpectedStraightLineCodeMultipleFunctions</a></strong>(llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorexpectedstraightlinecodemultipleblocks">errorExpectedStraightLineCodeMultipleBlocks</a></strong>(llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorreleasefailnonstandardalloc">errorReleaseFailNonStandardAlloc</a></strong>(llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-warningreleasephinodequbit">warningReleasePhiNodeQubit</a></strong>(llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorfunctioninliningmaxrecursion">errorFunctionInliningMaxRecursion</a></strong>(uint64_t n, llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errornoqubitspresent">errorNoQubitsPresent</a></strong>(llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errornoresultspresent">errorNoResultsPresent</a></strong>(llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-erroropcodenotallowed">errorOpcodeNotAllowed</a></strong>(String const &amp; code, String const &amp; profile_name, llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorcustomfunctionsnotallowed">errorCustomFunctionsNotAllowed</a></strong>(llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorexternalcallsnotallowed">errorExternalCallsNotAllowed</a></strong>(String const &amp; function_name, String const &amp; profile_name, llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errortypenotallowed">errorTypeNotAllowed</a></strong>(String const &amp; type_name, String const &amp; profile_name, llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorpoisonnotallowed">errorPoisonNotAllowed</a></strong>(String const &amp; profile_name, llvm::Value * ptr =nullptr)</td>
+</tr>
+<tr>
+<td>virtual void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-errorundefnotallowed">errorUndefNotAllowed</a></strong>(String const &amp; profile_name, llvm::Value * ptr =nullptr)</td>
+</tr>
 </tbody>
 </table>
-<h2 id="protected-attributes">Protected Attributes</h2>
+<h2 id="protected-functions">Protected Functions</h2>
 <table>
 <thead>
 <tr>
@@ -717,12 +777,12 @@
 </thead>
 <tbody>
 <tr>
-<td>bool</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#variable-had_errors_">had_errors_</a></strong> <br>Variable to indicate whether or not errors were reported.</td>
+<td>void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-sethaserrors">setHasErrors</a></strong>(bool value)</td>
 </tr>
 <tr>
-<td>bool</td>
-<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#variable-had_warnings_">had_warnings_</a></strong> <br>Variable to indicate whether or not warnings were reported.</td>
+<td>void</td>
+<td><strong><a href="/qat/Api/Classes/classmicrosoft_1_1quantum_1_1_i_logger/#function-sethaswarnings">setHasWarnings</a></strong>(bool value)</td>
 </tr>
 </tbody>
 </table>
@@ -789,22 +849,22 @@
 <h3 id="function-ilogger_1">function ILogger</h3>
 <pre><code class="language-cpp">ILogger(
     ILogger const &amp; 
-) =default
+)
 </code></pre>
 <h3 id="function-ilogger_2">function ILogger</h3>
 <pre><code class="language-cpp">ILogger(
     ILogger &amp;&amp; 
-) =default
+)
 </code></pre>
 <h3 id="function-operator">function operator=</h3>
 <pre><code class="language-cpp">ILogger &amp; operator=(
     ILogger const &amp; 
-) =default
+)
 </code></pre>
 <h3 id="function-operator_1">function operator=</h3>
 <pre><code class="language-cpp">ILogger &amp; operator=(
     ILogger &amp;&amp; 
-) =default
+)
 </code></pre>
 <h3 id="function-ilogger_3">function ~ILogger</h3>
 <pre><code class="language-cpp">virtual ~ILogger()
@@ -901,17 +961,105 @@
 <pre><code class="language-cpp">bool hadWarnings() const
 </code></pre>
 <p>Whether or not warnings were logged. </p>
-<h2 id="protected-attributes-documentation">Protected Attributes Documentation</h2>
-<h3 id="variable-had_errors_">variable had_errors_</h3>
-<pre><code class="language-cpp">bool had_errors_ {false};
+<h3 id="function-errorwithlocation">function errorWithLocation</h3>
+<pre><code class="language-cpp">void errorWithLocation(
+    String const &amp; message,
+    llvm::Value * ptr =nullptr
+)
 </code></pre>
-<p>Variable to indicate whether or not errors were reported. </p>
-<h3 id="variable-had_warnings_">variable had_warnings_</h3>
-<pre><code class="language-cpp">bool had_warnings_ {false};
+<h3 id="function-errorcouldnotdeletenode">function errorCouldNotDeleteNode</h3>
+<pre><code class="language-cpp">virtual void errorCouldNotDeleteNode(
+    llvm::Value * ptr =nullptr
+)
 </code></pre>
-<p>Variable to indicate whether or not warnings were reported. </p>
+<p>Standard messages. </p>
+<h3 id="function-errorexpectedstraightlinecodemultiplefunctions">function errorExpectedStraightLineCodeMultipleFunctions</h3>
+<pre><code class="language-cpp">virtual void errorExpectedStraightLineCodeMultipleFunctions(
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errorexpectedstraightlinecodemultipleblocks">function errorExpectedStraightLineCodeMultipleBlocks</h3>
+<pre><code class="language-cpp">virtual void errorExpectedStraightLineCodeMultipleBlocks(
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errorreleasefailnonstandardalloc">function errorReleaseFailNonStandardAlloc</h3>
+<pre><code class="language-cpp">virtual void errorReleaseFailNonStandardAlloc(
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-warningreleasephinodequbit">function warningReleasePhiNodeQubit</h3>
+<pre><code class="language-cpp">virtual void warningReleasePhiNodeQubit(
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errorfunctioninliningmaxrecursion">function errorFunctionInliningMaxRecursion</h3>
+<pre><code class="language-cpp">virtual void errorFunctionInliningMaxRecursion(
+    uint64_t n,
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errornoqubitspresent">function errorNoQubitsPresent</h3>
+<pre><code class="language-cpp">virtual void errorNoQubitsPresent(
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errornoresultspresent">function errorNoResultsPresent</h3>
+<pre><code class="language-cpp">virtual void errorNoResultsPresent(
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-erroropcodenotallowed">function errorOpcodeNotAllowed</h3>
+<pre><code class="language-cpp">virtual void errorOpcodeNotAllowed(
+    String const &amp; code,
+    String const &amp; profile_name,
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errorcustomfunctionsnotallowed">function errorCustomFunctionsNotAllowed</h3>
+<pre><code class="language-cpp">virtual void errorCustomFunctionsNotAllowed(
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errorexternalcallsnotallowed">function errorExternalCallsNotAllowed</h3>
+<pre><code class="language-cpp">virtual void errorExternalCallsNotAllowed(
+    String const &amp; function_name,
+    String const &amp; profile_name,
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errortypenotallowed">function errorTypeNotAllowed</h3>
+<pre><code class="language-cpp">virtual void errorTypeNotAllowed(
+    String const &amp; type_name,
+    String const &amp; profile_name,
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errorpoisonnotallowed">function errorPoisonNotAllowed</h3>
+<pre><code class="language-cpp">virtual void errorPoisonNotAllowed(
+    String const &amp; profile_name,
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h3 id="function-errorundefnotallowed">function errorUndefNotAllowed</h3>
+<pre><code class="language-cpp">virtual void errorUndefNotAllowed(
+    String const &amp; profile_name,
+    llvm::Value * ptr =nullptr
+)
+</code></pre>
+<h2 id="protected-functions-documentation">Protected Functions Documentation</h2>
+<h3 id="function-sethaserrors">function setHasErrors</h3>
+<pre><code class="language-cpp">void setHasErrors(
+    bool value
+)
+</code></pre>
+<h3 id="function-sethaswarnings">function setHasWarnings</h3>
+<pre><code class="language-cpp">void setHasWarnings(
+    bool value
+)
+</code></pre>
 <hr />
-<p>Updated on  2 June 2022 at 11:42:17 UTC</p></div>
+<p>Updated on 13 July 2022 at 09:07:27 UTC</p></div>
 </div>
           </div>
         </main>
